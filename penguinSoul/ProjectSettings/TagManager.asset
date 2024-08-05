@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Item
+  - Enemy
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Player
+  - Enemy
+  - Item
+  - Map
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1722377191
+    locked: 0
+  - name: SnowFlake
+    uniqueID: 1421773867
+    locked: 0
+  - name: Map
+    uniqueID: 344178191
+    locked: 0
+  - name: Enemy
+    uniqueID: 1659162129
+    locked: 0
+  - name: Item
+    uniqueID: 3317856619
+    locked: 0
+  - name: Player
+    uniqueID: 1254773833
+    locked: 0
