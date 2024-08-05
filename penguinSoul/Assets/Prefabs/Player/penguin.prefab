@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7115586103985451362
 Transform:
   m_ObjectHideFlags: 0
@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 1907362777151511165}
   - component: {fileID: 4122005665043513037}
   - component: {fileID: 8913441768855776745}
+  - component: {fileID: 7706006671184195614}
   m_Layer: 6
   m_Name: penguin
   m_TagString: Player
@@ -186,9 +187,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2224dd1b69aa87643bd8c0dbcf62f77b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.01
+  inputValue: 0
+  moveSpeed: 10
   fireInterval: 0.5
   bulletPrefab: {fileID: 0}
+  maxJump: 2
+  jumpPower: 500
 --- !u!50 &1907362777151511165
 Rigidbody2D:
   serializedVersion: 4
@@ -204,7 +208,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -270,8 +274,38 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.3, y: 0.8}
+  m_Size: {x: 2.4, y: 1.4}
   m_Direction: 1
+--- !u!114 &7706006671184195614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3035153351409878591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 5605751e2b05d534e9fdc2f4efc38575, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &6811522786865593591
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PenguinController : MonoBehaviour
 {
+    [SerializeField]
+    float inputValue;
+    float moveValue;
     /// <summary>
     /// 이동 속도
     /// </summary>
@@ -132,17 +135,18 @@ public class PenguinController : MonoBehaviour
         // Debug.Log(Time.fixedDeltaTime);
 
         // transform.Translate(Time.fixedDeltaTime * moveSpeed * inputDirection);   // 한번은 파고 들어간다.
-        rigid.velocity = new Vector2(moveSpeed ,rigid.velocity.y);
+        moveValue = inputValue * moveSpeed;
+        rigid.velocity = new Vector2(moveValue,rigid.velocity.y);
+        
     }
 
     /// <summary>
     /// Move 액션이 발생했을 때 실행될 함수
     /// </summary>
     /// <param name="context">입력 정보</param>
-    private void OnMove(InputAction.CallbackContext context)
+    private void OnMove(InputAction.CallbackContext value)
     {
-        Vector2 input = context.ReadValue<Vector2>();   // 입력 값 읽기
-        inputDirection = (Vector3)input;
+        inputValue = value.ReadValue<Vector2>().x;   // 입력 값 읽기
     }
 
     /// <summary>
@@ -151,13 +155,21 @@ public class PenguinController : MonoBehaviour
     /// <param name="_">입력 정보(사용하지 않아서 칸만 잡아놓은 것)</param>
     private void OnJump(InputAction.CallbackContext _)
     {
-        Jump();
+        if (rigid != null)
+        {
+            rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            Debug.Log("점프!");
+        }
+        else
+        {
+            Debug.LogError("Rigidbody2D가 초기화되지 않았습니다.");
+        }
     }
-    void Jump()
-    {
-        Debug.Log("점프");
-        rigid.AddForce(Vector2.up * jumpPower);
-    }
+    //void Jump()
+    //{
+    //    Debug.Log("점프");
+    //    rigid.AddForce2D(Vector2.up * jumpPower,ForceMode2D.Impulse);
+    //}
     /// <summary>
     /// Fire 액션이 발생했을 때 실행될 함수
     /// </summary>
