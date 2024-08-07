@@ -36,6 +36,7 @@ public class PenguinController : MonoBehaviour
     /// </summary>
     public float jumpPower = 1.0f;
 
+    bool isJump = false;
     /// <summary>
     /// 입력된 방향
     /// </summary>
@@ -45,15 +46,6 @@ public class PenguinController : MonoBehaviour
     /// 입력용 인풋 액션
     /// </summary>
     PlayerInputAction inputActions;
-
-    /// <summary>
-    /// 애니메이터 컴포넌트를 저장할 변수
-    /// </summary>
-
-    /// <summary>
-    /// 애니메이터용 해시 만들기
-    /// </summary>
-    readonly int InputY_String = Animator.StringToHash("InputY");
 
     /// <summary>
     /// 총알 발사용 트랜스폼
@@ -66,8 +58,9 @@ public class PenguinController : MonoBehaviour
     IEnumerator fireCoroutine;
 
     /// <summary>
-    /// 점프를 위한 코루틴
+    /// 스프라이트 렌더러
     /// </summary>
+    SpriteRenderer spriteRenderer;
     
     /// <summary>
     /// 애니메이터 컴포넌트를 저장할 변수
@@ -88,7 +81,11 @@ public class PenguinController : MonoBehaviour
     /// </summary>
     Rigidbody2D rigid;
 
+    /// <summary>
+    /// 게임을 감독하는 컴포넌트
+    /// </summary>
     GameDirector gameDirector;
+
 
     private void Awake()
     {
@@ -98,6 +95,7 @@ public class PenguinController : MonoBehaviour
         animator = GetComponent<Animator>();        // 자신과 같은 게임오브젝트 안에 있는 컴포넌트 찾기        
         rigid = GetComponent<Rigidbody2D>();
         gameDirector = GetComponent<GameDirector>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         fireTransform = transform.GetChild(0);          // 첫번째 자식 찾기
         fireFlash = transform.GetChild(1).gameObject;   // 두번째 자식 찾아서 그 자식의 게임 오브젝트 저장하기
@@ -134,10 +132,20 @@ public class PenguinController : MonoBehaviour
         // 항상 일정 시간 간격(Time.fixedDeltaTime)으로 호출된다.
         // Debug.Log(Time.fixedDeltaTime);
 
-        // transform.Translate(Time.fixedDeltaTime * moveSpeed * inputDirection);   // 한번은 파고 들어간다.
         moveValue = inputValue * moveSpeed;
         rigid.velocity = new Vector2(moveValue,rigid.velocity.y);
-        
+        if (rigid.velocity.x != 0)
+        {
+            spriteRenderer.flipX = rigid.velocity.x < 0;
+            animator.SetFloat("Walk", 1.0f);
+        }
+        else
+        {
+            animator.SetFloat("Walk", 0.0f);
+        }
+
+        //점프 도중 바닥에 닿았는지 확인하는 코드
+        //RaycastHit2D rayHit = Physics2D.Raycast
     }
 
     /// <summary>
@@ -155,21 +163,15 @@ public class PenguinController : MonoBehaviour
     /// <param name="_">입력 정보(사용하지 않아서 칸만 잡아놓은 것)</param>
     private void OnJump(InputAction.CallbackContext _)
     {
-        if (rigid != null)
+        if (!isJump)
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            animator.SetBool("Jump",true);
             Debug.Log("점프!");
-        }
-        else
-        {
-            Debug.LogError("Rigidbody2D가 초기화되지 않았습니다.");
+            //isJump = true;
         }
     }
-    //void Jump()
-    //{
-    //    Debug.Log("점프");
-    //    rigid.AddForce2D(Vector2.up * jumpPower,ForceMode2D.Impulse);
-    //}
+
     /// <summary>
     /// Fire 액션이 발생했을 때 실행될 함수
     /// </summary>
