@@ -32,6 +32,11 @@ public class PenguinController : MonoBehaviour
     public int maxJump = 2;
 
     /// <summary>
+    /// 점프한 횟수를 세기위한 변수
+    /// </summary>
+    int jumpCnt=0;
+
+    /// <summary>
     /// 점프의 힘
     /// </summary>
     public float jumpPower = 1.0f;
@@ -168,7 +173,15 @@ public class PenguinController : MonoBehaviour
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             animator.SetBool("Jump",true);
             Debug.Log("점프!");
-            //isJump = true;
+            isJump = true;
+            jumpCnt++;
+        }
+        else if (isJump &&  jumpCnt <2) //이단점프
+        {
+            rigid.velocity =Vector2.zero;
+            rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            animator.SetBool("DoubleJump", true);
+            jumpCnt++;
         }
     }
 
