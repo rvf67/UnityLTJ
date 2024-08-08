@@ -178,7 +178,7 @@ public class PenguinController : MonoBehaviour
         }
         else if (isJump &&  jumpCnt <2) //이단점프
         {
-            rigid.velocity =Vector2.zero;
+            rigid.velocity =Vector2.zero; //velocity를 초기화하여 일정한 높이의 점프를 하도록 함
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             animator.SetBool("DoubleJump", true);
             jumpCnt++;

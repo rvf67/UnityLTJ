@@ -1,5 +1,0 @@
-sceneSetups:
-- path: Assets/PenguinAssets/2D PenguinRunner ALL in One Pack/example02.unity
-  isLoaded: 1
-  isActive: 1
-  isSubScene: 0
