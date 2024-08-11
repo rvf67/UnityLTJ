@@ -1,4 +1,7 @@
+using Microsoft.Unity.VisualStudio.Editor;
+using System;
 using System.Collections;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +14,8 @@ public class PenguinController : MonoBehaviour
     [SerializeField]
     float inputValue;
     float moveValue;
+
+    private int _hp;
     /// <summary>
     /// 이동 속도
     /// </summary>
@@ -89,26 +94,33 @@ public class PenguinController : MonoBehaviour
     /// <summary>
     /// 게임을 감독하는 컴포넌트
     /// </summary>
-    GameDirector gameDirector;
+    GameManager gameManager;
 
+    public int HP
+    {
+        get => _hp;
 
+        private set => _hp = Mathf.Clamp(value,0,_hp);
+    } 
     private void Awake()
     {
 
         inputActions = new PlayerInputAction();    // 인풋 액션 생성
-
         animator = GetComponent<Animator>();        // 자신과 같은 게임오브젝트 안에 있는 컴포넌트 찾기        
         rigid = GetComponent<Rigidbody2D>();
-        gameDirector = GetComponent<GameDirector>();
+        gameManager = GetComponent<GameManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
+        
         fireTransform = transform.GetChild(0);          // 첫번째 자식 찾기
         fireFlash = transform.GetChild(1).gameObject;   // 두번째 자식 찾아서 그 자식의 게임 오브젝트 저장하기
 
         fireCoroutine = FireCoroutine();            // 코루틴 저장하기
 
         flashWait = new WaitForSeconds(0.1f);       // 총알 발사용 이팩트는 0.1초 동안만 보인다.
+
+        _hp = 100;
     }
+
 
     private void OnEnable()
     {
@@ -149,8 +161,24 @@ public class PenguinController : MonoBehaviour
             animator.SetFloat("Walk", 0.0f);
         }
 
+        //점프도중 점프 애니메이션 범위를 레이로 그림
+        Debug.DrawRay(rigid.position,Vector3.down, new Color(1,0,0));
         //점프 도중 바닥에 닿았는지 확인하는 코드
-        //RaycastHit2D rayHit = Physics2D.Raycast
+        if (rigid.velocity.y < 0)
+        {
+            RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1.0f,LayerMask.GetMask("Map"));
+            if(rayHit.collider != null)
+            {
+                if(rayHit.distance < 0.5f)
+                {
+                    jumpCnt = 0;
+                    animator.SetBool("DoubleJump", false);
+                    animator.SetBool("Jump", false);
+                    isJump = false;
+                }
+            }
+        
+        }
     }
 
     /// <summary>
@@ -191,19 +219,11 @@ public class PenguinController : MonoBehaviour
     /// <param name="_">입력 정보(사용하지 않아서 칸만 잡아놓은 것)</param>
     private void OnFireStart(InputAction.CallbackContext _)
     {
-        //Debug.Log("발사 시작");
-        //Fire();
-        //StartCoroutine("FireCoroutine");
-        //StartCoroutine(FireCoroutine());
         StartCoroutine(fireCoroutine);
     }
 
     private void OnFireEnd(InputAction.CallbackContext _)
     {
-        //Debug.Log("발사 종료");
-        //StopAllCoroutines();    // 모든 코루틴 정지시키기
-        //StopCoroutine("FireCoroutine");
-        //StopCoroutine(FireCoroutine());
         StopCoroutine(fireCoroutine);
     }
 
@@ -264,7 +284,7 @@ public class PenguinController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))  // 이쪽을 권장. ==에 비해 가비지가 덜 생성된다. 생성되는 코드도 훨씬 빠르게 구현되어 있음.
         {
             Debug.Log("적과 부딪쳤다.");
-            gameDirector.DecreaseHp();
+            //gameManager.DecreaseHp();
             this.animator.SetTrigger("DamageTrigger");
         }
  

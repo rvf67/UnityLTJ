@@ -19,8 +19,8 @@ public class Needlecontroller : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D player)
     {
-        GameObject dierctor = GameObject.Find("GameDirector");
-        dierctor.GetComponent<GameDirector>().DecreaseHp();
+        //GameObject dierctor = GameObject.Find("GameDirector");
+        //dierctor.GetComponent<GameManager>().DecreaseHp();
         gameObject.SetActive(false);
     }
 }

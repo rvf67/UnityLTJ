@@ -18,8 +18,8 @@ public class SharkController : RecycleObject
     }
     void OnTriggerEnter2D(Collider2D player)
     {
-        GameObject dierctor = GameObject.Find("GameDirector");
-        dierctor.GetComponent<GameDirector>().DecreaseHp();
+        //GameObject dierctor = GameObject.Find("GameDirector");
+        //dierctor.GetComponent<GameManager>().DecreaseHp();
         Debug.Log("attack");
     }
 }
