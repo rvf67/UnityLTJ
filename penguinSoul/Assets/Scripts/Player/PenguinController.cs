@@ -285,7 +285,7 @@ public class PenguinController : MonoBehaviour
         {
             Debug.Log("Àû°ú ºÎµúÃÆ´Ù.");
             //gameManager.DecreaseHp();
-            this.animator.SetTrigger("DamageTrigger");
+            animator.SetTrigger("DamageTrigger");
         }
  
     }
