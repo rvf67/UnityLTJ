@@ -15,7 +15,7 @@ public class GameOverDIrector : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("Main");
         }
     }
 }
