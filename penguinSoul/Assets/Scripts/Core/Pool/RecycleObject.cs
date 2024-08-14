@@ -28,6 +28,13 @@ public class RecycleObject : MonoBehaviour
     }
 
     /// <summary>
+    /// 재활용 될 때 초기화 시키는 함수(빈함수)
+    /// </summary>
+    protected virtual void OnReset()
+    {
+    }
+
+    /// <summary>
     /// 일정 시간 후에 게임오브젝트를 자동으로 비활성화시키는 함수
     /// </summary>
     /// <param name="time">기다릴 시간</param>
