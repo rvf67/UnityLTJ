@@ -5,21 +5,29 @@ using UnityEngine;
 
 public class SharkController : RecycleObject
 {
+    /// <summary>
+    /// 상어의 속도
+    /// </summary>
+    float moveSpeed=-0.04f;
+    
+    SpriteRenderer spriteRenderer;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        transform.Translate(-0.04f, 0, 0);
-        if (transform.position.x < -11.0f) 
-        {
-            gameObject.SetActive(false);
-        }
+        transform.Translate(moveSpeed,0,0);
     }
-    void OnTriggerEnter2D(Collider2D player)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        //GameObject dierctor = GameObject.Find("GameDirector");
-        //dierctor.GetComponent<GameManager>().DecreaseHp();
-        Debug.Log("attack");
+        spriteRenderer.flipX = moveSpeed < 0;
+        moveSpeed=-moveSpeed; //방향을 바꾸기 위함
     }
+
+    
 }

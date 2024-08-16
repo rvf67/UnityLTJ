@@ -367,7 +367,7 @@ public class Player : MonoBehaviour
         spriteRenderer.color = Color.white;
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!isHit && collision.gameObject.CompareTag("Enemy"))  // 이쪽을 권장. ==에 비해 가비지가 덜 생성된다. 생성되는 코드도 훨씬 빠르게 구현되어 있음.
         {

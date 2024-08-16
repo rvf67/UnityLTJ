@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBoss : EnemyBase
+public class EnemyBoss : RecycleObject
 {
     private int patternRandom = 0;
     int totalPatternCount;
@@ -10,8 +10,8 @@ public class EnemyBoss : EnemyBase
     private static readonly int PATTERN1 = 1; 
     private static readonly int PATTERN2 = 2; 
     private static readonly int PATTERN3 = 3; 
-    private static readonly int PATTERN4 = 4; 
-    
+    private static readonly int PATTERN4 = 4;
+
     IEnumerator RandomPattern()
     {
         switch (patternRandom)

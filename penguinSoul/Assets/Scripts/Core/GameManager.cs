@@ -24,7 +24,6 @@ public class GameManager : Singleton<GameManager>
     }
     public void DecreaseHp(float hp)
     {
-        Debug.Log("dfff");
         this.heart.GetComponent<Image>().fillAmount = hp;
         if (this.heart.GetComponent<Image>().fillAmount <= 0)
         {
