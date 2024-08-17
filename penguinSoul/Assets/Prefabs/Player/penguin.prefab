@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 1254773833
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a93415f4ea74e4946a72b20a32023a35, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c9baa6f9903c0854792610d2338c0031, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -194,9 +194,10 @@ MonoBehaviour:
   maxHp: 100
   moveSpeed: 6
   fireInterval: 0.5
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 7668868802277624182, guid: e08273dc1e881d4499e88c30e8bbfab5, type: 3}
   maxJump: 2
   jumpPower: 15
+  damagePow: 10
   undieTime: 2
 --- !u!50 &1907362777151511165
 Rigidbody2D:
@@ -383,7 +384,7 @@ SpriteRenderer:
   m_SortingLayerID: 1254773833
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a93415f4ea74e4946a72b20a32023a35, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c9baa6f9903c0854792610d2338c0031, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

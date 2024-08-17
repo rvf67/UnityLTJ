@@ -61,6 +61,10 @@ public class Player : MonoBehaviour
     public float jumpPower = 1.0f;
 
     /// <summary>
+    /// 데미지를 받았을 때 튕겨나가는 힘
+    /// </summary>
+    public float damagePow=10;
+    /// <summary>
     /// 무적시간
     /// </summary>
     public  float undieTime = 2.0f;
@@ -132,6 +136,7 @@ public class Player : MonoBehaviour
     /// 게임을 감독하는 컴포넌트
     /// </summary>
     GameManager gameManager;
+
     public int HP
     {
         get => hp;
@@ -194,25 +199,26 @@ public class Player : MonoBehaviour
     }
 
 
-
     private void FixedUpdate()
     {
         // 항상 일정 시간 간격(Time.fixedDeltaTime)으로 호출된다.
         // Debug.Log(Time.fixedDeltaTime);
 
         moveValue = inputValue * moveSpeed;
-        rigid.velocity = new Vector2(moveValue,rigid.velocity.y);
-        if (rigid.velocity.x != 0)
+        if (!isHit)
         {
-            spriteRenderer.flipX = rigid.velocity.x < 0;
-            isFlip =rigid.velocity.x < 0;
-            animator.SetFloat("Walk", 1.0f);
+            rigid.velocity = new Vector2(moveValue, rigid.velocity.y);
+            if (rigid.velocity.x != 0)
+            {
+                spriteRenderer.flipX = rigid.velocity.x < 0;
+                isFlip = rigid.velocity.x < 0;
+                animator.SetFloat("Walk", 1.0f);
+            }
+            else
+            {
+                animator.SetFloat("Walk", 0.0f);
+            }
         }
-        else
-        {
-            animator.SetFloat("Walk", 0.0f);
-        }
-
         //점프도중 점프 애니메이션 범위를 레이로 그림
         Debug.DrawRay(rigid.position,Vector3.down, new Color(1,0,0));
         //점프 도중 바닥에 닿았는지 확인하는 코드
@@ -226,6 +232,8 @@ public class Player : MonoBehaviour
                     jumpCnt = 0;
                     animator.SetBool("DoubleJump", false);
                     animator.SetBool("Jump", false);
+                    animator.SetFloat("Walk", 0.0f);
+                    animator.SetTrigger("IdleTrigger");
                     isJump = false;
                 }
             }
@@ -287,14 +295,8 @@ public class Player : MonoBehaviour
         // 플래시 이팩트 잠깐 켜기
         StartCoroutine(FlashEffect());
 
-        // 총알 생성
-        //Instantiate(bulletPrefab, transform); // 자식은 부모를 따라다니므로 이렇게 하면 안됨
-        //Instantiate(bulletPrefab, transform.position, Quaternion.identity);           // 총알이 비행기와 같은 위치에 생성
-        //Instantiate(bulletPrefab, transform.position + Vector3.right, Quaternion.identity);   // 총알 발사 위치를 확인하기 힘듬
-        //Instantiate(bulletPrefab, fireTransform.position, fireTransform.rotation);  // 총알을 fireTransform의 위치와 회전에 따라 생성
-
         //팩토리 활용 총알 생성
-        //Factory.Instance.GetBullet(fireTransform.position, fireTransform.rotation.eulerAngles.z);
+        Factory.Instance.GetBullet(fireTransform.position,isFlip,fireTransform.rotation.eulerAngles.z);
     }
 
     /// <summary>
@@ -369,12 +371,17 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!isHit && collision.gameObject.CompareTag("Enemy"))  // 이쪽을 권장. ==에 비해 가비지가 덜 생성된다. 생성되는 코드도 훨씬 빠르게 구현되어 있음.
+        if (!isHit && collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("적과 부딪쳤다.");
-            HP -= 10;
-            isHit = true;
-            StartCoroutine(Undie());
+            Hit(collision.transform.position);
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision) //맞은 상태에서 적위에 있으면 충돌 구현이 안되기 때문에STAY도 넣음
+    {
+        if (!isHit && collision.gameObject.CompareTag("Enemy"))
+        {
+            Hit(collision.transform.position);
         }
     }
 
@@ -385,5 +392,16 @@ public class Player : MonoBehaviour
         animator.SetBool("Jump", false);
         animator.SetBool("DoubleJump", false);
         animator.SetFloat("Walk", 0.0f);
+
+    }
+
+    private void Hit(Vector2 targetPos)
+    {
+        Debug.Log("적과 부딪쳤다.");
+        HP -= 10;
+        isHit = true;
+        int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1; //충돌위치를 비교하여 튕겨나갈 방향 조절
+        rigid.AddForce(new Vector2(dirc, 1) * damagePow, ForceMode2D.Impulse);
+        StartCoroutine(Undie());
     }
 }
