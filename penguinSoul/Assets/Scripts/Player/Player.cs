@@ -83,7 +83,10 @@ public class Player : MonoBehaviour
     /// 플립되었는지 체크
     /// </summary>
     private bool isFlip;
-
+    /// <summary>
+    /// 움직임 막는 불리언 값
+    /// </summary>
+    private bool isBlockedMove=false;
     /// <summary>
     /// 입력된 방향
     /// </summary>
@@ -205,7 +208,7 @@ public class Player : MonoBehaviour
         // Debug.Log(Time.fixedDeltaTime);
 
         moveValue = inputValue * moveSpeed;
-        if (!isHit)
+        if (!isBlockedMove)
         {
             rigid.velocity = new Vector2(moveValue, rigid.velocity.y);
             if (rigid.velocity.x != 0)
@@ -233,8 +236,9 @@ public class Player : MonoBehaviour
                     animator.SetBool("DoubleJump", false);
                     animator.SetBool("Jump", false);
                     animator.SetFloat("Walk", 0.0f);
-                    animator.SetTrigger("IdleTrigger");
+                    animator.SetBool("Idle",true);
                     isJump = false;
+                    isBlockedMove = false;
                 }
             }
         
@@ -256,7 +260,7 @@ public class Player : MonoBehaviour
     /// <param name="_">입력 정보(사용하지 않아서 칸만 잡아놓은 것)</param>
     private void OnJump(InputAction.CallbackContext _)
     {
-        if (!isJump)
+        if (!isBlockedMove && !isJump)
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             animator.SetBool("Jump",true);
@@ -264,7 +268,7 @@ public class Player : MonoBehaviour
             isJump = true;
             jumpCnt++;
         }
-        else if (isJump &&  jumpCnt <2) //이단점프
+        else if (!isBlockedMove && isJump &&  jumpCnt <2) //이단점프
         {
             rigid.velocity =Vector2.zero; //velocity를 초기화하여 일정한 높이의 점프를 하도록 함
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
@@ -385,9 +389,28 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            bool isCoin = collision.gameObject.name.Contains("coin");
+            bool isBlueFlake = collision.gameObject.name.Contains("blue");
+            
+            //점수
+            if (isCoin)
+                GameManager.Instance.AddScore(100);
+            else if (isBlueFlake)
+                GameManager.Instance.AddScore(200);
+            
+            // 아이템 삭제
+            collision.gameObject.SetActive(false);
+        }
+    }
+
     public void OnHit(float decreaseHp)
     {
         gameManager.DecreaseHp(decreaseHp);
+        animator.SetBool("Idle", false);
         animator.SetTrigger("DamageTrigger");
         animator.SetBool("Jump", false);
         animator.SetBool("DoubleJump", false);
@@ -403,5 +426,6 @@ public class Player : MonoBehaviour
         int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1; //충돌위치를 비교하여 튕겨나갈 방향 조절
         rigid.AddForce(new Vector2(dirc, 1) * damagePow, ForceMode2D.Impulse);
         StartCoroutine(Undie());
+        isBlockedMove = true;
     }
 }

@@ -22,12 +22,12 @@ public class EnemyBase : RecycleObject
     /// <summary>
     /// 적의 최대 HP
     /// </summary>
-    public int maxHP = 1;
+    public int maxHP = 3;
 
     /// <summary>
     /// 적의 HP
     /// </summary>
-    int hp = 1;
+    int hp = 3;
 
     /// <summary>
     /// 생존 여부를 표현하는 변수
@@ -65,7 +65,7 @@ public class EnemyBase : RecycleObject
         OnVisualUpdate(Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         HP--;   // 부딪칠 때마다 HP감소(적끼리는 부딪치지 않는다)
     }

@@ -3,13 +3,8 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class SharkController : RecycleObject
+public class SharkController : EnemyBase
 {
-    /// <summary>
-    /// 상어의 속도
-    /// </summary>
-    float moveSpeed=-0.04f;
-    
     SpriteRenderer spriteRenderer;
 
     private void Awake()
@@ -23,11 +18,18 @@ public class SharkController : RecycleObject
         transform.Translate(moveSpeed,0,0);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        spriteRenderer.flipX = moveSpeed < 0;
-        moveSpeed=-moveSpeed; //방향을 바꾸기 위함
+        base.OnCollisionEnter2D(collision);
+        if (collision.gameObject.CompareTag("Player")||collision.gameObject.CompareTag("Map"))
+        {
+            moveSpeed=-moveSpeed; //방향을 바꾸기 위함
+            spriteRenderer.flipX = moveSpeed > 0;
+        }
     }
 
-    
+    protected override void OnDie()
+    {
+        GameManager.Instance.AddScore(point);
+    }
 }
