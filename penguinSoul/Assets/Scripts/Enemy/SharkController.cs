@@ -7,8 +7,9 @@ public class SharkController : EnemyBase
 {
     SpriteRenderer spriteRenderer;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -20,12 +21,12 @@ public class SharkController : EnemyBase
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        base.OnCollisionEnter2D(collision);
         if (collision.gameObject.CompareTag("Player")||collision.gameObject.CompareTag("Map"))
         {
-            moveSpeed=-moveSpeed; //방향을 바꾸기 위함
-            spriteRenderer.flipX = moveSpeed > 0;
+            point = 0;
+            transform.gameObject.SetActive(false);
         }
+        base.OnCollisionEnter2D(collision);
     }
 
     protected override void OnDie()

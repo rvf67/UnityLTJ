@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyBase : RecycleObject
 {
@@ -22,17 +23,17 @@ public class EnemyBase : RecycleObject
     /// <summary>
     /// 적의 최대 HP
     /// </summary>
-    public int maxHP = 3;
+    public int maxHP=1;
 
     /// <summary>
     /// 적의 HP
     /// </summary>
-    int hp = 3;
+    int hp=1;
 
     /// <summary>
     /// 생존 여부를 표현하는 변수
     /// </summary>
-    bool isAlive = true;
+    protected bool isAlive = true;
 
     /// <summary>
     /// 적의 HP를 get/set할 수 있는 프로퍼티
@@ -54,7 +55,7 @@ public class EnemyBase : RecycleObject
     /// 자신이 죽었음을 알리는 델리게이트(int : 자신의 점수)
     /// </summary>
     public Action<int> onDie;
-    private void Awake()
+    protected virtual void Awake()
     {
         HP = maxHP;
         isAlive = true;
@@ -98,7 +99,7 @@ public class EnemyBase : RecycleObject
     /// <summary>
     /// 적이 터질 때 실행될 함수
     /// </summary>
-    protected void Die()
+    protected virtual void Die()
     {
         if (isAlive) // 살아있을 때만 죽을 수 있음
         {
