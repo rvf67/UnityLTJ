@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class EnemyBoss : EnemyBase
 {
-    private int patternRandom = 0;
+    private int prevPatternRandom = 0;
     int totalPatternCount;
     private static readonly int NONE = 0; 
-    private static readonly int PATTERN1 = 1; 
+    private static readonly int RUSH = 1; 
     private static readonly int PATTERN2 = 2; 
     private static readonly int PATTERN3 = 3; 
     private static readonly int PATTERN4 = 4;
@@ -21,30 +21,21 @@ public class EnemyBoss : EnemyBase
         animator = GetComponent<Animator>();
     }
 
-    IEnumerator RandomPattern()
+    
+    IEnumerator Rush() 
     {
-        switch (patternRandom)
-        {
-            case 1:
-                StartCoroutine(Pattern1());
-                break;
-            case 2:
-                StartCoroutine(Pattern2());
-                break;
-            case 3:
-                StartCoroutine(Pattern3());
-                break;
-            case 4:
-                StartCoroutine(Pattern4());
-                break;
-        }
-        yield return null;
+        
+        yield return null; 
     }
-    IEnumerator Pattern1() { yield return null; }
     IEnumerator Pattern2() { yield return null; }
     IEnumerator Pattern3() { yield return null; }
     IEnumerator Pattern4() { yield return null; }
-
+    IEnumerator LoadClear()
+    {
+        animator.SetTrigger("Die");
+        yield return new WaitForSeconds(5.0f);
+        SceneManager.LoadScene("ClearScene");
+    }
     protected override void Die()
     {
         if (isAlive) // 살아있을 때만 죽을 수 있음
@@ -61,10 +52,30 @@ public class EnemyBoss : EnemyBase
         GameManager.Instance.AddScore(point);
         StartCoroutine(LoadClear());
     }
-    IEnumerator LoadClear()
+    
+
+    void RandomPattern()
     {
-        animator.SetTrigger("Die");
-        yield return new WaitForSeconds(5.0f);
-        SceneManager.LoadScene("ClearScene");
+        int newPattern = Random.Range(1, 5);
+        while (newPattern==prevPatternRandom)
+        {
+            newPattern = Random.Range(1, 5);
+        }
+        prevPatternRandom=newPattern;
+        switch (newPattern)
+        {
+            case 1:
+                StartCoroutine(Rush());
+                break;
+            case 2:
+                StartCoroutine(Pattern2());
+                break;
+            case 3:
+                StartCoroutine(Pattern3());
+                break;
+            case 4:
+                StartCoroutine(Pattern4());
+                break;
+        }
     }
 }
