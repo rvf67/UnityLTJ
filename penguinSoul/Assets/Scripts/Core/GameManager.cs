@@ -46,15 +46,10 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     public int Score => ScoreText.Score;    // get만 있는 프로퍼티
 
-    private void Awake()
-    {
-        this.heart = GameObject.Find("Heart");
-    }
-
     protected override void OnInitialize()
     {
         player = FindAnyObjectByType<Player>();
-
+        this.heart = GameObject.Find("Heart");
         scoreTextUI = FindAnyObjectByType<ScoreText>();
         scoreTextUI?.OnInitialize();
     }

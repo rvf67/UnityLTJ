@@ -32,12 +32,6 @@ public class BossMissile : EnemyBase
         target = GameManager.Instance.Player.transform;
         isGuided = true;
     }
-    protected override void Awake()
-    {
-        base.Awake();
-        target = GameManager.Instance.Player.transform;
-        isGuided = true;
-    }
     protected override void OnMoveUpdate(float deltaTime)
     {
         base.OnMoveUpdate(deltaTime);   //transform.Translate(deltaTime * moveSpeed * Vector2.left);

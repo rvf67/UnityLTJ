@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,12 +15,14 @@ public class EnemyBoss : EnemyBase
     /// 일제발사 때 발사 횟수
     /// </summary>
     public int barrageCount = 3;
-    int totalPatternCount;
-    private static readonly int NONE = 0; 
-    private static readonly int RUSH = 1; 
-    private static readonly int PATTERN2 = 2; 
-    private static readonly int PATTERN3 = 3; 
-    private static readonly int PATTERN4 = 4;
+
+    /// <summary>
+    /// 각패턴의 번호를 상수로 표현
+    /// </summary>
+    const int NONE = 0; 
+    const int RUSH = 1; 
+    const int BOSSMISSILE = 2; 
+    const int SPAWNSPIKE = 3;
 
     /// <summary>
     /// 미사일발사 위치 1
@@ -30,11 +33,11 @@ public class EnemyBoss : EnemyBase
     /// </summary>
     Transform fire2;
     /// <summary>
-    /// 미사일발사 위치 3(미사일)
+    /// 미사일발사 위치 3
     /// </summary>
     Transform fire3;
     /// <summary>
-    /// 미사일발사 위치 4(미사일)
+    /// 미사일발사 위치 4
     /// </summary>
     Transform fire4;
 
@@ -51,23 +54,35 @@ public class EnemyBoss : EnemyBase
         fire4 = transform.GetChild(0).GetChild(3);
     }
 
-    
+    private void Start()
+    {
+        RandomPattern();
+    }
     IEnumerator Rush() 
     {
-        
-        yield return null; 
+        Debug.Log("패턴1");
+        yield return new WaitForSeconds(3.0f);
+        RandomPattern();
     }
     IEnumerator shotSwordFishMissile() 
     {
         for (int i = 0; i < barrageCount; i++)
         {
+            Factory.Instance.GetBossMissile(fire1.position); //연속 발사 개수만큼 생성
+            Factory.Instance.GetBossMissile(fire2.position); //연속 발사 개수만큼 생성
             Factory.Instance.GetBossMissile(fire3.position); //연속 발사 개수만큼 생성
+            Factory.Instance.GetBossMissile(fire4.position); //연속 발사 개수만큼 생성
             yield return new WaitForSeconds(barrageInterval);
         }
-        yield return null;
+        yield return new WaitForSeconds(3.0f);
+        RandomPattern();
     }
-    IEnumerator Pattern3() { yield return null; }
-    IEnumerator Pattern4() { yield return null; }
+    IEnumerator Pattern3() 
+    {
+        Debug.Log("패턴3");
+        yield return new WaitForSeconds(3.0f);
+        RandomPattern();
+    }
     IEnumerator LoadClear()
     {
         animator.SetTrigger("Die");
@@ -94,25 +109,22 @@ public class EnemyBoss : EnemyBase
 
     void RandomPattern()
     {
-        int newPattern = Random.Range(1, 5);
+        int newPattern = Random.Range(1, 4);
         while (newPattern==prevPatternRandom)
         {
-            newPattern = Random.Range(1, 5);
+            newPattern = Random.Range(1, 4);
         }
         prevPatternRandom=newPattern;
         switch (newPattern)
         {
-            case 1:
+            case RUSH:
                 StartCoroutine(Rush());
                 break;
-            case 2:
+            case BOSSMISSILE:
                 StartCoroutine(shotSwordFishMissile());
                 break;
-            case 3:
+            case SPAWNSPIKE:
                 StartCoroutine(Pattern3());
-                break;
-            case 4:
-                StartCoroutine(Pattern4());
                 break;
         }
     }

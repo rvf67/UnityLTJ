@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameOverDIrector : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void OnInitialize()
     {
-        
+        Player player = GameManager.Instance.Player;
+        GameObject heart = GameObject.Find("Heart");
     }
 
     // Update is called once per frame
