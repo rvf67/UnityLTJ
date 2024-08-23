@@ -1,11 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class EnemyBoss : EnemyBase
 {
+    /// <summary>
+    /// 플레이어
+    /// </summary>
+    Player player;
+    /// <summary>
+    /// 이전에 사용한 패턴
+    /// </summary>
     private int prevPatternRandom = 0;
     /// <summary>
     /// 미사일 일제 발사때 발사별 간경
@@ -15,6 +20,10 @@ public class EnemyBoss : EnemyBase
     /// 일제발사 때 발사 횟수
     /// </summary>
     public int barrageCount = 3;
+    /// <summary>
+    /// 돌진횟수
+    /// </summary>
+    public int rushCount = 4;
 
     /// <summary>
     /// 각패턴의 번호를 상수로 표현
@@ -24,6 +33,10 @@ public class EnemyBoss : EnemyBase
     const int BOSSMISSILE = 2; 
     const int SPAWNSPIKE = 3;
 
+    /// <summary>
+    /// 플레이어로의 방향
+    /// </summary>
+    Vector3 direction;
     /// <summary>
     /// 미사일발사 위치 1
     /// </summary>
@@ -43,10 +56,19 @@ public class EnemyBoss : EnemyBase
 
     Animator animator;
 
+    Rigidbody2D rigid;
+    /// <summary>
+    /// 스프라이트 렌더러
+    /// </summary>
+    SpriteRenderer spriteRenderer;
     protected override void Awake()
     {
         base.Awake();
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        rigid = GetComponent<Rigidbody2D>();
+        player=GameManager.Instance.Player;
 
         fire1 = transform.GetChild(0).GetChild(0); //각 4개의 총알 발사위치를 찾음
         fire2 = transform.GetChild(0).GetChild(1);
@@ -58,9 +80,19 @@ public class EnemyBoss : EnemyBase
     {
         RandomPattern();
     }
+
+
     IEnumerator Rush() 
     {
-        Debug.Log("패턴1");
+        for(int i=0; i < rushCount; i++)
+        {
+            moveSpeed = 30.0f;
+            Debug.Log("패턴1");
+            yield return new WaitForSeconds(1.0f);
+            RushToPlayer();
+            yield return new WaitForSeconds(2.0f);
+        }
+        moveSpeed = 0;
         yield return new WaitForSeconds(3.0f);
         RandomPattern();
     }
@@ -105,8 +137,11 @@ public class EnemyBoss : EnemyBase
         GameManager.Instance.AddScore(point);
         StartCoroutine(LoadClear());
     }
-    
 
+    protected override void OnMoveUpdate(float deltaTime)
+    {
+        rigid.AddForce(moveSpeed * direction,ForceMode2D.Impulse); // 기본 동작은 왼쪽으로 계속 이동하기
+    }
     void RandomPattern()
     {
         int newPattern = Random.Range(1, 4);
@@ -127,5 +162,12 @@ public class EnemyBoss : EnemyBase
                 StartCoroutine(Pattern3());
                 break;
         }
+    }
+
+    public void RushToPlayer()
+    {
+        direction = (player.transform.position - transform.position).normalized;
+        
+        spriteRenderer.flipX = direction.x > 0;
     }
 }

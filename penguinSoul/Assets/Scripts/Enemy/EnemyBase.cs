@@ -60,7 +60,7 @@ public class EnemyBase : RecycleObject
         HP = maxHP;
         isAlive = true;
     }
-    private void Update()
+    protected virtual void Update()
     {
         OnMoveUpdate(Time.deltaTime);
         OnVisualUpdate(Time.deltaTime);
@@ -68,7 +68,10 @@ public class EnemyBase : RecycleObject
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        HP--;   // 부딪칠 때마다 HP감소(적끼리는 부딪치지 않는다)
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            HP--;   // 부딪칠 때마다 HP감소(적끼리는 부딪치지 않는다)
+        }
     }
 
     
