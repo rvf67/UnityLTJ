@@ -124,8 +124,8 @@ Transform:
   m_Children:
   - {fileID: 9127351234495269871}
   - {fileID: 60416352080067025}
-  - {fileID: 595897003665416373}
   - {fileID: 103377221589756271}
+  - {fileID: 4346919271237743733}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5215066977984515561
@@ -184,9 +184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c725ee6181035584cb3ea0871229eca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 7675360762242489405, guid: bdf6e06cea56a37489320709ec245bf2, type: 3}
   poolSize: 64
---- !u!1 &8894263045903033334
+--- !u!1 &6917797727598390719
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,21 +194,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 595897003665416373}
+  - component: {fileID: 4346919271237743733}
+  - component: {fileID: 3650362408613715706}
   m_Layer: 0
-  m_Name: EnemyBossPool
+  m_Name: EnemyBossBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &595897003665416373
+--- !u!4 &4346919271237743733
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8894263045903033334}
+  m_GameObject: {fileID: 6917797727598390719}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -217,3 +218,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7836385424341326124}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3650362408613715706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6917797727598390719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70815043cd9b62443a066bf0f97128b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4706375226490346865, guid: 68a9cb9b2923caa4593bbd4778f8237f, type: 3}
+  poolSize: 2

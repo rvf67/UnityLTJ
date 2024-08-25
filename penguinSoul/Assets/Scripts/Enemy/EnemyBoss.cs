@@ -84,20 +84,22 @@ public class EnemyBoss : EnemyBase
 
     IEnumerator Rush() 
     {
+        yield return new WaitForSeconds(2.0f);
         for(int i=0; i < rushCount; i++)
         {
-            moveSpeed = 30.0f;
+            rushSpeed = 10.0f;
             Debug.Log("패턴1");
             yield return new WaitForSeconds(1.0f);
             RushToPlayer();
             yield return new WaitForSeconds(2.0f);
         }
-        moveSpeed = 0;
-        yield return new WaitForSeconds(3.0f);
+        rushSpeed = 0;
+        yield return new WaitForSeconds(7.0f);
         RandomPattern();
     }
     IEnumerator shotSwordFishMissile() 
     {
+        yield return new WaitForSeconds(2.0f);
         for (int i = 0; i < barrageCount; i++)
         {
             Factory.Instance.GetBossMissile(fire1.position); //연속 발사 개수만큼 생성
@@ -106,18 +108,22 @@ public class EnemyBoss : EnemyBase
             Factory.Instance.GetBossMissile(fire4.position); //연속 발사 개수만큼 생성
             yield return new WaitForSeconds(barrageInterval);
         }
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(5.0f);
         RandomPattern();
     }
     IEnumerator Pattern3() 
     {
-        Debug.Log("패턴3");
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(2.0f);
+        Factory.Instance.GetBossBall(fire1.position);
+        yield return new WaitForSeconds(5.0f);
         RandomPattern();
     }
     IEnumerator LoadClear()
     {
         animator.SetTrigger("Die");
+        Collider2D collider = GetComponent<Collider2D>();
+        rigid.velocity = Vector2.zero;
+        Destroy(collider);
         yield return new WaitForSeconds(5.0f);
         SceneManager.LoadScene("ClearScene");
     }
@@ -135,12 +141,13 @@ public class EnemyBoss : EnemyBase
     protected override void OnDie()
     {
         GameManager.Instance.AddScore(point);
+        StopAllCoroutines();
         StartCoroutine(LoadClear());
     }
 
     protected override void OnMoveUpdate(float deltaTime)
     {
-        rigid.AddForce(moveSpeed * direction,ForceMode2D.Impulse); // 기본 동작은 왼쪽으로 계속 이동하기
+        rigid.velocity = rushSpeed*direction;
     }
     void RandomPattern()
     {

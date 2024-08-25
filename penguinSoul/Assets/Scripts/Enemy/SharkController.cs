@@ -16,7 +16,7 @@ public class SharkController : EnemyBase
 
     private void FixedUpdate()
     {
-        transform.Translate(moveSpeed,0,0);
+        OnMoveUpdate(Time.deltaTime);
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)

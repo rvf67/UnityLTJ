@@ -368,8 +368,10 @@ public class Player : MonoBehaviour
 
             yield return null; //다음 프레임까지 대기
         }
-        isHit = false;  //명중 여부 리셋
+        isHit = false;  //명중 여부 리셋'
+        isBlockedMove = false; //움직임 막기 리셋
         gameObject.layer = playerLayer; //플레이어로 레이어 복구
+        animator.SetBool("Idle", true);
         spriteRenderer.color = Color.white;
     }
 

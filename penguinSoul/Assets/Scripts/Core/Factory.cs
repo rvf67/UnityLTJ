@@ -7,6 +7,7 @@ public class Factory : Singleton<Factory>
     SharkPool shark;
     PlayerBulletPool playerBullet;
     BossMissilePool bossMissile;
+    BossBallPool bossBall;
 
     protected override void OnInitialize()
     {
@@ -21,6 +22,10 @@ public class Factory : Singleton<Factory>
         bossMissile = GetComponentInChildren<BossMissilePool>();
         if(bossMissile != null ) 
             bossMissile.Initialize();
+
+        bossBall = GetComponentInChildren<BossBallPool>();
+        if(bossBall != null )
+            bossBall.Initialize();
     }
     /// <summary>
     /// 상어 생성
@@ -53,5 +58,10 @@ public class Factory : Singleton<Factory>
     public BossMissile GetBossMissile(Vector3? position)
     {
         return bossMissile.GetObject(position);
+    }
+
+    public BossBall GetBossBall(Vector3? position)
+    {
+        return bossBall.GetObject(position);
     }
 }

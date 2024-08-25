@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - Test
   - Map
+  - PlayerBullet
+  - PowerUp
+  - BossArea
   layers:
   - Default
   - TransparentFX

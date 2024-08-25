@@ -13,7 +13,7 @@ public class EnemyBase : RecycleObject
     /// <summary>
     /// 이동 속도
     /// </summary>
-    public float moveSpeed = 3.0f;
+    public float rushSpeed = 3.0f;
 
     /// <summary>
     /// 이 적을 죽였을 때 얻는 점수
@@ -68,7 +68,7 @@ public class EnemyBase : RecycleObject
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("PlayerBullet"))
         {
             HP--;   // 부딪칠 때마다 HP감소(적끼리는 부딪치지 않는다)
         }
@@ -90,7 +90,7 @@ public class EnemyBase : RecycleObject
     /// <param name="deltaTime">Time.deltaTime</param>
     protected virtual void OnMoveUpdate(float deltaTime)
     {
-        transform.Translate(deltaTime * moveSpeed * -transform.right, Space.World); // 기본 동작은 왼쪽으로 계속 이동하기
+        transform.Translate(deltaTime * rushSpeed * -transform.right, Space.World); // 기본 동작은 왼쪽으로 계속 이동하기
     }
 
     /// <summary>
