@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BossTrigger : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject panelBossHP;
+
     GameObject boss;
     private void Awake()
     {
@@ -15,6 +19,7 @@ public class BossTrigger : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             boss.SetActive(true);
+            panelBossHP.SetActive(true);
             collision.gameObject.transform.GetChild(3).SetParent(null);
             this.gameObject.SetActive(false);
         }

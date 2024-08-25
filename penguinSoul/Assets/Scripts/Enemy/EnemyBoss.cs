@@ -88,7 +88,6 @@ public class EnemyBoss : EnemyBase
         for(int i=0; i < rushCount; i++)
         {
             rushSpeed = 10.0f;
-            Debug.Log("ÆÐÅÏ1");
             yield return new WaitForSeconds(1.0f);
             RushToPlayer();
             yield return new WaitForSeconds(2.0f);
@@ -97,7 +96,7 @@ public class EnemyBoss : EnemyBase
         yield return new WaitForSeconds(7.0f);
         RandomPattern();
     }
-    IEnumerator shotSwordFishMissile() 
+    IEnumerator ShotSwordFishMissile() 
     {
         yield return new WaitForSeconds(2.0f);
         for (int i = 0; i < barrageCount; i++)
@@ -111,10 +110,10 @@ public class EnemyBoss : EnemyBase
         yield return new WaitForSeconds(5.0f);
         RandomPattern();
     }
-    IEnumerator Pattern3() 
+    IEnumerator SpawnBall() 
     {
         yield return new WaitForSeconds(2.0f);
-        Factory.Instance.GetBossBall(fire1.position);
+        Factory.Instance.GetBossBall(transform.position);
         yield return new WaitForSeconds(5.0f);
         RandomPattern();
     }
@@ -163,10 +162,10 @@ public class EnemyBoss : EnemyBase
                 StartCoroutine(Rush());
                 break;
             case BOSSMISSILE:
-                StartCoroutine(shotSwordFishMissile());
+                StartCoroutine(ShotSwordFishMissile());
                 break;
             case SPAWNSPIKE:
-                StartCoroutine(Pattern3());
+                StartCoroutine(SpawnBall());
                 break;
         }
     }
