@@ -10,9 +10,11 @@ public class BossTrigger : MonoBehaviour
     private GameObject panelBossHP;
 
     GameObject boss;
+    GameObject bossArea;
     private void Awake()
     {
         boss = GameObject.Find("Boss").transform.GetChild(0).gameObject;
+        bossArea = GameObject.Find("BossArea");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,6 +27,7 @@ public class BossTrigger : MonoBehaviour
             cam.SetParent(null);
             cam.transform.position = new Vector3(cam.position.x,-5.8f,cam.position.z);
             this.gameObject.SetActive(false);
+            bossArea.GetComponent<CompositeCollider2D>().isTrigger =false;
         }
     }
 }

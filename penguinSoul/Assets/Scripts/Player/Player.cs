@@ -264,7 +264,6 @@ public class Player : MonoBehaviour
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             animator.SetBool("Jump",true);
-            Debug.Log("점프!");
             isJump = true;
             jumpCnt++;
         }
@@ -422,7 +421,6 @@ public class Player : MonoBehaviour
 
     private void Hit(Vector2 targetPos)
     {
-        Debug.Log("적과 부딪쳤다.");
         HP -= 10;
         isHit = true;
         int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1; //충돌위치를 비교하여 튕겨나갈 방향 조절
