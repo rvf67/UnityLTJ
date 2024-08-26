@@ -16,8 +16,6 @@ public class BossHPViewer : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(boss.HP);
-        Debug.Log(boss.maxHP);
         sliderHP.value = (float)boss.HP/(float)boss.maxHP;
     }
 }

@@ -64,8 +64,8 @@ public class BossBall : EnemyBase
         int dirX= playerTransform.position.x - transform.position.x<0 ? 1:-1;
         
 
-        direction = new Vector3(dirX,-1,0);                                   // 등장 직후는 안움직이게 하기
-        DirectionChangeCount = directionChangeMaxCount;             // 방향 전환 회수 설정하면서 일정 시간 후에 움직이게 만들기
+        direction = new Vector3(dirX,-1,0);                                 
+        DirectionChangeCount = directionChangeMaxCount;             
     }
 
 }

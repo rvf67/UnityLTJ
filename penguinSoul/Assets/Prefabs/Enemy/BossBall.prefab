@@ -103,7 +103,7 @@ MonoBehaviour:
   point: 200
   maxHP: 20
   moveSpeed: 10
-  directionChangeMaxCount: 10
+  directionChangeMaxCount: 20
 --- !u!58 &3957214290028619157
 CircleCollider2D:
   m_ObjectHideFlags: 0

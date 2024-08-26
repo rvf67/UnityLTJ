@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -20,7 +21,9 @@ public class BossTrigger : MonoBehaviour
         {
             boss.SetActive(true);
             panelBossHP.SetActive(true);
-            collision.gameObject.transform.GetChild(3).SetParent(null);
+            Transform cam = collision.gameObject.transform.GetChild(3);
+            cam.SetParent(null);
+            cam.transform.position = new Vector3(cam.position.x,-5.8f,cam.position.z);
             this.gameObject.SetActive(false);
         }
     }
