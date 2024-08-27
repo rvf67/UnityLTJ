@@ -65,7 +65,7 @@ public class BossBall : EnemyBase
         
 
         direction = new Vector3(dirX,-1,0);                                 
-        DirectionChangeCount = directionChangeMaxCount;             
+        DirectionChangeCount = directionChangeMaxCount;    
     }
 
 }

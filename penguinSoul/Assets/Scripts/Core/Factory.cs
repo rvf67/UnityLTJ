@@ -8,7 +8,7 @@ public class Factory : Singleton<Factory>
     PlayerBulletPool playerBullet;
     BossMissilePool bossMissile;
     BossBallPool bossBall;
-
+    DangerLinePool dangerLine;
     protected override void OnInitialize()
     {
         shark = GetComponentInChildren<SharkPool>();
@@ -26,6 +26,11 @@ public class Factory : Singleton<Factory>
         bossBall = GetComponentInChildren<BossBallPool>();
         if(bossBall != null )
             bossBall.Initialize();
+
+        dangerLine = GetComponentInChildren<DangerLinePool>();
+        if(dangerLine != null )
+            dangerLine.Initialize();
+
     }
     /// <summary>
     /// 상어 생성
@@ -63,5 +68,10 @@ public class Factory : Singleton<Factory>
     public BossBall GetBossBall(Vector3? position)
     {
         return bossBall.GetObject(position);
+    }
+
+    public DangerLine GetDangerLine(Vector3? position)
+    {
+        return dangerLine.GetObject(position);
     }
 }

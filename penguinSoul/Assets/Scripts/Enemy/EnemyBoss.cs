@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -84,11 +85,10 @@ public class EnemyBoss : EnemyBase
 
     IEnumerator Rush() 
     {
-        yield return new WaitForSeconds(2.0f);
         for(int i=0; i < rushCount; i++)
         {
+            Factory.Instance.GetDangerLine(transform.position);
             rushSpeed = 10.0f;
-            yield return new WaitForSeconds(1.0f);
             RushToPlayer();
             yield return new WaitForSeconds(2.0f);
         }

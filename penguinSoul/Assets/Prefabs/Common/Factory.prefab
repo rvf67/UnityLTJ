@@ -126,6 +126,7 @@ Transform:
   - {fileID: 60416352080067025}
   - {fileID: 103377221589756271}
   - {fileID: 4346919271237743733}
+  - {fileID: 5705209634320164943}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5215066977984515561
@@ -186,6 +187,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 7675360762242489405, guid: bdf6e06cea56a37489320709ec245bf2, type: 3}
   poolSize: 64
+--- !u!1 &6762757085541670437
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5705209634320164943}
+  - component: {fileID: 6485516482286622003}
+  m_Layer: 0
+  m_Name: DangerLinePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5705209634320164943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762757085541670437}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7836385424341326124}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6485516482286622003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762757085541670437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7345de77bac7bdf4bbcbf9e2eb41d700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4233905772169941592, guid: 6c93c0ff1f26c7e44a332c2836787d39, type: 3}
+  poolSize: 4
 --- !u!1 &6917797727598390719
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +244,7 @@ GameObject:
   - component: {fileID: 4346919271237743733}
   - component: {fileID: 3650362408613715706}
   m_Layer: 0
-  m_Name: EnemyBossBall
+  m_Name: EnemyBossBallPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

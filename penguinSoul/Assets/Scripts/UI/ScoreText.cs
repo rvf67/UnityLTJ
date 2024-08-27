@@ -50,7 +50,6 @@ public class ScoreText : MonoBehaviour
     {
         Transform child = transform.GetChild(1);
         score = child.GetComponent<TextMeshProUGUI>();
-
         //GetComponents<TestBase>();    // 이 게임 오브젝트에 들어있는 모든 TestBase 찾기
         //TextMeshProUGUI[] result = GetComponentsInChildren<TextMeshProUGUI>();    // 자신과 자신의 모든 자식에 들어있는 TextMeshProUGUI 찾기
     }
