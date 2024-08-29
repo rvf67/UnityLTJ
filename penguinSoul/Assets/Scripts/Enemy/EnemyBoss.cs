@@ -1,10 +1,16 @@
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms;
 
 public class EnemyBoss : EnemyBase
 {
+    /// <summary>
+    /// 공 스폰 방향
+    /// </summary>
+    private Vector2 spawnDIr;
     /// <summary>
     /// 플레이어
     /// </summary>
@@ -27,6 +33,10 @@ public class EnemyBoss : EnemyBase
     public int rushCount = 4;
 
     /// <summary>
+    /// 속도 복사
+    /// </summary>
+    float rushSpeedCopy;
+    /// <summary>
     /// 각패턴의 번호를 상수로 표현
     /// </summary>
     const int NONE = 0; 
@@ -34,6 +44,10 @@ public class EnemyBoss : EnemyBase
     const int BOSSMISSILE = 2; 
     const int SPAWNSPIKE = 3;
 
+    /// <summary>
+    /// 라인그리기용 벡터
+    /// </summary>
+    private Vector2 newDirection;
     /// <summary>
     /// 플레이어로의 방향
     /// </summary>
@@ -62,12 +76,14 @@ public class EnemyBoss : EnemyBase
     /// 스프라이트 렌더러
     /// </summary>
     SpriteRenderer spriteRenderer;
+    LineRenderer lineRenderer;
+
     protected override void Awake()
     {
         base.Awake();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
+        lineRenderer = GetComponent<LineRenderer>();
         rigid = GetComponent<Rigidbody2D>();
         player=GameManager.Instance.Player;
 
@@ -79,26 +95,42 @@ public class EnemyBoss : EnemyBase
 
     private void Start()
     {
+        lineRenderer.startColor = new Color(1, 0, 0, 0.5f);
+        lineRenderer.endColor = new Color(1, 0, 0, 0.5f);
+        lineRenderer.startWidth = 0.3f;
+        lineRenderer.endWidth = 0.3f;
+        rushSpeedCopy = rushSpeed;
         RandomPattern();
     }
 
-
+    /// <summary>
+    /// 플레이어에게 연속돌진
+    /// </summary>
+    /// <returns></returns>
     IEnumerator Rush() 
     {
+        yield return new WaitForSeconds(3.0f);
         for(int i=0; i < rushCount; i++)
         {
+            rushSpeed = 0;
             Factory.Instance.GetDangerLine(transform.position);
-            rushSpeed = 10.0f;
-            RushToPlayer();
+            RushToPlayer(transform.position);
+            yield return new WaitForSeconds(1.0f);
+            rushSpeed = rushSpeedCopy;
             yield return new WaitForSeconds(2.0f);
         }
         rushSpeed = 0;
-        yield return new WaitForSeconds(7.0f);
         RandomPattern();
     }
+
+    /// <summary>
+    /// 플레이어를 추적하는 철갑상어 생성
+    /// </summary>
+    /// <returns></returns>
     IEnumerator ShotSwordFishMissile() 
     {
-        yield return new WaitForSeconds(2.0f);
+        player.DangerMissile();
+        yield return new WaitForSeconds(3.0f);
         for (int i = 0; i < barrageCount; i++)
         {
             Factory.Instance.GetBossMissile(fire1.position); //연속 발사 개수만큼 생성
@@ -107,16 +139,27 @@ public class EnemyBoss : EnemyBase
             Factory.Instance.GetBossMissile(fire4.position); //연속 발사 개수만큼 생성
             yield return new WaitForSeconds(barrageInterval);
         }
-        yield return new WaitForSeconds(5.0f);
         RandomPattern();
     }
+
+    /// <summary>
+    /// 공 생성
+    /// </summary>
+    /// <returns></returns>
     IEnumerator SpawnBall() 
     {
-        yield return new WaitForSeconds(2.0f);
-        Factory.Instance.GetBossBall(transform.position);
-        yield return new WaitForSeconds(5.0f);
+        DangerLineShoot();
+        yield return new WaitForSeconds(3.0f);
+        DangerLineDelete();
+        Factory.Instance.GetBossBall(transform.position,spawnDIr);
+        yield return new WaitForSeconds(3.0f);
         RandomPattern();
     }
+
+    /// <summary>
+    /// 클리어 화면전환
+    /// </summary>
+    /// <returns></returns>
     IEnumerator LoadClear()
     {
         animator.SetTrigger("Die");
@@ -144,10 +187,18 @@ public class EnemyBoss : EnemyBase
         StartCoroutine(LoadClear());
     }
 
+    /// <summary>
+    /// 이동처리
+    /// </summary>
+    /// <param name="deltaTime"></param>
     protected override void OnMoveUpdate(float deltaTime)
     {
         rigid.velocity = rushSpeed*direction;
     }
+
+    /// <summary>
+    /// 패턴을 랜덤으로 뽑아주는 함수
+    /// </summary>
     void RandomPattern()
     {
         int newPattern = Random.Range(1, 4);
@@ -170,9 +221,58 @@ public class EnemyBoss : EnemyBase
         }
     }
 
-    public void RushToPlayer()
+
+    /// <summary>
+    /// 경고선 그리는 함수
+    /// </summary>
+    public void DangerLineShoot()
     {
-        direction = (player.transform.position - transform.position).normalized;
+        Vector2 newDirection = new Vector2(player.transform.position.x-transform.position.x>0 ? 1.0f:-1.0f, 
+            player.transform.position.y - transform.position.y > 0 ? 1.0f : -1.0f);
+        spawnDIr = newDirection;
+        Vector2 newPos = transform.position;
+        lineRenderer.positionCount = 1;
+        lineRenderer.SetPosition(0, transform.position);
+        for (int i = 1; i < 4; i++)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(newPos+(0.0001f*newDirection), newDirection, Mathf.Infinity, LayerMask.GetMask("BossArea"));
+            if (hit.collider != null)
+            {
+                newPos = hit.point;
+                newDirection = Vector2.Reflect(newDirection, hit.normal);
+                lineRenderer.positionCount++;
+                lineRenderer.SetPosition(i, newPos);
+            }
+            else
+            {
+                // 만약 충돌이 없으면, 그냥 계속 직선으로 그리기
+                newPos += newDirection * 100; // 임의의 큰 값을 사용하여 선을 계속 연장
+                lineRenderer.positionCount++;
+                lineRenderer.SetPosition(i, newPos);
+                break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 그렸던 라인을 삭제하는 함수
+    /// </summary>
+    private void DangerLineDelete()
+    {
+        for (int i = 0; i < lineRenderer.positionCount; i++)
+        {
+            lineRenderer.SetPosition(i,Vector2.zero);
+        }
+        lineRenderer.positionCount = 0;
+    }
+
+    /// <summary>
+    /// 플레이어에게로의 방향계산
+    /// </summary>
+    /// <param name="pos">자신의 현재위치</param>
+    public void RushToPlayer(Vector3 pos)
+    {
+        direction = (player.transform.position - pos).normalized;
         
         spriteRenderer.flipX = direction.x > 0;
     }

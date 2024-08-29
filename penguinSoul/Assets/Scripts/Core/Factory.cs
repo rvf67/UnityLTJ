@@ -65,13 +65,32 @@ public class Factory : Singleton<Factory>
         return bossMissile.GetObject(position);
     }
 
-    public BossBall GetBossBall(Vector3? position)
+    /// <summary>
+    /// 공을 생성하고 방향을 direction방향으로 지정
+    /// </summary>
+    /// <param name="position">스폰위치</param>
+    /// <param name="direction">스폰 방향</param>
+    /// <returns></returns>
+    public BossBall GetBossBall(Vector3? position, Vector2 direction)
     {
-        return bossBall.GetObject(position);
+        BossBall bb = bossBall.GetObject(position);
+        bb.SetDirection(direction);
+        return bb;
     }
 
+    /// <summary>
+    /// 돌진전 경고선을 스폰해주는 함수
+    /// </summary>
+    /// <param name="position">스폰위치</param>
+    /// <returns></returns>
     public DangerLine GetDangerLine(Vector3? position)
     {
-        return dangerLine.GetObject(position);
+        DangerLine danger = dangerLine.GetObject(position);
+        if (position != null)
+        {
+            danger.endPosition=GameManager.Instance.Player.transform.position;
+            danger.SetDestination(danger.endPosition);
+        }
+        return danger;
     }
 }

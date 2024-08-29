@@ -125,6 +125,7 @@ public class Player : MonoBehaviour
     /// </summary>
     GameObject fireFlashRight;
 
+    GameObject dangerMissileFlash;
     /// <summary>
     /// 총알 발사 이팩트가 보일 시간용
     /// </summary>
@@ -168,6 +169,7 @@ public class Player : MonoBehaviour
         fireTransform = transform.GetChild(0);          // 첫번째 자식 찾기
         fireFlashLeft = transform.GetChild(1).gameObject;   // 두번째 자식 찾아서 그 자식의 게임 오브젝트 저장하기
         fireFlashRight = transform.GetChild(2).gameObject;   // 세번째 자식 찾아서 그 자식의 게임 오브젝트 저장하기
+        dangerMissileFlash =transform.GetChild(4).gameObject;
 
         fireCoroutine = FireCoroutine();            // 코루틴 저장하기
 
@@ -322,6 +324,12 @@ public class Player : MonoBehaviour
         // yield return new WaitForEndOfFrame();
     }
 
+    IEnumerator MissileDangerCorutine()
+    {
+        dangerMissileFlash.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        dangerMissileFlash.SetActive(false);
+    }
 
     /// <summary>
     /// 발사 이팩트용 코루틴
@@ -345,6 +353,13 @@ public class Player : MonoBehaviour
         }
     }
 
+
+
+
+    /// <summary>
+    /// 무적레이어 지정
+    /// </summary>
+    /// <returns></returns>
     IEnumerator Undie()
     {
         gameObject.layer = undieLayer; //무적 레이어로 변경
@@ -408,6 +423,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 적에게 맞았을 때 처리
+    /// </summary>
+    /// <param name="decreaseHp">UI체력감소양</param>
     public void OnHit(float decreaseHp)
     {
         gameManager.DecreaseHp(decreaseHp);
@@ -419,6 +438,10 @@ public class Player : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 맞았을 때 튕겨나갈 방향지정, 실제 체력감소도 함
+    /// </summary>
+    /// <param name="targetPos">충돌위치</param>
     private void Hit(Vector2 targetPos)
     {
         HP -= 10;
@@ -427,5 +450,10 @@ public class Player : MonoBehaviour
         rigid.AddForce(new Vector2(dirc, 1) * damagePow, ForceMode2D.Impulse);
         StartCoroutine(Undie());
         isBlockedMove = true;
+    }
+
+    public void DangerMissile()
+    {
+        StartCoroutine(MissileDangerCorutine());
     }
 }

@@ -37,7 +37,7 @@ public class RecycleObject : MonoBehaviour
     /// 일정 시간 후에 게임오브젝트를 자동으로 비활성화시키는 함수
     /// </summary>
     /// <param name="time">기다릴 시간</param>
-    protected void DisableTimer(float time = 0.0f)
+    protected virtual void DisableTimer(float time = 0.0f)
     {
         StartCoroutine(LifeOver(time));
     }
