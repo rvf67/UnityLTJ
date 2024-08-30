@@ -14,7 +14,7 @@ public class BossTrigger : MonoBehaviour
     private void Awake()
     {
         boss = GameObject.Find("Boss").transform.GetChild(0).gameObject;
-        bossArea = GameObject.Find("BossArea");
+        bossArea = GameObject.Find("Map").transform.GetChild(3).gameObject;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -229,6 +229,7 @@ public class EnemyBoss : EnemyBase
     {
         Vector2 newDirection = new Vector2(player.transform.position.x-transform.position.x>0 ? 1.0f:-1.0f, 
             player.transform.position.y - transform.position.y > 0 ? 1.0f : -1.0f);
+        
         spawnDIr = newDirection;
         Vector2 newPos = transform.position;
         lineRenderer.positionCount = 1;

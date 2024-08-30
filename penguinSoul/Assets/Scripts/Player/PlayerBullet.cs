@@ -32,6 +32,7 @@ public class PlayerBullet : RecycleObject
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        moveSpeed = Mathf.Abs(moveSpeed);
         gameObject.SetActive(false);
     }
 }

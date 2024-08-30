@@ -26,12 +26,18 @@ public class BossBall : EnemyBase
     /// <summary>
     /// 현재 이동 방향
     /// </summary>
-    Vector3 direction;
+    Vector2 direction;
 
     /// <summary>
     /// 플레이어의 트랜스폼
     /// </summary>
     Transform playerTransform;
+
+    /// <summary>
+    /// 리지드바디
+    /// </summary>
+    Rigidbody2D rb;
+
 
     /// <summary>
     /// 방향 전환 회수 확인 및 설정용 프로퍼티
@@ -42,11 +48,24 @@ public class BossBall : EnemyBase
         set
         {
             directionChangeCount = value;           // 값을 지정하고
+            if (directionChangeCount == 0)
+            {
+                int copy = point;
+                point = 0;
+                Die();
+                point = copy;
+            }
         }
     }
-    protected override void Update()
-    { 
-        transform.Translate(Time.deltaTime * moveSpeed * direction);    // direction 방향으로 이동
+
+    protected override void Awake()
+    {
+        base.Awake();
+        rb= GetComponent<Rigidbody2D>();
+    }
+    private void FixedUpdate()
+    {
+        rb.MovePosition(rb.position+Time.fixedDeltaTime * moveSpeed * direction);    // direction 방향으로 이동
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -62,6 +81,7 @@ public class BossBall : EnemyBase
 
     protected override void OnReset()
     {        
+        base.OnReset();
         DirectionChangeCount = directionChangeMaxCount;    
     }
 
@@ -69,4 +89,5 @@ public class BossBall : EnemyBase
     {
         this.direction = direction;
     }
+
 }
