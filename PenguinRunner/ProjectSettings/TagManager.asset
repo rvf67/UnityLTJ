@@ -16,7 +16,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Map
   - 
   - 
   - 
@@ -48,6 +48,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 3312020757
+    locked: 0
+  - name: Map
+    uniqueID: 3423073863
     locked: 0
   - name: Player
     uniqueID: 3775658165
