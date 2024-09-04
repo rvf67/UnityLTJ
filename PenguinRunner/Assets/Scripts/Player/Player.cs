@@ -31,11 +31,6 @@ public class Player : MonoBehaviour
     public int maxJump = 1;
 
     /// <summary>
-    /// 점프한 횟수를 세기위한 변수
-    /// </summary>
-    int jumpCnt=0;
-
-    /// <summary>
     /// 무적 레이어의 번호
     /// </summary>
     int undieLayer;
@@ -144,10 +139,14 @@ public class Player : MonoBehaviour
         inputActions.Player.Move.performed += OnMove;
         inputActions.Player.Move.canceled += OnMove;
         inputActions.Player.Jump.performed += OnJump;
+        inputActions.Player.Dodge.performed += OnDodge;
     }
+
+    
 
     private void OnDisable()
     {
+        inputActions.Player.Dodge.performed -= OnDodge;
         inputActions.Player.Jump.performed -= OnJump;
         inputActions.Player.Move.canceled -= OnMove;
         inputActions.Player.Move.performed -= OnMove;
@@ -185,7 +184,6 @@ public class Player : MonoBehaviour
             {
                 if(rayHit.distance < 0.5f)
                 {
-                    jumpCnt = 0;
                     animator.SetBool("Jump", false);
                     animator.SetFloat("Walk", 0.0f);
                     animator.SetBool("Idle",true);
@@ -221,6 +219,10 @@ public class Player : MonoBehaviour
   
     }
 
+    private void OnDodge(InputAction.CallbackContext _)
+    {
+        throw new NotImplementedException();
+    }
 
     /// <summary>
     /// 무적레이어 지정
@@ -255,22 +257,13 @@ public class Player : MonoBehaviour
         spriteRenderer.color = Color.white;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!isHit && collision.gameObject.CompareTag("Enemy"))
         {
             Hit(collision.transform.position);
         }
     }
-
-    private void OnCollisionStay2D(Collision2D collision) //맞은 상태에서 적위에 있으면 충돌 구현이 안되기 때문에STAY도 넣음
-    {
-        if (!isHit && collision.gameObject.CompareTag("Enemy"))
-        {
-            Hit(collision.transform.position);
-        }
-    }
-
 
 
     /// <summary>
