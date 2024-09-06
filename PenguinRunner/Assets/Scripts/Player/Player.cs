@@ -98,6 +98,7 @@ public class Player : MonoBehaviour
     /// 게임을 감독하는 컴포넌트
     /// </summary>
     GameManager gameManager;
+    private bool isDodge;
 
     public int HP
     {
@@ -140,12 +141,14 @@ public class Player : MonoBehaviour
         inputActions.Player.Move.canceled += OnMove;
         inputActions.Player.Jump.performed += OnJump;
         inputActions.Player.Dodge.performed += OnDodge;
+        inputActions.Player.Dodge.canceled += OnDodge;
     }
 
     
 
     private void OnDisable()
     {
+        inputActions.Player.Dodge.canceled -= OnDodge;
         inputActions.Player.Dodge.performed -= OnDodge;
         inputActions.Player.Jump.performed -= OnJump;
         inputActions.Player.Move.canceled -= OnMove;
@@ -221,7 +224,16 @@ public class Player : MonoBehaviour
 
     private void OnDodge(InputAction.CallbackContext _)
     {
-        throw new NotImplementedException();
+        if (isDodge)
+        {
+            animator.SetBool("Dodge",false);
+            isDodge = false;
+        }
+        else
+        {
+            animator.SetBool("Dodge", true);
+            isDodge=true;
+        }
     }
 
     /// <summary>
@@ -261,7 +273,7 @@ public class Player : MonoBehaviour
     {
         if (!isHit && collision.gameObject.CompareTag("Enemy"))
         {
-            Hit(collision.transform.position);
+            Hit();
         }
     }
 
@@ -274,16 +286,16 @@ public class Player : MonoBehaviour
     {
         gameManager.DecreaseHp(decreaseHp);
         animator.SetBool("Idle", false);
+        animator.SetBool("Dodge", false);
         animator.SetTrigger("DamageTrigger");
         animator.SetBool("Jump", false);
         animator.SetFloat("Walk", 0.0f);
     }
 
     /// <summary>
-    /// 맞았을 때 튕겨나갈 방향지정, 실제 체력감소도 함
+    /// 충돌시 처리함수
     /// </summary>
-    /// <param name="targetPos">충돌위치</param>
-    private void Hit(Vector2 targetPos)
+    private void Hit()
     {
         HP -= 10;
         isHit = true;
