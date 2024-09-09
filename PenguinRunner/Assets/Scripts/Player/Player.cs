@@ -137,6 +137,7 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         inputActions.Enable();                          // 인풋 액션 활성화
+        inputActions.Player.Fire.performed += OnFire;
         inputActions.Player.Move.performed += OnMove;
         inputActions.Player.Move.canceled += OnMove;
         inputActions.Player.Jump.performed += OnJump;
@@ -144,7 +145,7 @@ public class Player : MonoBehaviour
         inputActions.Player.Dodge.canceled += OnDodge;
     }
 
-    
+  
 
     private void OnDisable()
     {
@@ -153,6 +154,7 @@ public class Player : MonoBehaviour
         inputActions.Player.Jump.performed -= OnJump;
         inputActions.Player.Move.canceled -= OnMove;
         inputActions.Player.Move.performed -= OnMove;
+        inputActions.Player.Fire.performed -= OnFire;
         inputActions.Disable();
     }
 
@@ -180,18 +182,18 @@ public class Player : MonoBehaviour
         //점프도중 점프 애니메이션 범위를 레이로 그림
         Debug.DrawRay(rigid.position,Vector3.down, new Color(1,0,0));
         //점프 도중 바닥에 닿았는지 확인하는 코드
-        if (rigid.velocity.y < 0)
+        if (rigid.velocity.y < 0)   //이동방향이 아래쪽일때만
         {
             RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1.0f,LayerMask.GetMask("Map"));
             if(rayHit.collider != null)
             {
-                if(rayHit.distance < 0.5f)
+                if(rayHit.distance < 1.0f)
                 {
+                    isJump = false;
+                    isBlockedMove = false;
                     animator.SetBool("Jump", false);
                     animator.SetFloat("Walk", 0.0f);
                     animator.SetBool("Idle",true);
-                    isJump = false;
-                    isBlockedMove = false;
                 }
             }
         
@@ -213,7 +215,7 @@ public class Player : MonoBehaviour
     /// <param name="_">입력 정보(사용하지 않아서 칸만 잡아놓은 것)</param>
     private void OnJump(InputAction.CallbackContext _)
     {
-        if (!isBlockedMove && !isJump)
+        if (!isBlockedMove && !isJump && !isDodge)
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             animator.SetBool("Jump",true);
@@ -221,7 +223,19 @@ public class Player : MonoBehaviour
         }
   
     }
-
+    private void OnFire(InputAction.CallbackContext context)
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(mousePosition, transform.forward, 15.0f);
+        if (hit)
+        {
+            if (hit.collider.CompareTag("Missile"))
+            {
+                hit.transform.gameObject.SetActive(false);
+            }
+        }
+    }
     private void OnDodge(InputAction.CallbackContext _)
     {
         if (isDodge)
@@ -231,6 +245,8 @@ public class Player : MonoBehaviour
         }
         else
         {
+            animator.SetBool("Jump", false);
+            rigid.AddForce(Vector2.down * jumpPower, ForceMode2D.Impulse);
             animator.SetBool("Dodge", true);
             isDodge=true;
         }
@@ -287,8 +303,8 @@ public class Player : MonoBehaviour
         gameManager.DecreaseHp(decreaseHp);
         animator.SetBool("Idle", false);
         animator.SetBool("Dodge", false);
-        animator.SetTrigger("DamageTrigger");
         animator.SetBool("Jump", false);
+        animator.SetTrigger("DamageTrigger");
         animator.SetFloat("Walk", 0.0f);
     }
 

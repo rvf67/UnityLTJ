@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public float health;
+
     GameObject heart;
     /// <summary>
     /// 플레이어
@@ -46,4 +47,5 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+ 
 }
