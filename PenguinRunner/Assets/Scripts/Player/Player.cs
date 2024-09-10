@@ -192,7 +192,6 @@ public class Player : MonoBehaviour
                     isJump = false;
                     isBlockedMove = false;
                     animator.SetBool("Jump", false);
-                    animator.SetFloat("Walk", 0.0f);
                     animator.SetBool("Idle",true);
                 }
             }
@@ -287,7 +286,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isHit && collision.gameObject.CompareTag("Enemy"))
+        if (!isHit && (collision.gameObject.CompareTag("Enemy")||collision.gameObject.CompareTag("Missile")) )
         {
             Hit();
         }

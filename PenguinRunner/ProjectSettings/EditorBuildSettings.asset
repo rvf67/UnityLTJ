@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: bdfd06a70e274d34dbe2d383517d0f39
+  - enabled: 1
     path: Assets/PenguinAssets/Scenes/GameOverScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

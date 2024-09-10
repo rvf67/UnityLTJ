@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossMissile : RecycleObject
+public class Missile : EnemyBase
 {
     // HP는 1이고 터트렸을 때 점수는 0점
 
@@ -26,30 +26,49 @@ public class BossMissile : RecycleObject
     /// </summary>
     bool isGuided = true;
 
+    SpriteRenderer spriteRenderer;
+    int flipXint;
+
+    private void Awake()
+    {
+        spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+    }
+    private void Start()
+    {
+        if (transform.position.x < GameManager.Instance.Player.transform.position.x)
+        {
+            spriteRenderer.flipX = true;
+            flipXint = 1;
+        }
+        else
+        {
+            spriteRenderer.flipX=false;
+            flipXint = -1;
+        }
+    }
+    private void Update()
+    {
+        OnMoveUpdate(Time.deltaTime);
+
+    }
     protected override void OnReset()
     {
         base.OnReset();
         target = GameManager.Instance.Player.transform;
         isGuided = true;
     }
-    public void OnMoveUpdate(float deltaTime)
+    protected override void OnMoveUpdate(float deltaTime)
     {
         if (isGuided)
         {
-            Vector2 direction = target.position - transform.position;   // target 위치로 가는 방향
+            Vector2 direction = (target.position - transform.position).normalized;   // target 위치로 가는 방향
             
             // 플레이어쪽으로 천천히 회전하게 만들기
-            transform.right = -Vector3.Slerp(-transform.right, direction, deltaTime * guidedPerformance);
+            transform.right = flipXint*Vector3.Slerp(flipXint*transform.right, direction, deltaTime * guidedPerformance);
+            transform.Translate(deltaTime * moveSpeed * direction, Space.World);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (isGuided && collision.CompareTag("Player")) // 추적 중이고 플레이어가 범위안에 들어오면
-        {
-            isGuided = false;   // 이제 추적 중지
-        }
-    }
 
 
 }
