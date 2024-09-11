@@ -131,6 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 64374414}
+  - component: {fileID: 64374415}
   m_Layer: 0
   m_Name: SpikeSpawner
   m_TagString: Untagged
@@ -153,6 +154,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &64374415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64374413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5194aae0f35add1428bc4f51d9a0b0b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interval: 2
 --- !u!1001 &194956815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -367,9 +381,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5634573906958628863, guid: d66c57250ffa0d74eb922b8b4c3d389b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5943564243121380742, guid: d66c57250ffa0d74eb922b8b4c3d389b, type: 3}
       propertyPath: m_Name
       value: Factory
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474164544809146826, guid: d66c57250ffa0d74eb922b8b4c3d389b, type: 3}
+      propertyPath: poolSize
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7836385424341326124, guid: d66c57250ffa0d74eb922b8b4c3d389b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1223,6 +1245,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shark
       objectReference: {fileID: 0}
+    - target: {fileID: 3218467006150777381, guid: 809ee9775a1ad6148bc62d4325190b10, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8961882103820710338, guid: 809ee9775a1ad6148bc62d4325190b10, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.41
@@ -1278,7 +1304,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 267327629394367251, guid: b0af357d1178f764c9f1564b6a071639, type: 3}
       propertyPath: m_Name
-      value: Needle
+      value: Spike
       objectReference: {fileID: 0}
     - target: {fileID: 267327629394367251, guid: b0af357d1178f764c9f1564b6a071639, type: 3}
       propertyPath: m_IsActive

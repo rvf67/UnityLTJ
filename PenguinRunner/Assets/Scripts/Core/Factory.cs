@@ -29,7 +29,7 @@ public class Factory : Singleton<Factory>
     public Spike GetSpike(Vector3? position)
     {
         //Vector3.forward * angle
-        return spike.GetObject(position);
+        return spike.GetObject(position,new Vector3(0,0,180.0f));
     }
 
     public Shark GetShark(Vector3? position)

@@ -6,6 +6,7 @@ public class SpikeSpawner : MonoBehaviour
 {
     protected const float MaxX = 8.0f;
     protected const float MinX = -8.0f;
+    public float interval =2.0f;
     private void OnDrawGizmos()
     {
         // 출발지점 그리기
@@ -13,5 +14,30 @@ public class SpikeSpawner : MonoBehaviour
         Vector3 p0 = transform.position + Vector3.right * MaxX;
         Vector3 p1 = transform.position + Vector3.right * MinX;
         Gizmos.DrawLine(p0, p1);
+    }
+    private void Start()
+    {
+        StartCoroutine(SpawnCoroutine());
+    }
+    IEnumerator SpawnCoroutine()
+    {
+        yield return new WaitForSeconds(interval);
+        
+
+        while (true)
+        {
+            // Debug.Log($"연속스폰 시작 : {Time.time}");
+            Vector3 spawnPosition = GetSpawnPosition();
+
+            Factory.Instance.GetSpike(spawnPosition);
+
+            yield return new WaitForSeconds(interval);
+        }
+    }
+    protected Vector3 GetSpawnPosition()
+    {
+        Vector3 result = transform.position;
+        result.x = Random.Range(MinX, MaxX);
+        return result;
     }
 }

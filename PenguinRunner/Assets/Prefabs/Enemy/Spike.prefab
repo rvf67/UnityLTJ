@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2326290408766755228}
   - component: {fileID: 2440209445920159486}
   - component: {fileID: 1446793254281168355}
+  - component: {fileID: 3314261413615581126}
   m_Layer: 8
   m_Name: Spike
   m_TagString: Enemy
@@ -148,3 +149,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3314261413615581126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267327629394367251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea777aebed0a11b4090323b8c9da019a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
