@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1234742469931046405}
   m_Layer: 8
   m_Name: spaceMissiles_007
-  m_TagString: Enemy
+  m_TagString: Missile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -193,5 +193,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce879fd7914d114abfe1fee0d9d436e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guidedPerformance: 1.5
+  lifeTime: 30
   moveSpeed: 1
+  guidedPerformance: 1.5
