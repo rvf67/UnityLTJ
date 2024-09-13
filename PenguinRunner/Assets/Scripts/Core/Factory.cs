@@ -34,7 +34,9 @@ public class Factory : Singleton<Factory>
 
     public Shark GetShark(Vector3? position)
     {
-        return shark.GetObject(position);
+        Shark sharkModif=shark.GetObject(position);
+        sharkModif.SharkFlip();
+        return sharkModif;
     }
 
     public Missile GetMissile(Vector3? position) 
