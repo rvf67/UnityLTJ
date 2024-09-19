@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
     /// 플레이어
     /// </summary>
     Player player;
+
     public Player Player
     {
         get
