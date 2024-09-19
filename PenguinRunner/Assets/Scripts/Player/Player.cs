@@ -240,7 +240,8 @@ public class Player : MonoBehaviour
         {
             if (hit.collider.CompareTag("Missile"))
             {
-                hit.transform.gameObject.SetActive(false);
+                Missile missile = hit.transform.gameObject.GetComponent<Missile>();
+                missile.breakMissile();
             }
         }
     }

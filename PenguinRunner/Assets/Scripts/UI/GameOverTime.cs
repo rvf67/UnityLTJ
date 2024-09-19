@@ -24,6 +24,6 @@ public class GameOverTime : MonoBehaviour
     private void Update()
     {
         countDown -= Time.deltaTime;
-        countText.text = $"{countDown}";
+        countText.text = $"{countDown.ToString("F1")}";
     }
 }

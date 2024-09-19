@@ -26,12 +26,17 @@ public class Missile : EnemyBase
     /// </summary>
     bool isGuided = true;
 
+    /// <summary>
+    /// 죽을때 발생하는 이팩트
+    /// </summary>
+    GameObject flash;
     SpriteRenderer spriteRenderer;
     int flipXint;
 
     private void Awake()
     {
         spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        flash= transform.GetChild(1).gameObject;
     }
     private void Start()
     {
@@ -69,6 +74,17 @@ public class Missile : EnemyBase
         }
     }
 
-
+    public void breakMissile()
+    {
+        StartCoroutine(DestroyMissile());
+    }
+    IEnumerator DestroyMissile()
+    {
+        moveSpeed = 0;
+        flash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        flash.SetActive(false);
+        DisableTimer();
+    }
 
 }
