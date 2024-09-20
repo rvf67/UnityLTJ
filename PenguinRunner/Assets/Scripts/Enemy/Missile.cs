@@ -21,6 +21,7 @@ public class Missile : EnemyBase
     /// </summary>
     Transform target;
 
+    GameOverTime gameOverTime;
     /// <summary>
     /// 추적 중인지 표시하는 변수(true면 추적중, false면 추적 중지)
     /// </summary>
@@ -36,6 +37,7 @@ public class Missile : EnemyBase
     private void Awake()
     {
         spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        gameOverTime = GameManager.Instance.GameOverTime;
         flash= transform.GetChild(1).gameObject;
     }
     private void Start()
@@ -53,8 +55,8 @@ public class Missile : EnemyBase
     }
     private void Update()
     {
+        moveSpeed = moveSpeed*gameOverTime.level;
         OnMoveUpdate(Time.deltaTime);
-
     }
     protected override void OnReset()
     {
@@ -80,7 +82,6 @@ public class Missile : EnemyBase
     }
     IEnumerator DestroyMissile()
     {
-        moveSpeed = 0;
         flash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         flash.SetActive(false);

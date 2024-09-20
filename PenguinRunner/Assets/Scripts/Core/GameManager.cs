@@ -12,6 +12,7 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     Player player;
 
+    GameOverTime gameOverTime;
     public Player Player
     {
         get
@@ -24,10 +25,21 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-
+    public GameOverTime GameOverTime
+    {
+        get
+        {
+            if(gameOverTime==null)
+            {
+                gameOverTime = FindAnyObjectByType<GameOverTime>();
+            }
+            return gameOverTime;
+        }
+    }
     protected override void OnInitialize()
     {
         player = FindAnyObjectByType<Player>();
+        gameOverTime = FindAnyObjectByType<GameOverTime>();
         this.heart = GameObject.Find("Heart");
     }
     public void DecreaseHp(float hp)
@@ -38,13 +50,5 @@ public class GameManager : Singleton<GameManager>
             SceneManager.LoadScene("GameOverScene");
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            SceneManager.LoadScene("GameOverScene");
-        }
-    }
 
- 
 }
