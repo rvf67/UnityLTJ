@@ -55,7 +55,6 @@ public class Missile : EnemyBase
     }
     private void Update()
     {
-        moveSpeed = moveSpeed*gameOverTime.level;
         OnMoveUpdate(Time.deltaTime);
     }
     protected override void OnReset()
@@ -72,7 +71,7 @@ public class Missile : EnemyBase
             
             // 플레이어쪽으로 천천히 회전하게 만들기
             transform.right = flipXint*Vector3.Slerp(flipXint*transform.right, direction, deltaTime * guidedPerformance);
-            transform.Translate(deltaTime * moveSpeed * direction, Space.World);
+            transform.Translate(deltaTime * moveSpeed * gameOverTime.level * direction, Space.World);
         }
     }
 

@@ -279,5 +279,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 30
-  moveSpeed: 1
+  moveSpeed: 2
   guidedPerformance: 1.5

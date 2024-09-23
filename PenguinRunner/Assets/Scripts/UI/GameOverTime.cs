@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOverTime : MonoBehaviour
@@ -46,5 +47,10 @@ public class GameOverTime : MonoBehaviour
             flowTime = 0;
         }
         countText.text = $"{countDown.ToString("F1")}";
+
+        if(countDown<0)
+        {
+            SceneManager.LoadScene("ClearScene");
+        }
     }
 }
