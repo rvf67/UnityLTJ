@@ -33,6 +33,7 @@ public class Missile : EnemyBase
     GameObject flash;
     SpriteRenderer spriteRenderer;
     int flipXint;
+    private bool isDie;
 
     private void Awake()
     {
@@ -40,19 +41,7 @@ public class Missile : EnemyBase
         gameOverTime = GameManager.Instance.GameOverTime;
         flash= transform.GetChild(1).gameObject;
     }
-    private void Start()
-    {
-        if (transform.position.x < GameManager.Instance.Player.transform.position.x)
-        {
-            spriteRenderer.flipX = true;
-            flipXint = 1;
-        }
-        else
-        {
-            spriteRenderer.flipX=false;
-            flipXint = -1;
-        }
-    }
+
     private void Update()
     {
         OnMoveUpdate(Time.deltaTime);
@@ -60,6 +49,7 @@ public class Missile : EnemyBase
     protected override void OnReset()
     {
         base.OnReset();
+        isDie = false;
         target = GameManager.Instance.Player.transform;
         isGuided = true;
     }
@@ -81,10 +71,30 @@ public class Missile : EnemyBase
     }
     IEnumerator DestroyMissile()
     {
-        flash.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        flash.SetActive(false);
-        DisableTimer();
+        if (!isDie)
+        {
+            isDie = true;
+            flash.SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+            flash.SetActive(false);
+            DisableTimer();
+        }
     }
 
+    /// <summary>
+    /// 스프라이트 반전여부 결정 함수
+    /// </summary>
+    public void FlipModif()
+    {
+        if (transform.position.x < GameManager.Instance.Player.transform.position.x)
+        {
+            spriteRenderer.flipX = true;
+            flipXint = 1;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+            flipXint = -1;
+        }
+    }
 }

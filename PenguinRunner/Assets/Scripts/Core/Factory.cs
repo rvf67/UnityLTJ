@@ -41,6 +41,8 @@ public class Factory : Singleton<Factory>
 
     public Missile GetMissile(Vector3? position) 
     {
-        return missile.GetObject(position); 
+        Missile missileModif = missile.GetObject(position);
+        missileModif.FlipModif();
+        return missileModif; 
     }
 }
