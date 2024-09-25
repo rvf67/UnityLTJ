@@ -7,6 +7,7 @@ public class GameOverDIrector : MonoBehaviour
     public void OnInitialize()
     {
         Player player = GameManager.Instance.Player;
+        GameOverTime gameOverTime = GameManager.Instance.GameOverTime;
         GameObject heart = GameObject.Find("Heart");
     }
 

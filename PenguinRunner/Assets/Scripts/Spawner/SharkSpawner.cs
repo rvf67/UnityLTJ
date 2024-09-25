@@ -10,7 +10,6 @@ public class SharkSpawner : MonoBehaviour
     GameOverTime gameOverTime;
     private void Awake()
     {
-        gameOverTime = GameManager.Instance.GameOverTime;
         spawnPoints = new Transform[transform.childCount];
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -25,6 +24,7 @@ public class SharkSpawner : MonoBehaviour
 
     IEnumerator SpawnShark()
     {
+        gameOverTime = GameManager.Instance.GameOverTime;
         int randomSpawnPoint = Random.Range(0, spawnPoints.Length);
         while (true)
         {

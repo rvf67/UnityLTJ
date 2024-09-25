@@ -50,6 +50,7 @@ public class GameOverTime : MonoBehaviour
 
         if(countDown<0)
         {
+            level = 1;
             SceneManager.LoadScene("ClearScene");
         }
     }

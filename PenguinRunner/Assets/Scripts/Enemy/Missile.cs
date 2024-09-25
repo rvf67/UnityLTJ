@@ -51,6 +51,7 @@ public class Missile : EnemyBase
         base.OnReset();
         isDie = false;
         target = GameManager.Instance.Player.transform;
+        gameOverTime = GameManager.Instance.GameOverTime;
         isGuided = true;
     }
     protected override void OnMoveUpdate(float deltaTime)

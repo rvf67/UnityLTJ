@@ -210,10 +210,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: penguin
       objectReference: {fileID: 0}
-    - target: {fileID: 6349668333217057186, guid: 0ef51b2742c539341a69f815f0bff10b, type: 3}
-      propertyPath: maxHp
-      value: 1000
-      objectReference: {fileID: 0}
     - target: {fileID: 7188821057404819500, guid: 0ef51b2742c539341a69f815f0bff10b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.33
@@ -485,6 +481,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory
       objectReference: {fileID: 0}
+    - target: {fileID: 7474164544809146826, guid: d66c57250ffa0d74eb922b8b4c3d389b, type: 3}
+      propertyPath: poolSize
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7836385424341326124, guid: d66c57250ffa0d74eb922b8b4c3d389b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.0820527
@@ -527,7 +527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9088726889891262668, guid: d66c57250ffa0d74eb922b8b4c3d389b, type: 3}
       propertyPath: poolSize
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

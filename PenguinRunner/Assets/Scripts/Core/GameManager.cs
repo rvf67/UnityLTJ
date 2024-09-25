@@ -47,6 +47,7 @@ public class GameManager : Singleton<GameManager>
         this.heart.GetComponent<Image>().fillAmount = hp;
         if (this.heart.GetComponent<Image>().fillAmount <= 0)
         {
+            gameOverTime.level = 1;
             SceneManager.LoadScene("GameOverScene");
         }
     }

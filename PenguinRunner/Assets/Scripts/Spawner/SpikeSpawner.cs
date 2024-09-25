@@ -16,10 +16,7 @@ public class SpikeSpawner : MonoBehaviour
         Vector3 p1 = transform.position + Vector3.right * MinX;
         Gizmos.DrawLine(p0, p1);
     }
-    private void Awake()
-    {
-        gameOverTime = GameManager.Instance.GameOverTime;
-    }
+
     private void Start()
     {
         StartCoroutine(SpawnCoroutine());
@@ -27,7 +24,7 @@ public class SpikeSpawner : MonoBehaviour
     IEnumerator SpawnCoroutine()
     {
         yield return new WaitForSeconds(interval);
-        
+        gameOverTime = GameManager.Instance.GameOverTime;
 
         while (true)
         {

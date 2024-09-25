@@ -7,6 +7,7 @@ public class ClearDirector : MonoBehaviour
     public void OnInitialize()
     {
         Player player = GameManager.Instance.Player;
+        GameOverTime gameOverTime = GameManager.Instance.GameOverTime;
     }
 
     // Update is called once per frame
