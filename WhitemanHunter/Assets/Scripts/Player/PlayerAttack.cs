@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
+
 public class PlayerAttack : MonoBehaviour
 {
     /// <summary>
@@ -24,7 +24,7 @@ public class PlayerAttack : MonoBehaviour
     readonly int Attack_Hash = Animator.StringToHash("Attack");
     private void Awake()
     {
-        animator = GetComponent<Animator>(); 
+        animator = transform.GetChild(0).GetComponent<Animator>(); 
     }
     private void Start()
     {

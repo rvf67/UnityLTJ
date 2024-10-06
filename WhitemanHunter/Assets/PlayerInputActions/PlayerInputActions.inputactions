@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "MoveModeChange",
+                    "type": "Button",
+                    "id": "349f2044-525b-4948-aef4-f49d681c6709",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "c440a71e-6a27-4e10-a0d0-7abe8166cc44",
@@ -108,6 +117,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cf2599ad-3659-4d21-b11b-910cf69041ec",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveModeChange",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

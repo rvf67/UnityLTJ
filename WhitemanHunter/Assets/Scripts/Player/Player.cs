@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInputController), typeof(PlayerMovement))]
 public class Player : MonoBehaviour
 {
-    // ì»´í¬ë„ŒíŠ¸ ë“¤
+    // ÄÄÆ÷³ÍÆ® µé
     CharacterController characterController;
 
     PlayerInputController inputController;

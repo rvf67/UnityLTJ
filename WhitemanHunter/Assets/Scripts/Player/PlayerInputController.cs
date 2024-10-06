@@ -32,7 +32,7 @@ public class PlayerInputController : MonoBehaviour
         inputActions.Player.Enable();
         inputActions.Player.Move.performed += OnMove;
         inputActions.Player.Move.canceled += OnMove;
-        //inputActions.Player.MoveModeChange.performed += OnMoveModeChange;
+        inputActions.Player.MoveModeChange.performed += OnMoveModeChange;
         //inputActions.Player.Attack.performed += OnAttack;
 
     }
@@ -42,7 +42,7 @@ public class PlayerInputController : MonoBehaviour
     private void OnDisable()
     {
         //inputActions.Player.Attack.performed -= OnAttack;
-        //inputActions.Player.MoveModeChange.performed -= OnMoveModeChange;
+        inputActions.Player.MoveModeChange.performed -= OnMoveModeChange;
         inputActions.Player.Move.canceled -= OnMove;
         inputActions.Player.Move.performed -= OnMove;
         inputActions.Player.Disable();
