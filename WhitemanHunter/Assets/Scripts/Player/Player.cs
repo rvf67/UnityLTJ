@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
         attack = GetComponent<PlayerAttack>();
         inputController.onMove += movement.SetDirection;
         inputController.onMoveModeChange += movement.ToggleMoveMode;
+        inputController.onDodge += movement.Dodge;
         inputController.onAttack += attack.OnAttackInput;
-
     }
 }

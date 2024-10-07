@@ -16,6 +16,11 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeed = 5.0f;
 
     /// <summary>
+    /// 회피속도
+    /// </summary>
+    public float dodgeSpeed = 10.0f;
+
+    /// <summary>
     /// 회전 정도(10이면 0.1초 정도)
     /// </summary>
     public float turnSmooth = 10.0f;
@@ -62,11 +67,13 @@ public class PlayerMovement : MonoBehaviour
     {
         Stop,   // 정지 상태
         Walk,   // 걷기 상태
-        Run     // 달리기 상태
+        Run,     // 달리기 상태
+        Dodge
     }
 
     // 애니메이터용 해시값 및 상수
     readonly int Speed_Hash = Animator.StringToHash("Speed");
+    readonly int Dodge_Hash = Animator.StringToHash("Dodge");
     const float Animator_StopSpeed = 0.0f;
     const float Animator_WalkSpeed = 0.3f;
     const float Animator_RunSpeed = 1.0f;
@@ -74,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
     // 컴포넌트
     CharacterController cc;
     Animator animator;
+    private bool isDodge;
 
     private void Awake()
     {
@@ -145,12 +153,26 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void Dodge()
+    {
+        currentSpeed *= 100;
+        animator.SetTrigger(Dodge_Hash);
+        isDodge = true;
+        Invoke("DodgeExit",0.4f);
+    }
+
+    void DodgeExit()
+    {
+        currentSpeed /= 100;
+        isDodge=false;
+    }
     /// <summary>
     /// 플레이어 이동 속도 변화와 애니메이션 처리용 함수
     /// </summary>
     /// <param name="mode">설정할 이동 모드</param>
     void SetMoveSpeedAndAnimation(MoveState mode)
     {
+   
         // 속도와 애니메이션 변경
         switch (mode)
         {
@@ -159,7 +181,7 @@ public class PlayerMovement : MonoBehaviour
                 currentSpeed = 0.0f;
                 break;
             case MoveState.Walk:
-                if(direction.sqrMagnitude > 0)      // 움직일 때만 애니메이션 변경하기
+                if (direction.sqrMagnitude > 0)      // 움직일 때만 애니메이션 변경하기
                 {
                     animator.SetFloat(Speed_Hash, Animator_WalkSpeed);
                 }
@@ -172,7 +194,11 @@ public class PlayerMovement : MonoBehaviour
                 }
                 currentSpeed = runSpeed;
                 break;
+            case MoveState.Dodge:
+                currentSpeed = dodgeSpeed;
+                break;
         }
         //Debug.Log(currentSpeed);
     }
+    
 }
