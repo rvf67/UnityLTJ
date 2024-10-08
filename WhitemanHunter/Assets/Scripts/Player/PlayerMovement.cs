@@ -25,8 +25,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     public float turnSmooth = 10.0f;
 
-    /// <summary>
-    /// 현재 이동 속도
+    /// <summary>    /// 현재 이동 속도
     /// </summary>
     float currentSpeed = 1.0f;
     /// <summary>
@@ -37,7 +36,10 @@ public class PlayerMovement : MonoBehaviour
     /// 현재 이동 모드(기본 run)
     /// </summary>
     MoveState currentMoveMode = MoveState.Run;
-
+    /// <summary>
+    /// 이전 이동모드
+    /// </summary>
+    MoveState prevMode = MoveState.Stop;
     /// <summary>
     /// 플레이어가 목표로 하는 회전
     /// </summary>
@@ -140,31 +142,51 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     public void ToggleMoveMode()
     {
-        switch( currentMoveMode )
+        if (!isDodge)
         {
-            case MoveState.Walk:                
-                currentMoveMode = MoveState.Run;    // 상태 변화
-                SetMoveSpeedAndAnimation(MoveState.Run);     // 속도와 애니메이션 변화
-                break;
-            case MoveState.Run:
-                currentMoveMode = MoveState.Walk;
-                SetMoveSpeedAndAnimation(MoveState.Walk);
-                break;
+            switch (currentMoveMode)
+            {
+                case MoveState.Walk:
+                    currentMoveMode = MoveState.Run;    // 상태 변화
+                    SetMoveSpeedAndAnimation(MoveState.Run);     // 속도와 애니메이션 변화
+                    break;
+                case MoveState.Run:
+                    currentMoveMode = MoveState.Walk;
+                    SetMoveSpeedAndAnimation(MoveState.Walk);
+                    break;
+            }
         }
     }
 
+    /// <summary>
+    /// 회피 함수
+    /// </summary>
     public void Dodge()
     {
-        currentSpeed *= 100;
-        animator.SetTrigger(Dodge_Hash);
-        isDodge = true;
-        Invoke("DodgeExit",0.4f);
+        if (!isDodge)
+        {
+            if (!isMove)//이동입력이 없을때 자동으로 플레이어 앞쪽으로 가게 하기
+            {
+                direction = transform.forward;
+            }
+            prevMode = currentMoveMode; 
+            SetMoveSpeedAndAnimation(MoveState.Dodge);
+            isDodge = true;
+            Invoke("DodgeExit",0.4f);
+        }
     }
 
+    /// <summary>
+    /// 회피 종료 함수(딜레이를 걸어주기 위함)
+    /// </summary>
     void DodgeExit()
     {
-        currentSpeed /= 100;
-        isDodge=false;
+        if (!isMove)
+        {
+            direction = Vector3.zero;
+        }
+        SetMoveSpeedAndAnimation(prevMode);
+        isDodge =false;
     }
     /// <summary>
     /// 플레이어 이동 속도 변화와 애니메이션 처리용 함수
@@ -195,7 +217,11 @@ public class PlayerMovement : MonoBehaviour
                 currentSpeed = runSpeed;
                 break;
             case MoveState.Dodge:
-                currentSpeed = dodgeSpeed;
+                if (!isDodge)
+                {
+                    currentSpeed = dodgeSpeed;
+                    animator.SetTrigger(Dodge_Hash);
+                }
                 break;
         }
         //Debug.Log(currentSpeed);
