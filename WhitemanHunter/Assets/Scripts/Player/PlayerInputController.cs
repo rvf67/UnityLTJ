@@ -23,7 +23,10 @@ public class PlayerInputController : MonoBehaviour
     /// 회피 입력 전달 델이게이트
     /// </summary>
     public Action onDodge;
-
+    /// <summary>
+    /// 상호작용 델리게이트
+    /// </summary>
+    public Action onInteraction;
     // 인풋 액션 에셋
     PlayerInputActions inputActions;
     /// <summary>
@@ -43,6 +46,7 @@ public class PlayerInputController : MonoBehaviour
         inputActions.Player.Move.canceled += OnMove;
         inputActions.Player.MoveModeChange.performed += OnMoveModeChange;
         inputActions.Player.Dodge.performed += OnDodge;
+        inputActions.Player.Interaction.performed += OnInteraction;
         //inputActions.Player.Attack.performed += OnAttack;
 
     }
@@ -51,6 +55,7 @@ public class PlayerInputController : MonoBehaviour
     private void OnDisable()
     {
         //inputActions.Player.Attack.performed -= OnAttack;
+        inputActions.Player.Interaction.performed -= OnInteraction;
         inputActions.Player.Dodge.performed -= OnDodge;
         inputActions.Player.MoveModeChange.performed -= OnMoveModeChange;
         inputActions.Player.Move.canceled -= OnMove;
@@ -92,4 +97,10 @@ public class PlayerInputController : MonoBehaviour
     {
         onDodge?.Invoke();
     }
+
+    private void OnInteraction(InputAction.CallbackContext context)
+    {
+        onInteraction?.Invoke();
+    }
+
 }

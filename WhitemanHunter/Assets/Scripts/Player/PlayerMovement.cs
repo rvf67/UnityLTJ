@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     Vector3 direction = Vector3.zero;
 
+
     /// <summary>
     /// 이동할 방향을 확인하고 설정하기 위한 프로퍼티
     /// </summary>
@@ -59,6 +60,15 @@ public class PlayerMovement : MonoBehaviour
         set
         {
             direction = value;
+        }
+    }
+
+    public bool IsDodge
+    {
+        get => isDodge;
+        set
+        {
+            isDodge = value;
         }
     }
 

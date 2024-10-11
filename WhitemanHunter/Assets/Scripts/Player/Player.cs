@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     PlayerInputController inputController;
     PlayerMovement movement;
     PlayerAttack attack;
+    PlayerInteraction interaction;
 
     private void Awake()
     {
@@ -20,9 +21,11 @@ public class Player : MonoBehaviour
         inputController = GetComponent<PlayerInputController>();
         movement = GetComponent<PlayerMovement>();
         attack = GetComponent<PlayerAttack>();
+        interaction = GetComponent<PlayerInteraction>();
         inputController.onMove += movement.SetDirection;
         inputController.onMoveModeChange += movement.ToggleMoveMode;
         inputController.onDodge += movement.Dodge;
         inputController.onAttack += attack.OnAttackInput;
+        inputController.onInteraction += interaction.Interact;
     }
 }

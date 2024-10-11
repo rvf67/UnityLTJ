@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2662005877297554311}
   m_Layer: 0
   m_Name: Weapon Hammer
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   floatSpeed: 0.5
   floatTime: 1
   itemType: 4
-  value: 1
+  value: 0
 --- !u!1 &3028620411612271871
 GameObject:
   m_ObjectHideFlags: 0
