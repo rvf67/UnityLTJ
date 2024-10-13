@@ -27,6 +27,10 @@ public class PlayerInputController : MonoBehaviour
     /// 상호작용 델리게이트
     /// </summary>
     public Action onInteraction;
+    /// <summary>
+    /// 무기스왑 델리게이트
+    /// </summary>
+    public Action<int> onSwap;
     // 인풋 액션 에셋
     PlayerInputActions inputActions;
     /// <summary>
@@ -34,6 +38,7 @@ public class PlayerInputController : MonoBehaviour
     /// </summary>
     PlayerAttack attack;
 
+    GameObject equipWeapon;
     private void Awake()
     {
         inputActions = new PlayerInputActions();
@@ -47,6 +52,7 @@ public class PlayerInputController : MonoBehaviour
         inputActions.Player.MoveModeChange.performed += OnMoveModeChange;
         inputActions.Player.Dodge.performed += OnDodge;
         inputActions.Player.Interaction.performed += OnInteraction;
+        inputActions.Player.WeaponSwap.performed += OnSwap;
         //inputActions.Player.Attack.performed += OnAttack;
 
     }
@@ -55,6 +61,7 @@ public class PlayerInputController : MonoBehaviour
     private void OnDisable()
     {
         //inputActions.Player.Attack.performed -= OnAttack;
+        inputActions.Player.WeaponSwap.performed -= OnSwap;
         inputActions.Player.Interaction.performed -= OnInteraction;
         inputActions.Player.Dodge.performed -= OnDodge;
         inputActions.Player.MoveModeChange.performed -= OnMoveModeChange;
@@ -71,6 +78,16 @@ public class PlayerInputController : MonoBehaviour
     {
         Vector2 input = context.ReadValue<Vector2>();
         onMove?.Invoke(input, !context.canceled);
+    }
+
+    /// <summary>
+    /// 무기 스왑함수
+    /// </summary>
+    /// <param name="context"></param>
+    private void OnSwap(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        int select= (int)context.ReadValue<float>();
+        onSwap?.Invoke(select);
     }
 
     /// <summary>

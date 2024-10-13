@@ -27,5 +27,6 @@ public class Player : MonoBehaviour
         inputController.onDodge += movement.Dodge;
         inputController.onAttack += attack.OnAttackInput;
         inputController.onInteraction += interaction.Interact;
+        inputController.onSwap += interaction.Swap;
     }
 }
