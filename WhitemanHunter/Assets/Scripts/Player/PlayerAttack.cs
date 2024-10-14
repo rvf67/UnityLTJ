@@ -6,14 +6,9 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     /// <summary>
-    /// 공격 애니메이션 재생시간(공통)
+    /// 쿨타임 설정용 변수(콤보를 위해서 애니 시간보다 작아야한다.)
     /// </summary>
-    const float AttackAnimLenght = 0.533f;
-
-    /// <summary>
-    /// 쿨타임 설정용 변수(콤보ㅗ를 위해서 애니 시간보다 작아야한다.)
-    /// </summary>
-    public float maxCoolTime = 0.3f;
+    public float maxCoolTime = 1.0f;
     
     /// <summary>
     /// 현재 남아있는 쿨타임

@@ -38,7 +38,6 @@ public class PlayerInputController : MonoBehaviour
     /// </summary>
     PlayerAttack attack;
 
-    GameObject equipWeapon;
     private void Awake()
     {
         inputActions = new PlayerInputActions();
@@ -53,14 +52,14 @@ public class PlayerInputController : MonoBehaviour
         inputActions.Player.Dodge.performed += OnDodge;
         inputActions.Player.Interaction.performed += OnInteraction;
         inputActions.Player.WeaponSwap.performed += OnSwap;
-        //inputActions.Player.Attack.performed += OnAttack;
+        inputActions.Player.Attack.performed += OnAttack;
 
     }
 
 
     private void OnDisable()
     {
-        //inputActions.Player.Attack.performed -= OnAttack;
+        inputActions.Player.Attack.performed -= OnAttack;
         inputActions.Player.WeaponSwap.performed -= OnSwap;
         inputActions.Player.Interaction.performed -= OnInteraction;
         inputActions.Player.Dodge.performed -= OnDodge;
