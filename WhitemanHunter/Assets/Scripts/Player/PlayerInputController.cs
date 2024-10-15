@@ -53,7 +53,6 @@ public class PlayerInputController : MonoBehaviour
         inputActions.Player.Interaction.performed += OnInteraction;
         inputActions.Player.WeaponSwap.performed += OnSwap;
         inputActions.Player.Attack.performed += OnAttack;
-
     }
 
 

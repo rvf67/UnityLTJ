@@ -12,13 +12,20 @@ public class PlayerInteraction : MonoBehaviour
     /// <summary>
     /// 장착하고 있는 무기
     /// </summary>
-    GameObject equipWeapon;
+    public Weapon equipWeapon;
 
     /// <summary>
     /// 플레이어의 움직임 컴포넌트
     /// </summary>
     PlayerMovement playerMovement;
-
+    /// <summary>
+    /// 애니메이터
+    /// </summary>
+    Animator animator;
+    /// <summary>
+    /// 스왑 애니메이터용 해시
+    /// </summary>
+    readonly int Swap_Hash = Animator.StringToHash("Swap");
     /// <summary>
     /// 플레이어가 가진 무기들
     /// </summary>
@@ -27,6 +34,7 @@ public class PlayerInteraction : MonoBehaviour
     private void Awake()
     {
         playerMovement= transform.GetComponent<PlayerMovement>();
+        animator = transform.GetChild(0).GetComponent<Animator>();
     }
     private void OnTriggerStay(Collider other)
     {
@@ -64,10 +72,11 @@ public class PlayerInteraction : MonoBehaviour
         if (!playerMovement.IsDodge && hasWeapons[select-1])
         {
             if(equipWeapon != null) 
-                equipWeapon.SetActive(false);
+                equipWeapon.gameObject.SetActive(false);
             weaponIndex = select-1;
-            equipWeapon = weapons[weaponIndex];
-            weapons[weaponIndex].SetActive(true);
+            equipWeapon = weapons[weaponIndex].GetComponent<Weapon>();
+            equipWeapon.gameObject.SetActive(true);
+            animator.SetTrigger(Swap_Hash);
         }
     }
 }

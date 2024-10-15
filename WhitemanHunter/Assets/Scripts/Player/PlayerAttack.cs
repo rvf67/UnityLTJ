@@ -5,21 +5,26 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    PlayerInteraction playerInteraction;
+
     /// <summary>
     /// 쿨타임 설정용 변수(콤보를 위해서 애니 시간보다 작아야한다.)
     /// </summary>
-    public float maxCoolTime = 1.0f;
+    public float maxCoolTime = 2.0f;
     
     /// <summary>
     /// 현재 남아있는 쿨타임
     /// </summary>
     float coolTime =0.0f;
     Animator animator;
-
-    readonly int Attack_Hash = Animator.StringToHash("Attack");
+    /// <summary>
+    /// 애니메이션용 스윙 해시
+    /// </summary>
+    readonly int Swing_Hash = Animator.StringToHash("Swing");
     private void Awake()
     {
         animator = transform.GetChild(0).GetComponent<Animator>(); 
+        playerInteraction = GetComponent<PlayerInteraction>();
     }
     private void Start()
     {
@@ -34,16 +39,23 @@ public class PlayerAttack : MonoBehaviour
     /// </summary>
     public void OnAttackInput()
     {
-        Attack();
+        if(playerInteraction.equipWeapon != null)   //장착한 무기가 있을 때만
+        {
+            Attack(playerInteraction.equipWeapon);
+        }
     }
     /// <summary>
     /// 공격 한번을 하는 함수
     /// </summary>
-    void Attack()
+    void Attack(Weapon equip)
     {
         if (coolTime < 0)
         {
-            animator.SetTrigger(Attack_Hash);
+            equip.Use();
+            if (equip.type == Weapon.WeaponType.Melee)
+            {
+                animator.SetTrigger(Swing_Hash);
+            }
             coolTime = maxCoolTime;
         }
 
