@@ -11,7 +11,10 @@ public class PlayerAttack : MonoBehaviour
     /// 쿨타임 설정용 변수(콤보를 위해서 애니 시간보다 작아야한다.)
     /// </summary>
     public float maxCoolTime = 2.0f;
-    
+    /// <summary>
+    /// 공격여부
+    /// </summary>
+    public bool isAttack;
     /// <summary>
     /// 현재 남아있는 쿨타임
     /// </summary>
@@ -39,15 +42,19 @@ public class PlayerAttack : MonoBehaviour
     /// </summary>
     public void OnAttackInput()
     {
-        if(playerInteraction.equipWeapon != null)   //장착한 무기가 있을 때만
+        if(playerInteraction.equipWeapon != null&& !playerInteraction.isSwap)   //장착한 무기가 있을 때만,스왑중이 아닐때
         {
-            Attack(playerInteraction.equipWeapon);
+            StartCoroutine(Attack(playerInteraction.equipWeapon));
+        }
+        else
+        {
+            isAttack =false;
         }
     }
     /// <summary>
     /// 공격 한번을 하는 함수
     /// </summary>
-    void Attack(Weapon equip)
+    IEnumerator Attack(Weapon equip)
     {
         if (coolTime < 0)
         {
@@ -57,7 +64,9 @@ public class PlayerAttack : MonoBehaviour
                 animator.SetTrigger(Swing_Hash);
             }
             coolTime = maxCoolTime;
+            isAttack = true;
         }
-
+        yield return new WaitForSeconds(0.3f);
+        isAttack = false;
     }
 }

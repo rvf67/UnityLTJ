@@ -30,7 +30,15 @@ public class PlayerInteraction : MonoBehaviour
     /// 플레이어가 가진 무기들
     /// </summary>
     public GameObject[] weapons;
+    /// <summary>
+    /// 소지하고 있는지에 대한 배열
+    /// </summary>
     public bool[] hasWeapons;
+    /// <summary>
+    /// 스왑중인지 체크하는 변수
+    /// </summary>
+    public bool isSwap;
+
     private void Awake()
     {
         playerMovement= transform.GetComponent<PlayerMovement>();
@@ -77,6 +85,13 @@ public class PlayerInteraction : MonoBehaviour
             equipWeapon = weapons[weaponIndex].GetComponent<Weapon>();
             equipWeapon.gameObject.SetActive(true);
             animator.SetTrigger(Swap_Hash);
+
+            isSwap = true;
+            Invoke("SwapOut", 0.3f);
         }
+    }
+    public void SwapOut()
+    {
+        isSwap = false;
     }
 }

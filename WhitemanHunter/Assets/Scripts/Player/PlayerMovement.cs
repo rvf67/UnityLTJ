@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -49,8 +50,14 @@ public class PlayerMovement : MonoBehaviour
     /// 이동할 방향(3D 공간의 이동 방향, y는 무조건 바닥 높이)
     /// </summary>
     Vector3 direction = Vector3.zero;
-
-
+    /// <summary>
+    /// 플레이어 상호작용
+    /// </summary>
+    PlayerInteraction playerInteraction;
+    /// <summary>
+    /// 플레이어 공격
+    /// </summary>
+    PlayerAttack playerAttack;
     /// <summary>
     /// 이동할 방향을 확인하고 설정하기 위한 프로퍼티
     /// </summary>
@@ -99,6 +106,8 @@ public class PlayerMovement : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         animator = transform.GetChild(0).GetComponent<Animator>();
+        playerInteraction = GetComponent<PlayerInteraction>();
+        playerAttack = GetComponent<PlayerAttack>();
     }
 
     private void Start()
@@ -108,8 +117,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        cc.Move(Time.deltaTime * currentSpeed * direction); // 수동
-        //cc.SimpleMove(inputDirection);                    // 자동
+        if (!playerInteraction.isSwap && !playerAttack.isAttack)
+            cc.Move(Time.deltaTime * currentSpeed * direction); // 수동
 
         if (isMove)
         {
@@ -128,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
         direction.x = inputDir.x;
         direction.y = 0.0f;
         direction.z = inputDir.y;
-
+        
         if (isPress)
         {
             Quaternion camY = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0);    // 카메라의 Y축 회전만 따로 추출
@@ -234,7 +243,6 @@ public class PlayerMovement : MonoBehaviour
                 }
                 break;
         }
-        //Debug.Log(currentSpeed);
     }
-    
+ 
 }
