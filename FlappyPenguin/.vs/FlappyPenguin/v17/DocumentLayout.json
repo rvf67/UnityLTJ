@@ -1,0 +1,200 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|c:\\users\\\uC774\uD0DC\uC8FC\\documents\\github\\unity\\flappypenguin\\assets\\assets\\scripts\\common\\gamedirector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|solutionrelative:assets\\assets\\scripts\\common\\gamedirector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|c:\\users\\\uC774\uD0DC\uC8FC\\documents\\github\\unity\\flappypenguin\\assets\\assets\\scripts\\player\\penguincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|solutionrelative:assets\\assets\\scripts\\player\\penguincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|c:\\users\\\uC774\uD0DC\uC8FC\\documents\\github\\unity\\flappypenguin\\assets\\assets\\scripts\\scenecontroll\\gameoverdirector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|solutionrelative:assets\\assets\\scripts\\scenecontroll\\gameoverdirector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|c:\\users\\\uC774\uD0DC\uC8FC\\documents\\github\\unity\\flappypenguin\\assets\\assets\\scripts\\enemy\\needlecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|solutionrelative:assets\\assets\\scripts\\enemy\\needlecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\assets\\assets\\scripts\\core\\pool\\recycleobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|solutionrelative:assets\\assets\\scripts\\core\\pool\\recycleobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\assets\\assets\\scripts\\core\\pool\\poolchild\\sharkpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|solutionrelative:assets\\assets\\scripts\\core\\pool\\poolchild\\sharkpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\assets\\assets\\scripts\\enemy\\shark.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|solutionrelative:assets\\assets\\scripts\\enemy\\shark.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\assets\\assets\\scripts\\core\\factory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|solutionrelative:assets\\assets\\scripts\\core\\factory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\assets\\assets\\scripts\\core\\singleton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|solutionrelative:assets\\assets\\scripts\\core\\singleton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\assets\\assets\\scripts\\enemy\\spawner\\multispawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|solutionrelative:assets\\assets\\scripts\\enemy\\spawner\\multispawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\assets\\assets\\scripts\\core\\pool\\objectpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1957AD0-1074-5DE0-62CA-BE863CD87E96}|Assembly-CSharp.csproj|solutionrelative:assets\\assets\\scripts\\core\\pool\\objectpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GameOverDIrector.cs",
+              "DocumentMoniker": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\SceneControll\\GameOverDIrector.cs",
+              "RelativeDocumentMoniker": "Assets\\Assets\\Scripts\\SceneControll\\GameOverDIrector.cs",
+              "ToolTip": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\SceneControll\\GameOverDIrector.cs",
+              "RelativeToolTip": "Assets\\Assets\\Scripts\\SceneControll\\GameOverDIrector.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T02:17:03.974Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PenguinController.cs",
+              "DocumentMoniker": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Player\\PenguinController.cs",
+              "RelativeDocumentMoniker": "Assets\\Assets\\Scripts\\Player\\PenguinController.cs",
+              "ToolTip": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Player\\PenguinController.cs",
+              "RelativeToolTip": "Assets\\Assets\\Scripts\\Player\\PenguinController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T02:13:20.791Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GameDirector.cs",
+              "DocumentMoniker": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Common\\GameDirector.cs",
+              "RelativeDocumentMoniker": "Assets\\Assets\\Scripts\\Common\\GameDirector.cs",
+              "ToolTip": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Common\\GameDirector.cs",
+              "RelativeToolTip": "Assets\\Assets\\Scripts\\Common\\GameDirector.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAiwAwAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T01:52:41.486Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MultiSpawner.cs",
+              "DocumentMoniker": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Enemy\\Spawner\\MultiSpawner.cs",
+              "RelativeDocumentMoniker": "Assets\\Assets\\Scripts\\Enemy\\Spawner\\MultiSpawner.cs",
+              "ToolTip": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Enemy\\Spawner\\MultiSpawner.cs",
+              "RelativeToolTip": "Assets\\Assets\\Scripts\\Enemy\\Spawner\\MultiSpawner.cs",
+              "ViewState": "AQIAAE0AAAAAAAAAAAAlwFAAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-30T02:31:47.646Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RecycleObject.cs",
+              "DocumentMoniker": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Core\\Pool\\RecycleObject.cs",
+              "RelativeDocumentMoniker": "Assets\\Assets\\Scripts\\Core\\Pool\\RecycleObject.cs",
+              "ToolTip": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Core\\Pool\\RecycleObject.cs",
+              "RelativeToolTip": "Assets\\Assets\\Scripts\\Core\\Pool\\RecycleObject.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-29T04:39:29.229Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Factory.cs",
+              "DocumentMoniker": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Core\\Factory.cs",
+              "RelativeDocumentMoniker": "Assets\\Assets\\Scripts\\Core\\Factory.cs",
+              "ToolTip": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Core\\Factory.cs",
+              "RelativeToolTip": "Assets\\Assets\\Scripts\\Core\\Factory.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-29T04:10:44.965Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Shark.cs",
+              "DocumentMoniker": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Enemy\\Shark.cs",
+              "RelativeDocumentMoniker": "Assets\\Assets\\Scripts\\Enemy\\Shark.cs",
+              "ToolTip": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Enemy\\Shark.cs",
+              "RelativeToolTip": "Assets\\Assets\\Scripts\\Enemy\\Shark.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAYwBkAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-29T04:44:38.364Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Needlecontroller.cs",
+              "DocumentMoniker": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Enemy\\Needlecontroller.cs",
+              "RelativeDocumentMoniker": "Assets\\Assets\\Scripts\\Enemy\\Needlecontroller.cs",
+              "ToolTip": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Enemy\\Needlecontroller.cs",
+              "RelativeToolTip": "Assets\\Assets\\Scripts\\Enemy\\Needlecontroller.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAA7AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-30T02:00:40.668Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SharkPool.cs",
+              "DocumentMoniker": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Core\\Pool\\PoolChild\\SharkPool.cs",
+              "RelativeDocumentMoniker": "Assets\\Assets\\Scripts\\Core\\Pool\\PoolChild\\SharkPool.cs",
+              "ToolTip": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Core\\Pool\\PoolChild\\SharkPool.cs",
+              "RelativeToolTip": "Assets\\Assets\\Scripts\\Core\\Pool\\PoolChild\\SharkPool.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-29T04:44:06.275Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ObjectPool.cs",
+              "DocumentMoniker": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Core\\Pool\\ObjectPool.cs",
+              "RelativeDocumentMoniker": "Assets\\Assets\\Scripts\\Core\\Pool\\ObjectPool.cs",
+              "ToolTip": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Core\\Pool\\ObjectPool.cs",
+              "RelativeToolTip": "Assets\\Assets\\Scripts\\Core\\Pool\\ObjectPool.cs",
+              "ViewState": "AQIAADQAAAAAAAAAAAAYwD0AAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-29T04:40:57.209Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Singleton.cs",
+              "DocumentMoniker": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Core\\Singleton.cs",
+              "RelativeDocumentMoniker": "Assets\\Assets\\Scripts\\Core\\Singleton.cs",
+              "ToolTip": "C:\\Users\\\uC774\uD0DC\uC8FC\\Documents\\GitHub\\Unity\\FlappyPenguin\\Assets\\Assets\\Scripts\\Core\\Singleton.cs",
+              "RelativeToolTip": "Assets\\Assets\\Scripts\\Core\\Singleton.cs",
+              "ViewState": "AQIAACIAAAAAAAAAAAAYwDUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-29T04:12:51.919Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

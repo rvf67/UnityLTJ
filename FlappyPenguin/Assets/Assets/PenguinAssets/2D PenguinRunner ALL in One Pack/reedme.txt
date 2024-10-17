@@ -1,0 +1,35 @@
+﻿Thank you for your purchase.
+
+***  2D PenguinRunner ALL in One Pack - Read Me - ***
+
+
+This is a set of 2D PenguinRunner ALL in One Pack for 2D games.
+This asset, player image and the enemy image and the UI and the background image and element contains all.
+It is also possible to be completed only in this asset if small game.
+
+== Description ==
+
+-About player image(Penguin)- 
+The size of the sheet is 2500 x 2500px
+Individual size 500 x 500px
+-Animation
+1.Walk
+2.Idle
+3.Damage
+4.Jump
+5.Swim I (sliding) 
+
+-About enemy image-
+The size of the sheet is 2000 x 1000px
+Individual size 1000 x 1000px
+Animation 1 pattern
+
+-About elements&UI image-
+I has been created in the basic 250px trout.
+(Ground elements are different.)
+Coins are also provided individual sheets
+(Coin Spinning)
+
+
+
+

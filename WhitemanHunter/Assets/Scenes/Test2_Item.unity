@@ -346,6 +346,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -1.4353837
       objectReference: {fileID: 0}
+    - target: {fileID: 1919409794280816012, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1979158724074129353, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -51.067192
@@ -357,6 +361,10 @@ PrefabInstance:
     - target: {fileID: 1979158724074129353, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 2.3898654
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061877811632789728, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4718995849683955296, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -434,6 +442,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6490659268451370087, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6630823558059162381, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 10.542919
@@ -445,6 +457,10 @@ PrefabInstance:
     - target: {fileID: 6630823558059162381, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -88.751724
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652023850311139273, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7052447270300138844, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
       propertyPath: meleeArea
@@ -480,7 +496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7899113043661299313, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8370502049626771790, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
