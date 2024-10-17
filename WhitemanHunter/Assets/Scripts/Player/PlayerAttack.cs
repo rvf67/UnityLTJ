@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     PlayerInteraction playerInteraction;
+    PlayerMovement playerMovement;
 
     /// <summary>
     /// 쿨타임 설정용 변수(콤보를 위해서 애니 시간보다 작아야한다.)
@@ -28,6 +29,7 @@ public class PlayerAttack : MonoBehaviour
     {
         animator = transform.GetChild(0).GetComponent<Animator>(); 
         playerInteraction = GetComponent<PlayerInteraction>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
     private void Start()
     {
@@ -41,14 +43,10 @@ public class PlayerAttack : MonoBehaviour
     /// 공격입력이 들어오면 실행되는 함수
     /// </summary>
     public void OnAttackInput()
-    {
-        if(playerInteraction.equipWeapon != null&& !playerInteraction.isSwap)   //장착한 무기가 있을 때만,스왑중이 아닐때
+    { 
+        if(playerInteraction.equipWeapon != null && !playerInteraction.isSwap && !playerMovement.IsDodge)   //장착한 무기가 있을 때만,스왑중이 아닐때, 회피중이 아닐때
         {
             StartCoroutine(Attack(playerInteraction.equipWeapon));
-        }
-        else
-        {
-            isAttack =false;
         }
     }
     /// <summary>
@@ -65,8 +63,8 @@ public class PlayerAttack : MonoBehaviour
             }
             coolTime = maxCoolTime;
             isAttack = true;
+            yield return new WaitForSeconds(0.7f);
+            isAttack = false;
         }
-        yield return new WaitForSeconds(0.3f);
-        isAttack = false;
     }
 }

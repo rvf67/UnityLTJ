@@ -118,7 +118,10 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         if (!playerInteraction.isSwap && !playerAttack.isAttack)
+        {
             cc.Move(Time.deltaTime * currentSpeed * direction); // 수동
+        }
+        
 
         if (isMove)
         {
