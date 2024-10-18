@@ -25,19 +25,17 @@ public class PlayerAttack : MonoBehaviour
     /// 애니메이션용 스윙 해시
     /// </summary>
     readonly int Swing_Hash = Animator.StringToHash("Swing");
+    readonly int Shot_Hash = Animator.StringToHash("Shot");
     private void Awake()
     {
         animator = transform.GetChild(0).GetComponent<Animator>(); 
         playerInteraction = GetComponent<PlayerInteraction>();
         playerMovement = GetComponent<PlayerMovement>();
     }
-    private void Start()
-    {
-        coolTime = maxCoolTime;
-    }
+
     private void Update()
     {
-        coolTime -=Time.deltaTime;
+        coolTime +=Time.deltaTime;
     }
     /// <summary>
     /// 공격입력이 들어오면 실행되는 함수
@@ -54,14 +52,13 @@ public class PlayerAttack : MonoBehaviour
     /// </summary>
     IEnumerator Attack(Weapon equip)
     {
-        if (coolTime < 0)
+        if (coolTime > equip.rate)
         {
             equip.Use();
-            if (equip.type == Weapon.WeaponType.Melee)
-            {
-                animator.SetTrigger(Swing_Hash);
-            }
-            coolTime = maxCoolTime;
+
+            animator.SetTrigger(equip.type == Weapon.WeaponType.Melee? Swing_Hash : Shot_Hash);
+            
+            coolTime = 0;
             isAttack = true;
             yield return new WaitForSeconds(0.7f);
             isAttack = false;
