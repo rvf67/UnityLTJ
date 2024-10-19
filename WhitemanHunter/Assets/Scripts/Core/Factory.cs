@@ -4,16 +4,37 @@ using UnityEngine;
 
 public class Factory : Singleton<Factory>
 {
-    BulletPool bullet;
+    BulletCasePool bulletCase;
+    HandGunBulletPool handBullet;
+    SubMachineGunBulletPool subMachineBullet;
 
     protected override void OnInitialize()
     {
-        bullet = GetComponentInChildren<BulletPool>();
-        bullet?.Initialize();
+        handBullet = GetComponentInChildren<HandGunBulletPool>();
+        if( handBullet != null )
+            handBullet?.Initialize();
+
+        bulletCase = GetComponentInChildren<BulletCasePool>();
+        if( bulletCase != null )
+            bulletCase?.Initialize();
+
+        subMachineBullet = GetComponentInChildren<SubMachineGunBulletPool>();
+        if( subMachineBullet != null )
+            subMachineBullet?.Initialize();
     }
 
-    public Bullet GetBullet(Vector3? position = null, Vector3? eulerAngle = null)
+    public Bullet GetHandBullet(Vector3? position = null, Vector3? eulerAngle = null)
     {
-        return bullet.GetObject(position, eulerAngle);
+        return handBullet.GetObject(position, eulerAngle);
+    }
+
+    public Bullet GetBulletCase(Vector3? position = null, Vector3? eulerAngle = null)
+    {
+        return bulletCase.GetObject(position, eulerAngle);
+    }
+
+    public Bullet GetSubBullet(Vector3? position = null, Vector3? eulerAngle = null)
+    {
+        return subMachineBullet.GetObject(position, eulerAngle);
     }
 }

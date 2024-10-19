@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletPool : ObjectPool<Bullet>
+public class BulletCasePool : ObjectPool<Bullet>
 {
     // Start is called before the first frame update
     void Start()
