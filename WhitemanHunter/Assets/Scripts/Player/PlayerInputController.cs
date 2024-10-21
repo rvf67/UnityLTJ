@@ -7,6 +7,10 @@ using UnityEngine.InputSystem;
 public class PlayerInputController : MonoBehaviour
 {
     /// <summary>
+    /// 누르고 있는 동안 공격하기 위한 변수
+    /// </summary>
+    private bool isAttack = false;
+    /// <summary>
     /// 이동 입력을 전달하는 델리게이트(Vector2:이동방향, bool 누른 상황(true면 눌렀다))
     /// </summary>
     public Action<Vector2, bool> onMove;
@@ -20,9 +24,17 @@ public class PlayerInputController : MonoBehaviour
     /// </summary>
     public Action onAttack;
     /// <summary>
+    /// 공격종료 전달 델리게이트
+    /// </summary>
+    public Action onAttackEnd;
+    /// <summary>
     /// 회피 입력 전달 델이게이트
     /// </summary>
     public Action onDodge;
+    /// <summary>
+    /// 재장전 델리게이트
+    /// </summary>
+    public Action onReload;
     /// <summary>
     /// 상호작용 델리게이트
     /// </summary>
@@ -53,11 +65,16 @@ public class PlayerInputController : MonoBehaviour
         inputActions.Player.Interaction.performed += OnInteraction;
         inputActions.Player.WeaponSwap.performed += OnSwap;
         inputActions.Player.Attack.performed += OnAttack;
+        inputActions.Player.Attack.canceled += OnattackEnd;
+        inputActions.Player.Reload.performed += OnReload;
     }
 
+    
 
     private void OnDisable()
     {
+        inputActions.Player.Reload.performed -= OnReload;
+        inputActions.Player.Attack.canceled -= OnattackEnd;
         inputActions.Player.Attack.performed -= OnAttack;
         inputActions.Player.WeaponSwap.performed -= OnSwap;
         inputActions.Player.Interaction.performed -= OnInteraction;
@@ -67,7 +84,6 @@ public class PlayerInputController : MonoBehaviour
         inputActions.Player.Move.performed -= OnMove;
         inputActions.Player.Disable();
     }
-
     /// <summary>
     /// 이동 함수
     /// </summary>
@@ -102,7 +118,19 @@ public class PlayerInputController : MonoBehaviour
     /// <param name="context"></param>
     private void OnAttack(InputAction.CallbackContext context)
     {
-        onAttack?.Invoke();
+         onAttack?.Invoke();
+    }
+    /// <summary>
+    /// 공격 종료함수
+    /// </summary>
+    /// <param name="context"></param>
+    private void OnattackEnd(InputAction.CallbackContext context)
+    {
+        onAttackEnd?.Invoke();
+    }
+    private void OnReload(InputAction.CallbackContext context)
+    {
+        onReload?.Invoke();
     }
     /// <summary>
     /// 회피 함수

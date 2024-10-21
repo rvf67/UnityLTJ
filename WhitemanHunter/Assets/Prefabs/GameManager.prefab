@@ -44,4 +44,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa06f24d674e364783c81035248d1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showSlimePath: 0

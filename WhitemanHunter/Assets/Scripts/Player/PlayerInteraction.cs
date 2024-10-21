@@ -15,6 +15,10 @@ public class PlayerInteraction : MonoBehaviour
     public Weapon equipWeapon;
 
     /// <summary>
+    /// 가지고 있는 여분탄약
+    /// </summary>
+    public int ammo;
+    /// <summary>
     /// 플레이어의 움직임 컴포넌트
     /// </summary>
     PlayerMovement playerMovement;

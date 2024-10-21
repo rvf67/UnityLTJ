@@ -25,6 +25,14 @@ public class Weapon : MonoBehaviour
     /// </summary>
     public float rate;
     /// <summary>
+    /// 가질수 있는 최대 탄창
+    /// </summary>
+    public int maxAmmo;
+    /// <summary>
+    /// 현재 탄약
+    /// </summary>
+    public int currentAmmo;
+    /// <summary>
     /// 근접공격시 근접 범위
     /// </summary>
     public BoxCollider meleeArea;
@@ -60,9 +68,9 @@ public class Weapon : MonoBehaviour
             StopCoroutine(ActivateMelee());
             StartCoroutine(ActivateMelee());
         }
-        else if(type == WeaponType.Range)
+        else if(type == WeaponType.Range && currentAmmo > 0)
         {
-            StopCoroutine(ActivateShot());
+            currentAmmo--;
             StartCoroutine(ActivateShot());
         }
     }
@@ -90,7 +98,6 @@ public class Weapon : MonoBehaviour
             case RangeType.SubMachineGun:
                 Factory.Instance.GetSubBullet(firePosition.position);
                 break;
-
         }
             
         //탄피 생성

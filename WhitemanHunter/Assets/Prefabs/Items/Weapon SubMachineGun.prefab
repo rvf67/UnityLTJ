@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6671551444070527481}
   - component: {fileID: 4788828084638867052}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 2309700355470343535}
   - component: {fileID: 3725557168643617271}
   - component: {fileID: 5046381179257002265}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4935,7 +4935,7 @@ GameObject:
   - component: {fileID: 8486960036944006890}
   - component: {fileID: 1979092746426896743}
   - component: {fileID: 5239307459204991234}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5020,7 +5020,7 @@ GameObject:
   - component: {fileID: 6333673825650548193}
   - component: {fileID: 543642803493877568}
   - component: {fileID: 2322429301535737046}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Weapon SubMachineGun
   m_TagString: Weapon
   m_Icon: {fileID: 0}

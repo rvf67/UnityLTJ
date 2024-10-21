@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneTemplate;
 using UnityEngine;
 
 
@@ -44,24 +45,47 @@ public class PlayerAttack : MonoBehaviour
     { 
         if(playerInteraction.equipWeapon != null && !playerInteraction.isSwap && !playerMovement.IsDodge)   //장착한 무기가 있을 때만,스왑중이 아닐때, 회피중이 아닐때
         {
+            isAttack = true;
             StartCoroutine(Attack(playerInteraction.equipWeapon));
         }
     }
+
+    public void OnAttackEndInput()
+    {
+        if (playerInteraction.equipWeapon != null && !playerInteraction.isSwap && !playerMovement.IsDodge)   //장착한 무기가 있을 때만,스왑중이 아닐때, 회피중이 아닐때
+        {
+            isAttack = false;
+        }
+    }
     /// <summary>
-    /// 공격 한번을 하는 함수
+    /// 연사함수
     /// </summary>
     IEnumerator Attack(Weapon equip)
     {
         if (coolTime > equip.rate)
         {
-            equip.Use();
+            while (isAttack)
+            {
+                coolTime = 0;
+                equip.Use();
 
-            animator.SetTrigger(equip.type == Weapon.WeaponType.Melee? Swing_Hash : Shot_Hash);
-            
-            coolTime = 0;
-            isAttack = true;
-            yield return new WaitForSeconds(0.7f);
-            isAttack = false;
+                animator.SetTrigger(equip.type == Weapon.WeaponType.Melee ? Swing_Hash : Shot_Hash);
+
+                yield return new WaitForSeconds(equip.rate); 
+            }
+        }
+    }
+    void Reload()
+    {
+        if (playerInteraction.equipWeapon == null)
+            return;
+        if (playerInteraction.equipWeapon.type == Weapon.WeaponType.Melee)
+            return;
+        if (playerInteraction.ammo == 0)
+            return;
+        if (!playerMovement.IsDodge&&!isAttack&&!playerMovement.isMove)
+        {
+
         }
     }
 }

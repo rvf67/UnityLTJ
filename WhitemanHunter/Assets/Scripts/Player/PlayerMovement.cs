@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// 이게 있어야 플레이어 회전 상하좌우 강제 보간을 막을 수 있음
     /// </summary>
-    private bool isMove;
+    public bool isMove;
     /// <summary>
     /// 현재 이동 모드(기본 run)
     /// </summary>

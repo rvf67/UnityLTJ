@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8249168925596286094}
   - component: {fileID: 1705088636705512216}
   - component: {fileID: 6937686673713869519}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4840,7 +4840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6086637291298657867}
   - component: {fileID: 8355444962147313791}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4937,7 +4937,7 @@ GameObject:
   - component: {fileID: 7825758580834134647}
   - component: {fileID: 5621855996829040405}
   - component: {fileID: 8982455139146206315}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Weapon HandGun
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -5021,7 +5021,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -5042,7 +5042,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -5059,7 +5059,7 @@ GameObject:
   - component: {fileID: 1534864915703360276}
   - component: {fileID: 1309972879345900540}
   - component: {fileID: 6380476800609565718}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
