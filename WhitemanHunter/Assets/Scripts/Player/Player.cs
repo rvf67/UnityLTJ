@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
 {
     // 컴포넌트 들
     CharacterController characterController;
-
     PlayerInputController inputController;
     PlayerMovement movement;
     PlayerAttack attack;

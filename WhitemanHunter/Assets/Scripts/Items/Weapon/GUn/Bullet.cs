@@ -35,13 +35,13 @@ public class Bullet : RecycleObject
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Floor")       // 藕乔老 版快 贸府
+        if (other.gameObject.tag == "Floor")       // 藕乔老 版快 贸府
         {
             DisableTimer(0.3f);
         }   
-        else if(collision.gameObject.tag == "Wall"){
+        else if(other.gameObject.tag == "Wall"){
             DisableTimer();
         }
     }

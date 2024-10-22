@@ -49,6 +49,8 @@ MonoBehaviour:
   type: 1
   damage: 0
   rate: 0.15
+  maxAmmo: 30
+  currentAmmo: 30
   meleeArea: {fileID: 0}
   trailEffect: {fileID: 0}
   rangeType: 2
@@ -501,6 +503,8 @@ MonoBehaviour:
   runSpeed: 30
   dodgeSpeed: 50
   turnSmooth: 10
+  isMove: 0
+  isReload: 0
 --- !u!114 &6158248397220017622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,6 +530,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipWeapon: {fileID: 0}
+  ammo: 100
+  ammoMax: 100
   weapons:
   - {fileID: 7899113043661299313}
   - {fileID: 7740775427209449282}
@@ -667,6 +673,8 @@ MonoBehaviour:
   type: 1
   damage: 0
   rate: 0.5
+  maxAmmo: 12
+  currentAmmo: 12
   meleeArea: {fileID: 0}
   trailEffect: {fileID: 0}
   rangeType: 1
@@ -683,7 +691,7 @@ GameObject:
   - component: {fileID: 1756817205716541238}
   m_Layer: 7
   m_Name: Weapon Hammer
-  m_TagString: Untagged
+  m_TagString: Hammer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -720,6 +728,8 @@ MonoBehaviour:
   type: 0
   damage: 3
   rate: 0.5
+  maxAmmo: 0
+  currentAmmo: 0
   meleeArea: {fileID: 1756817205716541238}
   trailEffect: {fileID: 3626709276423734413}
   rangeType: 0
@@ -738,7 +748,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3

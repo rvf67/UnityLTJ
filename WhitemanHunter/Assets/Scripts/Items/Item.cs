@@ -49,9 +49,14 @@ public class Item : MonoBehaviour
     }
     private void Update()
     {
-        transform.Rotate(Vector3.up*rotateSpeed*Time.deltaTime);
+        transform.Rotate(Vector3.up*rotateSpeed*Time.deltaTime);            //옆으로 회전
         transform.GetChild(0).Translate(direction*floatSpeed*Time.deltaTime,Space.World);
     }
+
+    /// <summary>
+    /// 물체를 위아래로 움직이게하는 코루틴
+    /// </summary>
+    /// <returns></returns>
     IEnumerator UpDown()
     {
         while (true) 

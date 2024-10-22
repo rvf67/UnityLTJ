@@ -61,6 +61,9 @@ public class Weapon : MonoBehaviour
         firePosition = GameManager.Instance.Player.transform.GetChild(1);
     }
 
+    /// <summary>
+    /// 무기 사용 함수
+    /// </summary>
     public void Use()
     {
         if(type == WeaponType.Melee)
@@ -74,6 +77,12 @@ public class Weapon : MonoBehaviour
             StartCoroutine(ActivateShot());
         }
     }
+
+
+    /// <summary>
+    /// 근접공격 코루틴
+    /// </summary>
+    /// <returns></returns>
     IEnumerator ActivateMelee()
     {
         yield return new WaitForSeconds(0.1f);
@@ -85,6 +94,11 @@ public class Weapon : MonoBehaviour
         trailEffect.enabled = false;    
     }
 
+
+    /// <summary>
+    /// 원거리 공격 코루틴
+    /// </summary>
+    /// <returns></returns>
     IEnumerator ActivateShot()
     {
         //총알생성

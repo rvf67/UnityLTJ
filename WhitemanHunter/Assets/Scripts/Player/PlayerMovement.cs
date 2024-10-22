@@ -69,7 +69,10 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     PlayerAttack playerAttack;
 
-    Camera camera;
+    /// <summary>
+    /// 카메라
+    /// </summary>
+    Camera cam;
 
     /// <summary>
     /// 이동할 방향을 확인하고 설정하기 위한 프로퍼티
@@ -83,6 +86,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 회피여부를 확인할 프로퍼티
+    /// </summary>
     public bool IsDodge
     {
         get => isDodge;
@@ -126,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         SetMoveSpeedAndAnimation(MoveState.Stop);    // 일단 정지 상태
-        camera=Camera.main;
+        cam=Camera.main;
     }
 
     private void Update()
@@ -143,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Turn(), Time.deltaTime * turnSmooth);
+            transform.rotation = Quaternion.Slerp(transform.rotation, TurnFromMouse(), Time.deltaTime * turnSmooth);
         }
     }
 
@@ -286,10 +292,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public Quaternion Turn()
+    /// <summary>
+    /// 마우스에 의한 회전 함수
+    /// </summary>
+    /// <returns>마우스로의 회전방향</returns>
+    public Quaternion TurnFromMouse()
     {
         Quaternion result = Quaternion.identity;
-        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100))
         {

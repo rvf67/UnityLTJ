@@ -7,6 +7,8 @@ TagManager:
   - Weapon
   - Floor
   - Wall
+  - Hammer
+  - Bullet
   layers:
   - Default
   - TransparentFX

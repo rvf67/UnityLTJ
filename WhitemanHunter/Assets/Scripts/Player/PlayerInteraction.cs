@@ -84,6 +84,10 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 무기스왑 함수
+    /// </summary>
+    /// <param name="select"></param>
     public void Swap(int select)
     {
         int weaponIndex = -1;
@@ -100,6 +104,10 @@ public class PlayerInteraction : MonoBehaviour
             Invoke("SwapOut", 0.3f);
         }
     }
+
+    /// <summary>
+    /// 무기 스왑 종료 함수
+    /// </summary>
     public void SwapOut()
     {
         isSwap = false;

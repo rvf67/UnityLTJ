@@ -6,7 +6,13 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    /// <summary>
+    /// 플레이어 물체 상호작용
+    /// </summary>
     PlayerInteraction playerInteraction;
+    /// <summary>
+    /// 플레이어 움직임
+    /// </summary>
     PlayerMovement playerMovement;
     /// <summary>
     /// 쿨타임 설정용 변수(콤보를 위해서 애니 시간보다 작아야한다.)
@@ -25,6 +31,9 @@ public class PlayerAttack : MonoBehaviour
     /// 애니메이션용 스윙 해시
     /// </summary>
     readonly int Swing_Hash = Animator.StringToHash("Swing");
+    /// <summary>
+    /// 애니메이션용 샷 해시
+    /// </summary>
     readonly int Shot_Hash = Animator.StringToHash("Shot");
     private void Awake()
     {
@@ -35,8 +44,6 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         coolTime +=Time.deltaTime;
-
-        
     }
     /// <summary>
     /// 공격입력이 들어오면 실행되는 함수
@@ -49,7 +56,9 @@ public class PlayerAttack : MonoBehaviour
             StartCoroutine(Attack(playerInteraction.equipWeapon));
         }
     }
-
+    /// <summary>
+    /// 공격을 끝내기 위한 함수
+    /// </summary>
     public void OnAttackEndInput()
     {
         if (playerInteraction.equipWeapon != null && !playerInteraction.isSwap && !playerMovement.IsDodge)   //장착한 무기가 있을 때만,스왑중이 아닐때, 회피중이 아닐때
