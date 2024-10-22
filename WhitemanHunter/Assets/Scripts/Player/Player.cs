@@ -29,5 +29,6 @@ public class Player : MonoBehaviour
         inputController.onAttackEnd += attack.OnAttackEndInput;
         inputController.onInteraction += interaction.Interact;
         inputController.onSwap += interaction.Swap;
+        inputController.onReload += movement.Reload;
     }
 }

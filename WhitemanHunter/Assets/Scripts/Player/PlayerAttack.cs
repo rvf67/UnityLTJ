@@ -8,7 +8,6 @@ public class PlayerAttack : MonoBehaviour
 {
     PlayerInteraction playerInteraction;
     PlayerMovement playerMovement;
-
     /// <summary>
     /// 쿨타임 설정용 변수(콤보를 위해서 애니 시간보다 작아야한다.)
     /// </summary>
@@ -33,10 +32,11 @@ public class PlayerAttack : MonoBehaviour
         playerInteraction = GetComponent<PlayerInteraction>();
         playerMovement = GetComponent<PlayerMovement>();
     }
-
     private void Update()
     {
         coolTime +=Time.deltaTime;
+
+        
     }
     /// <summary>
     /// 공격입력이 들어오면 실행되는 함수
@@ -60,32 +60,22 @@ public class PlayerAttack : MonoBehaviour
     /// <summary>
     /// 연사함수
     /// </summary>
+    /// <param name="equip">장착중인 무기</param>
+    /// <returns></returns>
     IEnumerator Attack(Weapon equip)
     {
         if (coolTime > equip.rate)
         {
             while (isAttack)
             {
-                coolTime = 0;
                 equip.Use();
 
                 animator.SetTrigger(equip.type == Weapon.WeaponType.Melee ? Swing_Hash : Shot_Hash);
 
                 yield return new WaitForSeconds(equip.rate); 
             }
+            coolTime = 0;
         }
     }
-    void Reload()
-    {
-        if (playerInteraction.equipWeapon == null)
-            return;
-        if (playerInteraction.equipWeapon.type == Weapon.WeaponType.Melee)
-            return;
-        if (playerInteraction.ammo == 0)
-            return;
-        if (!playerMovement.IsDodge&&!isAttack&&!playerMovement.isMove)
-        {
 
-        }
-    }
 }

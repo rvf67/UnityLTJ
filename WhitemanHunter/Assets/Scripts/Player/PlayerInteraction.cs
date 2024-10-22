@@ -18,6 +18,12 @@ public class PlayerInteraction : MonoBehaviour
     /// 가지고 있는 여분탄약
     /// </summary>
     public int ammo;
+
+    /// <summary>
+    /// 원거리 무기가 가질 수 있는 최대 탄약
+    /// </summary>
+    public int ammoMax;
+
     /// <summary>
     /// 플레이어의 움직임 컴포넌트
     /// </summary>

@@ -33,6 +33,16 @@ public class PlayerMovement : MonoBehaviour
     /// 이게 있어야 플레이어 회전 상하좌우 강제 보간을 막을 수 있음
     /// </summary>
     public bool isMove;
+
+    /// <summary>
+    /// 정전중인지 확인용 변수
+    /// </summary>
+    public bool isReload;
+    /// <summary>
+    /// 회피중인지 확인용 변수
+    /// </summary>
+    private bool isDodge;
+
     /// <summary>
     /// 현재 이동 모드(기본 run)
     /// </summary>
@@ -58,6 +68,9 @@ public class PlayerMovement : MonoBehaviour
     /// 플레이어 공격
     /// </summary>
     PlayerAttack playerAttack;
+
+    Camera camera;
+
     /// <summary>
     /// 이동할 방향을 확인하고 설정하기 위한 프로퍼티
     /// </summary>
@@ -93,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
     // 애니메이터용 해시값 및 상수
     readonly int Speed_Hash = Animator.StringToHash("Speed");
     readonly int Dodge_Hash = Animator.StringToHash("Dodge");
+    readonly int Reload_Hash = Animator.StringToHash("Reload");
     const float Animator_StopSpeed = 0.0f;
     const float Animator_WalkSpeed = 0.3f;
     const float Animator_RunSpeed = 1.0f;
@@ -100,7 +114,6 @@ public class PlayerMovement : MonoBehaviour
     // 컴포넌트
     CharacterController cc;
     Animator animator;
-    private bool isDodge;
 
     private void Awake()
     {
@@ -113,11 +126,12 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         SetMoveSpeedAndAnimation(MoveState.Stop);    // 일단 정지 상태
+        camera=Camera.main;
     }
 
     private void Update()
     {
-        if (!playerInteraction.isSwap && !playerAttack.isAttack)
+        if (!playerInteraction.isSwap && !playerAttack.isAttack && !isReload)
         {
             cc.Move(Time.deltaTime * currentSpeed * direction); // 수동
         }
@@ -126,6 +140,10 @@ public class PlayerMovement : MonoBehaviour
         if (isMove)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * turnSmooth);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Turn(), Time.deltaTime * turnSmooth);
         }
     }
 
@@ -185,13 +203,14 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     public void Dodge()
     {
-        if (!isDodge)
+        if (!isDodge&&!isReload)
         {
             if (!isMove)//이동입력이 없을때 자동으로 플레이어 앞쪽으로 가게 하기
             {
                 direction = transform.forward;
             }
-            prevMode = currentMoveMode; 
+            prevMode = currentMoveMode;
+  
             SetMoveSpeedAndAnimation(MoveState.Dodge);
             isDodge = true;
             Invoke("DodgeExit",0.4f);
@@ -199,7 +218,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// 회피 종료 함수(딜레이를 걸어주기 위함)
+    /// 회피 종료 함수(딜레이를 걸어주기 위함), 타이밍 이슈로 코루틴은 회피함
     /// </summary>
     void DodgeExit()
     {
@@ -247,5 +266,50 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
     }
- 
+
+    /// <summary>
+    /// 재장전 함수
+    /// </summary>
+    public void Reload()
+    {
+        if (playerInteraction.equipWeapon == null)
+            return;
+        if (playerInteraction.equipWeapon.type == Weapon.WeaponType.Melee)
+            return;
+        if (playerInteraction.ammo == 0)
+            return;
+        if (!IsDodge && !playerAttack.isAttack && !playerInteraction.isSwap)
+        {
+            animator.SetTrigger(Reload_Hash);
+            isReload = true;
+            StartCoroutine(ReloadOut());
+        }
+    }
+
+    public Quaternion Turn()
+    {
+        Quaternion result = Quaternion.identity;
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100))
+        {
+            Vector3 direction = hit.point - transform.position;
+            result =Quaternion.LookRotation(direction);
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// 재장전 모션에서 빠져나올 때 사용할 코루틴
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator ReloadOut()
+    {
+        Weapon weapon = playerInteraction.equipWeapon; 
+        yield return new WaitForSeconds(2.0f);
+        int reAmmo = playerInteraction.ammo < weapon.maxAmmo ? playerInteraction.ammo : weapon.maxAmmo;
+        weapon.currentAmmo = reAmmo; 
+        playerInteraction.ammo -= reAmmo;
+        isReload=false;
+    }
 }

@@ -573,6 +573,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1760215632024192966, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
+      propertyPath: maxAmmo
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760215632024192966, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
+      propertyPath: currentAmmo
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 5722421461201191368, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
       propertyPath: m_Name
       value: Player
@@ -616,6 +624,22 @@ PrefabInstance:
     - target: {fileID: 6406802935109338851, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7196049243807300619, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
+      propertyPath: ammo
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7196049243807300619, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
+      propertyPath: ammoMax
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107942561748809194, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
+      propertyPath: maxAmmo
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107942561748809194, guid: bd4bb22924f61b240a5c2cc1d39d7c30, type: 3}
+      propertyPath: currentAmmo
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
