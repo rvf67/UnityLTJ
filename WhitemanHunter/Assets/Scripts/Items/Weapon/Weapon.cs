@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 모든 무기오브젝트는 플레이어의 오른손에 미리 담겨져있음
+/// </summary>
 public class Weapon : MonoBehaviour
 {
     /// <summary>

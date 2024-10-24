@@ -49,11 +49,15 @@ public class PlayerAttack : MonoBehaviour
     /// 공격입력이 들어오면 실행되는 함수
     /// </summary>
     public void OnAttackInput()
-    { 
-        if(playerInteraction.equipWeapon != null && !playerInteraction.isSwap && !playerMovement.IsDodge)   //장착한 무기가 있을 때만,스왑중이 아닐때, 회피중이 아닐때
+    {
+        if (playerInteraction.equipWeapon != null && !isAttack
+            && !playerInteraction.isSwap && !playerMovement.IsDodge)   //장착한 무기가 있을 때만,스왑중이 아닐때, 회피중이 아닐때, 공격중이 아닐때
         {
-            isAttack = true;
-            StartCoroutine(Attack(playerInteraction.equipWeapon));
+            if (coolTime > playerInteraction.equipWeapon.rate)
+            {
+                isAttack = true;
+                StartCoroutine(Attack(playerInteraction.equipWeapon));
+            }
         }
     }
     /// <summary>
@@ -61,7 +65,8 @@ public class PlayerAttack : MonoBehaviour
     /// </summary>
     public void OnAttackEndInput()
     {
-        if (playerInteraction.equipWeapon != null && !playerInteraction.isSwap && !playerMovement.IsDodge)   //장착한 무기가 있을 때만,스왑중이 아닐때, 회피중이 아닐때
+        if (playerInteraction.equipWeapon != null && playerInteraction.equipWeapon.type == Weapon.WeaponType.Range
+            && !playerInteraction.isSwap && !playerMovement.IsDodge)   //장착한 무기가 있을 때만,스왑중이 아닐때,회피중이 아닐때, 원거리 무기일때만
         {
             isAttack = false;
         }
@@ -73,18 +78,19 @@ public class PlayerAttack : MonoBehaviour
     /// <returns></returns>
     IEnumerator Attack(Weapon equip)
     {
-        if (coolTime > equip.rate)
+        while (isAttack)
         {
-            while (isAttack)
+            equip.Use();
+
+            animator.SetTrigger(equip.type == Weapon.WeaponType.Melee ? Swing_Hash : Shot_Hash);
+
+            yield return new WaitForSeconds(equip.rate);
+            if (equip.type == Weapon.WeaponType.Melee)//근접공격일 때 자동으로 공격종료 처리
             {
-                equip.Use();
-
-                animator.SetTrigger(equip.type == Weapon.WeaponType.Melee ? Swing_Hash : Shot_Hash);
-
-                yield return new WaitForSeconds(equip.rate); 
+                isAttack = false;
             }
-            coolTime = 0;
         }
+        coolTime = 0;
     }
 
 }

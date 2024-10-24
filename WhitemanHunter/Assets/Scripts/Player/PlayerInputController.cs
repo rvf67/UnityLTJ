@@ -7,10 +7,6 @@ using UnityEngine.InputSystem;
 public class PlayerInputController : MonoBehaviour
 {
     /// <summary>
-    /// 누르고 있는 동안 공격하기 위한 변수
-    /// </summary>
-    private bool isAttack = false;
-    /// <summary>
     /// 이동 입력을 전달하는 델리게이트(Vector2:이동방향, bool 누른 상황(true면 눌렀다))
     /// </summary>
     public Action<Vector2, bool> onMove;

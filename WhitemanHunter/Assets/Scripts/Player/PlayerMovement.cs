@@ -293,17 +293,23 @@ public class PlayerMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// 마우스에 의한 회전 함수
+    /// 마우스에 의한 회전 함수(무기가 있을 때만)
     /// </summary>
     /// <returns>마우스로의 회전방향</returns>
     public Quaternion TurnFromMouse()
     {
+        if(playerInteraction.equipWeapon == null)
+        {
+            return targetRotation;
+        }
         Quaternion result = Quaternion.identity;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100))
         {
             Vector3 direction = hit.point - transform.position;
+            direction.y = 0;
             result =Quaternion.LookRotation(direction);
         }
         return result;

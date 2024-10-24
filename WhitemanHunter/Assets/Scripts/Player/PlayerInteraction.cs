@@ -93,9 +93,17 @@ public class PlayerInteraction : MonoBehaviour
         int weaponIndex = -1;
         if (!playerMovement.IsDodge && hasWeapons[select-1])
         {
-            if(equipWeapon != null) 
-                equipWeapon.gameObject.SetActive(false);
             weaponIndex = select-1;
+            if(equipWeapon != null)
+            {
+                if(equipWeapon.gameObject==weapons[weaponIndex])        //장착한 무기가 선택한 무기와 같으면
+                {
+                    equipWeapon.gameObject.SetActive(false);
+                    equipWeapon = null;                                 //무기 해제
+                    return;
+                }
+                equipWeapon.gameObject.SetActive(false);
+            }
             equipWeapon = weapons[weaponIndex].GetComponent<Weapon>();
             equipWeapon.gameObject.SetActive(true);
             animator.SetTrigger(Swap_Hash);

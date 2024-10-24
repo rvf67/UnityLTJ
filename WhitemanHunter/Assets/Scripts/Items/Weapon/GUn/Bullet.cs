@@ -32,16 +32,19 @@ public class Bullet : RecycleObject
         if (GameManager.Instance.Player != null)
         {
             Shot();
+            DisableTimer(3.0f);
         }
     }
-
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.tag == "Floor")       // 藕乔老 版快 贸府
+        if (collision.gameObject.tag == "Floor")       // 藕乔老 版快 贸府
         {
             DisableTimer(0.3f);
-        }   
-        else if(other.gameObject.tag == "Wall"){
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Wall"){
             DisableTimer();
         }
     }
