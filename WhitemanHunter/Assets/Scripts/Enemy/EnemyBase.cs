@@ -25,7 +25,12 @@ public class EnemyBase : RecycleObject
     /// <summary>
     /// 적의 리지드바디
     /// </summary>
-    Rigidbody rb;
+    protected Rigidbody rb;
+
+    /// <summary>
+    /// 적의 목표
+    /// </summary>
+    protected Transform target;
 
     /// <summary>
     /// 적의 머터리얼들
@@ -35,19 +40,24 @@ public class EnemyBase : RecycleObject
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        bodyMaterial = transform.GetComponent<MeshRenderer>().material;
-    }
-    private void Start()
-    {
         enemyLayer = LayerMask.NameToLayer("Enemy");
         enemyUndieLayer = LayerMask.NameToLayer("EnemyDie");
     }
+    private void Start()
+    {
+        target = GameManager.Instance.Player.transform;
+        bodyMaterial = GetComponentInChildren<MeshRenderer>().material;
+    }
     protected override void OnReset()
     {
+        if (bodyMaterial != null)
+        {
+            bodyMaterial.color = Color.white;
+        }
         gameObject.layer = enemyLayer;
         health = maxHealth;
     }
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Melee")
         {
@@ -80,7 +90,12 @@ public class EnemyBase : RecycleObject
         {
             bodyMaterial.color = Color.gray;
             gameObject.layer=enemyUndieLayer;
+            Die();
             DisableTimer(0.4f);
         }
+    }
+    protected virtual void Die()
+    {
+
     }
 }

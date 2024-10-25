@@ -120,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
     // 컴포넌트
     CharacterController cc;
     Animator animator;
+    Rigidbody rb;
 
     private void Awake()
     {
@@ -127,6 +128,7 @@ public class PlayerMovement : MonoBehaviour
         animator = transform.GetChild(0).GetComponent<Animator>();
         playerInteraction = GetComponent<PlayerInteraction>();
         playerAttack = GetComponent<PlayerAttack>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -150,6 +152,13 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, TurnFromMouse(), Time.deltaTime * turnSmooth);
+        }
+    }
+    private void FixedUpdate()
+    {
+        if (!cc.isGrounded)
+        {
+            direction.y = -10f;
         }
     }
 
