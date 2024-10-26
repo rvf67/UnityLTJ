@@ -291,7 +291,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         if (playerInteraction.equipWeapon.type == Weapon.WeaponType.Melee)
             return;
-        if (playerInteraction.ammo == 0)
+        if (playerInteraction.Ammo == 0)
             return;
         if (!IsDodge && !playerAttack.isAttack && !playerInteraction.isSwap)
         {
@@ -332,9 +332,9 @@ public class PlayerMovement : MonoBehaviour
     {
         Weapon weapon = playerInteraction.equipWeapon; 
         yield return new WaitForSeconds(2.0f);
-        int reAmmo = playerInteraction.ammo < weapon.maxAmmo ? playerInteraction.ammo : weapon.maxAmmo;
+        int reAmmo = playerInteraction.Ammo < weapon.maxAmmo ? playerInteraction.Ammo : weapon.maxAmmo;
         weapon.currentAmmo = reAmmo; 
-        playerInteraction.ammo -= reAmmo;
+        playerInteraction.Ammo -= reAmmo;
         isReload=false;
     }
 }

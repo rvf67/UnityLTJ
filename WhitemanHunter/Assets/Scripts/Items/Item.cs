@@ -5,6 +5,21 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     /// <summary>
+    /// 아이템 타입
+    /// </summary>
+    public enum ItemType
+    {
+        Ammo =0,
+        Coin,
+        Grenade,
+        Heart,
+        Weapon
+    };
+    /// <summary>
+    /// 실제 타입을 저장할 변수
+    /// </summary>
+    public ItemType itemType;
+    /// <summary>
     /// 회전속도
     /// </summary>
     public float rotateSpeed = 10.0f;
@@ -24,21 +39,6 @@ public class Item : MonoBehaviour
     /// 움직일 방향
     /// </summary>
     Vector3 direction;
-    /// <summary>
-    /// 아이템 타입
-    /// </summary>
-    public enum ItemType
-    {
-        Ammo =0,
-        Coin,
-        Grenade,
-        Heart,
-        Weapon
-    };
-    /// <summary>
-    /// 실제 타입을 저장할 변수
-    /// </summary>
-    public ItemType itemType;
     /// <summary>
     /// 아이템이 가지는 양
     /// </summary>
