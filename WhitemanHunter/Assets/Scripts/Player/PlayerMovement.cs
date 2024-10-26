@@ -117,6 +117,9 @@ public class PlayerMovement : MonoBehaviour
     const float Animator_WalkSpeed = 0.3f;
     const float Animator_RunSpeed = 1.0f;
 
+    int undieLayer; 
+    int playerLayer;
+
     // 컴포넌트
     CharacterController cc;
     Animator animator;
@@ -134,7 +137,10 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         SetMoveSpeedAndAnimation(MoveState.Stop);    // 일단 정지 상태
-        cam=Camera.main;
+        undieLayer = LayerMask.NameToLayer("Undie");
+        playerLayer = LayerMask.NameToLayer("Player");
+        
+        cam =Camera.main;
     }
 
     private void Update()
@@ -225,7 +231,7 @@ public class PlayerMovement : MonoBehaviour
                 direction = transform.forward;
             }
             prevMode = currentMoveMode;
-  
+            gameObject.layer = undieLayer;
             SetMoveSpeedAndAnimation(MoveState.Dodge);
             isDodge = true;
             Invoke("DodgeExit",0.4f);
@@ -241,6 +247,7 @@ public class PlayerMovement : MonoBehaviour
         {
             direction = Vector3.zero;
         }
+        gameObject.layer = playerLayer;
         SetMoveSpeedAndAnimation(prevMode);
         isDodge =false;
     }

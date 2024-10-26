@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6136328956046286638}
   - component: {fileID: 1760215632024192966}
   m_Layer: 7
-  m_Name: Weapon SubMachineGun
+  m_Name: SubMachineGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 7196049243807300619}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -455,12 +455,12 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 5
-  m_Radius: 1
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Radius: 1.5
+  m_SlopeLimit: 90
+  m_StepOffset: 0.5
+  m_SkinWidth: 0.15
+  m_MinMoveDistance: 0
+  m_Center: {x: 0, y: 2.5, z: 0.2}
 --- !u!114 &9113904176572428029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,14 +530,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipWeapon: {fileID: 0}
-  ammo: 100
   ammoMax: 100
+  healthMax: 100
+  coinMax: 0
   weapons:
   - {fileID: 7899113043661299313}
   - {fileID: 7740775427209449282}
   - {fileID: 7941739193299009}
   hasWeapons: 000000
   isSwap: 0
+  undieTime: 1
+  isDamage: 0
 --- !u!1 &6472520065299826936
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,7 +638,7 @@ GameObject:
   - component: {fileID: 1776366999142427685}
   - component: {fileID: 9107942561748809194}
   m_Layer: 7
-  m_Name: Weapon HandGun
+  m_Name: HandGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -690,7 +693,7 @@ GameObject:
   - component: {fileID: 7052447270300138844}
   - component: {fileID: 1756817205716541238}
   m_Layer: 7
-  m_Name: Weapon Hammer
+  m_Name: Hammer
   m_TagString: Melee
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

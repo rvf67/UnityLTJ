@@ -39,11 +39,11 @@ public class EnemyBase : RecycleObject
 
     protected virtual void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = transform.GetComponent<Rigidbody>();
         enemyLayer = LayerMask.NameToLayer("Enemy");
         enemyUndieLayer = LayerMask.NameToLayer("EnemyDie");
     }
-    private void Start()
+    protected virtual void Start()
     {
         target = GameManager.Instance.Player.transform;
         bodyMaterial = GetComponentInChildren<MeshRenderer>().material;
@@ -93,6 +93,10 @@ public class EnemyBase : RecycleObject
             Die();
             DisableTimer(0.4f);
         }
+    }
+    protected virtual IEnumerator Attack()
+    {
+        yield return null;
     }
     protected virtual void Die()
     {

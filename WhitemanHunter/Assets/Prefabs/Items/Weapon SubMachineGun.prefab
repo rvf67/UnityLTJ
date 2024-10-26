@@ -5126,8 +5126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ede99ef65fce446b4ae4ef20028b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemType: 4
   rotateSpeed: 10
   floatSpeed: 0.5
   floatTime: 1
-  itemType: 4
   value: 2
