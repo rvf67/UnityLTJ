@@ -7,6 +7,7 @@ public class Factory : Singleton<Factory>
     BulletCasePool bulletCase;
     HandGunBulletPool handBullet;
     SubMachineGunBulletPool subMachineBullet;
+    MissilePool missile;
 
     protected override void OnInitialize()
     {
@@ -21,11 +22,17 @@ public class Factory : Singleton<Factory>
         subMachineBullet = GetComponentInChildren<SubMachineGunBulletPool>();
         if( subMachineBullet != null )
             subMachineBullet?.Initialize();
+
+        missile = GetComponentInChildren<MissilePool>();
+        if ( missile != null )
+            missile?.Initialize();
     }
 
     public Bullet GetHandBullet(Vector3? position = null, Vector3? eulerAngle = null)
     {
-        return handBullet.GetObject(position, eulerAngle);
+        Bullet handBulletPrefab = handBullet.GetObject(position, eulerAngle);
+        handBulletPrefab.SetDirection((Vector3)eulerAngle);
+        return handBulletPrefab;
     }
 
     public Bullet GetBulletCase(Vector3? position = null, Vector3? eulerAngle = null)
@@ -35,6 +42,15 @@ public class Factory : Singleton<Factory>
 
     public Bullet GetSubBullet(Vector3? position = null, Vector3? eulerAngle = null)
     {
-        return subMachineBullet.GetObject(position, eulerAngle);
+        Bullet submachineBulletPrefab = subMachineBullet.GetObject(position);
+        submachineBulletPrefab.SetDirection((Vector3)eulerAngle);
+        return submachineBulletPrefab;
+    }
+
+    public Bullet GetYellowMissile(Vector3? position = null, Vector3? eulerAngle =null)
+    {
+        Bullet missilePrefab= missile.GetObject(position);
+        missilePrefab.SetDirection((Vector3)eulerAngle);   
+        return missilePrefab;
     }
 }

@@ -55,6 +55,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if (coolTime > playerInteraction.equipWeapon.rate)
             {
+                coolTime = 0;
                 isAttack = true;
                 StartCoroutine(Attack(playerInteraction.equipWeapon));
             }
@@ -90,7 +91,6 @@ public class PlayerAttack : MonoBehaviour
                 isAttack = false;
             }
         }
-        coolTime = 0;
     }
 
 }

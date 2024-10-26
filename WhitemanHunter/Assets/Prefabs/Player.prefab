@@ -500,8 +500,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 15
-  runSpeed: 30
-  dodgeSpeed: 50
+  runSpeed: 25
+  dodgeSpeed: 40
   turnSmooth: 10
   isMove: 0
   isReload: 0
@@ -729,8 +729,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  damage: 15
-  rate: 0.5
+  damage: 30
+  rate: 1
   maxAmmo: 0
   currentAmmo: 0
   meleeArea: {fileID: 1756817205716541238}

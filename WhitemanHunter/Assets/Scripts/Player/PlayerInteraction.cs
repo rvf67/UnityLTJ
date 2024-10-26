@@ -145,6 +145,10 @@ public class PlayerInteraction : MonoBehaviour
                 Bullet enemyBullet = other.GetComponent<Bullet>();
                 health -= enemyBullet.damage;
                 StartCoroutine(OnDamage());
+                if (enemyBullet.GetComponent<Rigidbody>() != null)
+                {
+                    enemyBullet.gameObject.SetActive(false);
+                }
             }        
         }
     }

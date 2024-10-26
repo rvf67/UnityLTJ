@@ -10,6 +10,10 @@ public class Bullet : RecycleObject
     /// </summary>
     public int damage;
 
+    /// <summary>
+    /// 방향
+    /// </summary>
+    Vector3 direction;
 
     /// <summary>
     /// 총알의 속도
@@ -21,6 +25,10 @@ public class Bullet : RecycleObject
     /// </summary>
     Rigidbody rb;
 
+    /// <summary>
+    /// 적의 근접공격 범위인지 확인
+    /// </summary>
+    public bool isMelee;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -31,7 +39,6 @@ public class Bullet : RecycleObject
     {
         if (GameManager.Instance.Player != null)
         {
-            Shot();
             DisableTimer(3.0f);
         }
     }
@@ -44,17 +51,24 @@ public class Bullet : RecycleObject
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Wall"){
+        if(!isMelee&&other.gameObject.tag == "Wall"){
             DisableTimer();
         }
     }
 
-    /// <summary>
-    /// 플레이어 앞쪽으로만 발사할 수 있도록 하는 함수
-    /// </summary>
-    public void Shot()
+    private void Update()
     {
-        rb.velocity = GameManager.Instance.Player.transform.forward  * shotSpeed;
+        if(direction != Vector3.zero)
+            rb.velocity = direction  * shotSpeed;
     }
 
+    /// <summary>
+    /// 방향을 정해주는 함수
+    /// </summary>
+    /// <param name="direction"></param>
+    public void SetDirection(Vector3 direction)
+    {
+        this.direction = direction;
+        transform.rotation=Quaternion.LookRotation(direction, Vector3.up);
+    }
 }

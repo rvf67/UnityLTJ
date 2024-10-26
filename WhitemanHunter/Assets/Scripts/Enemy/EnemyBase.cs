@@ -35,7 +35,7 @@ public class EnemyBase : RecycleObject
     /// <summary>
     /// 적의 머터리얼들
     /// </summary>
-    protected Material bodyMaterial;
+    protected MeshRenderer[] bodyMeshs;
 
     protected virtual void Awake()
     {
@@ -46,13 +46,13 @@ public class EnemyBase : RecycleObject
     protected virtual void Start()
     {
         target = GameManager.Instance.Player.transform;
-        bodyMaterial = GetComponentInChildren<MeshRenderer>().material;
+        bodyMeshs = GetComponentsInChildren<MeshRenderer>();
     }
     protected override void OnReset()
     {
-        if (bodyMaterial != null)
+        if (bodyMeshs != null)
         {
-            bodyMaterial.color = Color.white;
+            MeshsChange(bodyMeshs,Color.white);
         }
         gameObject.layer = enemyLayer;
         health = maxHealth;
@@ -80,18 +80,25 @@ public class EnemyBase : RecycleObject
     }
     IEnumerator OnDamage()
     {
-        bodyMaterial.color = Color.red;
+        MeshsChange(bodyMeshs, Color.red);
         yield return new WaitForSeconds(0.1f);
         if(health > 0)
         {
-            bodyMaterial.color = Color.white;
+            MeshsChange(bodyMeshs, Color.white);
         }
         else
         {
-            bodyMaterial.color = Color.gray;
+            MeshsChange(bodyMeshs,Color.gray);
             gameObject.layer=enemyUndieLayer;
             Die();
             DisableTimer(0.4f);
+        }
+    }
+    public void MeshsChange(MeshRenderer[] meshRenderers, Color color)
+    {
+        foreach (MeshRenderer bodyMesh in meshRenderers)
+        {
+            bodyMesh.material.color = color;
         }
     }
     protected virtual IEnumerator Attack()

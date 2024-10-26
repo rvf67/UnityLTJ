@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2234361001069990354}
   - component: {fileID: 3606305422933263426}
   - component: {fileID: 9083620374399026206}
-  - component: {fileID: 3706653730008796113}
   m_Layer: 9
   m_Name: Enemy A
   m_TagString: Enemy
@@ -67,7 +66,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 328409505970683906}
   serializedVersion: 4
-  m_Mass: 100
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -122,27 +121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   health: 50
---- !u!135 &3706653730008796113
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328409505970683906}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 70
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5924019893030669029
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +132,7 @@ GameObject:
   - component: {fileID: 46538275867859487}
   - component: {fileID: 6413977311897770054}
   - component: {fileID: 4839404647495024250}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyAArea
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
@@ -190,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   shotSpeed: 50
+  isMelee: 1
 --- !u!65 &4839404647495024250
 BoxCollider:
   m_ObjectHideFlags: 0

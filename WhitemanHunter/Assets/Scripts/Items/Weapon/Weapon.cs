@@ -91,7 +91,7 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         meleeArea.enabled = true;
         trailEffect.enabled = true;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.4f);
         meleeArea.enabled = false;
         yield return new WaitForSeconds(0.3f);
         trailEffect.enabled = false;    
@@ -110,10 +110,10 @@ public class Weapon : MonoBehaviour
             case RangeType.None:
                 break;
             case RangeType.HandGun:
-                Factory.Instance.GetHandBullet(firePosition.position);
+                Factory.Instance.GetHandBullet(firePosition.position,firePosition.forward);
                 break;
             case RangeType.SubMachineGun:
-                Factory.Instance.GetSubBullet(firePosition.position);
+                Factory.Instance.GetSubBullet(firePosition.position,firePosition.forward);
                 break;
         }
             

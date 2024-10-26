@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+
+/// <summary>
+/// 능력이 없는 적
+/// </summary>
 public class GreenEnemy : EnemyBase
 {
     /// <summary>

@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
-/// 돌진하는 적
+/// 미사일 발사 적
 /// </summary>
-public class PurpleEnemy : EnemyBase
+public class YellowEnemy : EnemyBase
 {
     /// <summary>
     /// 애니메이션용 해시들
@@ -14,10 +14,7 @@ public class PurpleEnemy : EnemyBase
     readonly int Walk_Hash = Animator.StringToHash("Walk");
     readonly int Attack_Hash = Animator.StringToHash("Attack");
     readonly int Die_Hash = Animator.StringToHash("Die");
-    /// <summary>
-    /// 돌격하는 힘(속도)
-    /// </summary>
-    public float dashPower=20.0f;
+
     /// <summary>
     /// 추적여부
     /// </summary>
@@ -31,14 +28,12 @@ public class PurpleEnemy : EnemyBase
     /// </summary>
     NavMeshAgent agent;
     Animator animator;
-    BoxCollider damageArea;
 
     protected override void Awake()
     {
         base.Awake();
         agent = transform.GetComponent<NavMeshAgent>();
         animator = transform.GetChild(0).GetComponent<Animator>();
-        damageArea = transform.GetChild(1).GetComponent<BoxCollider>();
     }
 
     protected override void Start()
@@ -51,10 +46,18 @@ public class PurpleEnemy : EnemyBase
         if (agent.enabled)
         {
             agent.SetDestination(target.position);
-            if (target != null  && agent.remainingDistance <= agent.stoppingDistance*2 && !isAttack)//플레이어 돌진 가능거리에 도달했으면
+            if (target != null && agent.remainingDistance <= agent.stoppingDistance*8)//적의 사거리 안에 플레이어가 있으면
             {
-                animator.SetTrigger(Attack_Hash);
-                StartCoroutine(Attack());
+                RaycastHit[] rayHits =
+                    Physics.SphereCastAll(transform.position,
+                    1.5f, transform.forward,
+                    agent.stoppingDistance*8,
+                    LayerMask.GetMask("Player"));
+                if (rayHits.Length > 0 && !isAttack)
+                {
+                    animator.SetTrigger(Attack_Hash);
+                    StartCoroutine(Attack());
+                }
             }
             agent.isStopped = !isChase;
         }
@@ -85,12 +88,8 @@ public class PurpleEnemy : EnemyBase
     {
         isChase = false;
         isAttack = true;
-        yield return new WaitForSeconds(0.1f);
-        rb.AddForce(transform.forward * dashPower,ForceMode.VelocityChange);
-        damageArea.enabled = true;
         yield return new WaitForSeconds(0.5f);
-        rb.velocity=Vector3.zero;
-        damageArea.enabled = false;
+        Factory.Instance.GetYellowMissile(transform.position,transform.forward);
         yield return new WaitForSeconds(2.0f);
         isAttack = false;
         isChase = true;
