@@ -8,7 +8,7 @@ public class Factory : Singleton<Factory>
     HandGunBulletPool handBullet;
     SubMachineGunBulletPool subMachineBullet;
     MissilePool missile;
-
+    BossRockPool bossRock;
     protected override void OnInitialize()
     {
         handBullet = GetComponentInChildren<HandGunBulletPool>();
@@ -26,6 +26,10 @@ public class Factory : Singleton<Factory>
         missile = GetComponentInChildren<MissilePool>();
         if ( missile != null )
             missile?.Initialize();
+
+        bossRock = GetComponentInChildren<BossRockPool>();
+        if( bossRock != null )
+            bossRock?.Initialize();
     }
 
     public Bullet GetHandBullet(Vector3? position = null, Vector3? eulerAngle = null)
@@ -52,5 +56,12 @@ public class Factory : Singleton<Factory>
         Bullet missilePrefab= missile.GetObject(position);
         missilePrefab.SetDirection((Vector3)eulerAngle);   
         return missilePrefab;
+    }
+
+    public BossRock GetBossRock(Vector3? position = null, Vector3? eulerAngle = null)
+    {
+        BossRock bossRockPrefab = bossRock.GetObject(position);
+        bossRockPrefab.SetDirection((Vector3)eulerAngle);
+        return bossRockPrefab;
     }
 }

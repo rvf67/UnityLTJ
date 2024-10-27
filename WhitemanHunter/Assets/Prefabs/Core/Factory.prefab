@@ -80,6 +80,7 @@ Transform:
   - {fileID: 5610183801619389738}
   - {fileID: 7573011533479995234}
   - {fileID: 2430756646505089319}
+  - {fileID: 3877345150172977001}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4905209957294687397
@@ -186,6 +187,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 4667353654436168488, guid: bae010f3b52f724469bd8889a2d7b77c, type: 3}
   poolSize: 64
+--- !u!1 &7780085817272331995
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3877345150172977001}
+  - component: {fileID: 5990539586543150090}
+  m_Layer: 0
+  m_Name: BossRockPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3877345150172977001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7780085817272331995}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1582287029126269572}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5990539586543150090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7780085817272331995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd1b6cfc13460ad4ebdfea7581baae5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 542625699242317448, guid: 4a7ac9ca15b0fac4c84dadfa7720eba9, type: 3}
+  poolSize: 4
 --- !u!1 &8577278889416825778
 GameObject:
   m_ObjectHideFlags: 0

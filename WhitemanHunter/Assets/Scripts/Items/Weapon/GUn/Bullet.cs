@@ -23,15 +23,19 @@ public class Bullet : RecycleObject
     /// <summary>
     /// 리지드바디
     /// </summary>
-    Rigidbody rb;
+    protected Rigidbody rb;
 
     /// <summary>
     /// 적의 근접공격 범위인지 확인
     /// </summary>
     public bool isMelee;
+    /// <summary>
+    /// 보스돌인지 확인하는 변수
+    /// </summary>
+    public bool isRock;
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = transform.GetComponent<Rigidbody>();
     }
 
 
@@ -44,7 +48,7 @@ public class Bullet : RecycleObject
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Floor")       // 탄피일 경우 처리
+        if (!isRock&&collision.gameObject.tag == "Floor")       // 탄피일 경우 처리
         {
             DisableTimer(0.3f);
         }

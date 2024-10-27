@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class BossRock : MonoBehaviour
+public class BossRock : Bullet
 {
-    /// <summary>
-    /// 바위 리지드바디
-    /// </summary>
-    Rigidbody rb;
+
     /// <summary>
     /// 바위 회전속도
     /// </summary>
@@ -19,16 +18,32 @@ public class BossRock : MonoBehaviour
     /// <summary>
     /// 발사여부 확인
     /// </summary>
-    bool isShoot;
+    bool isShoot=false;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        
+    }
+    protected override void OnReset()
+    {
+        base.OnReset();
+        
+    }
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        transform.localScale = Vector3.one;
+        isShoot = false;
+        rb.AddTorque(0, 0, 0);
+        StartCoroutine(GainPowerTimer());
+        StartCoroutine(GainPower());
     }
 
     IEnumerator GainPowerTimer()
     {
         yield return new WaitForSeconds(2.2f);
+        isShoot = true;
     }
 
     IEnumerator GainPower()
@@ -38,6 +53,7 @@ public class BossRock : MonoBehaviour
             angularPower += 0.02f;
             scaleValue += 0.005f;
             transform.localScale = Vector3.one * scaleValue;
+            rb.AddTorque(transform.right * angularPower, ForceMode.Acceleration);
             yield return null;
         }
     }
