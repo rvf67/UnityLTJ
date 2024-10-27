@@ -52,6 +52,18 @@ public class PlayerInteraction : MonoBehaviour
     /// </summary>
     public float healthMax=100.0f;
 
+    public float Health
+    {
+        get =>health;
+        set
+        {
+            if (value != health)
+            {
+                health = value;
+            }
+        }
+    }
+
     /// <summary>
     /// 가지고 있는 돈
     /// </summary>
@@ -103,7 +115,7 @@ public class PlayerInteraction : MonoBehaviour
         playerMovement= transform.GetComponent<PlayerMovement>();
         animator = transform.GetChild(0).GetComponent<Animator>();
         meshs = transform.GetComponentsInChildren<MeshRenderer>();
-        health = healthMax;
+        Health = healthMax;
     }
     private void Start()
     {
@@ -143,7 +155,7 @@ public class PlayerInteraction : MonoBehaviour
             if (!isDamage)
             {
                 Bullet enemyBullet = other.GetComponent<Bullet>();
-                health -= enemyBullet.damage;
+                Health -= enemyBullet.damage;
                 StartCoroutine(OnDamage());
                 if (enemyBullet.GetComponent<Rigidbody>() != null)
                 {

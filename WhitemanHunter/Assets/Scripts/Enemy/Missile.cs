@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class YellowMissile : MonoBehaviour
+public class Missile : MonoBehaviour
 {
     /// <summary>
     /// 회전속도
