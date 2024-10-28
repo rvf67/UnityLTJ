@@ -137,6 +137,10 @@ public class PlayerInputController : MonoBehaviour
         onDodge?.Invoke();
     }
 
+    /// <summary>
+    /// 상호작용함수
+    /// </summary>
+    /// <param name="context"></param>
     private void OnInteraction(InputAction.CallbackContext context)
     {
         onInteraction?.Invoke();

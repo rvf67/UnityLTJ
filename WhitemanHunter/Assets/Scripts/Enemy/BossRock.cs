@@ -27,15 +27,17 @@ public class BossRock : Bullet
     }
     protected override void OnReset()
     {
-        base.OnReset();
-        
+        if (GameManager.Instance.Player != null)
+        {
+            DisableTimer(7.0f);
+        }
     }
     protected override void OnEnable()
     {
         base.OnEnable();
         transform.localScale = Vector3.one;
         isShoot = false;
-        rb.AddTorque(0, 0, 0);
+        scaleValue = 0.1f;
         StartCoroutine(GainPowerTimer());
         StartCoroutine(GainPower());
     }
@@ -51,7 +53,7 @@ public class BossRock : Bullet
         while (!isShoot)
         {
             angularPower += 0.02f;
-            scaleValue += 0.005f;
+            scaleValue += 0.01f;
             transform.localScale = Vector3.one * scaleValue;
             rb.AddTorque(transform.right * angularPower, ForceMode.Acceleration);
             yield return null;

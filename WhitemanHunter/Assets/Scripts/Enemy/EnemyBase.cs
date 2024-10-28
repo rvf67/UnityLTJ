@@ -17,7 +17,7 @@ public class EnemyBase : RecycleObject
     /// <summary>
     /// 무적레이어
     /// </summary>
-    int enemyUndieLayer;
+    protected int enemyUndieLayer;
     /// <summary>
     /// 생존한 적 레이어
     /// </summary>
@@ -78,7 +78,12 @@ public class EnemyBase : RecycleObject
             }
         }
     }
-    IEnumerator OnDamage()
+
+    /// <summary>
+    /// 데미지 코루틴
+    /// </summary>
+    /// <returns></returns>
+    protected virtual IEnumerator OnDamage()
     {
         MeshsChange(bodyMeshs, Color.red);
         yield return new WaitForSeconds(0.1f);
@@ -94,6 +99,11 @@ public class EnemyBase : RecycleObject
             DisableTimer(0.4f);
         }
     }
+    /// <summary>
+    /// 메시들의 색을 한번에 바꿔줄 함수
+    /// </summary>
+    /// <param name="meshRenderers">메시들</param>
+    /// <param name="color">색깔</param>
     public void MeshsChange(MeshRenderer[] meshRenderers, Color color)
     {
         foreach (MeshRenderer bodyMesh in meshRenderers)
@@ -101,10 +111,17 @@ public class EnemyBase : RecycleObject
             bodyMesh.material.color = color;
         }
     }
+    /// <summary>
+    /// 공격했을 때 실행할 코루틴
+    /// </summary>
+    /// <returns></returns>
     protected virtual IEnumerator Attack()
     {
         yield return null;
     }
+    /// <summary>
+    /// 죽었을 때 실행하는 함수
+    /// </summary>
     protected virtual void Die()
     {
 
