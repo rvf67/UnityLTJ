@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 542625699242317448}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -118,9 +118,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 40
-  shotSpeed: 20
+  shotSpeed: 0
   isMelee: 0
   isRock: 1
+  angularBase: 2
+  angularPower: 0.2
+  scaleBase: 0.1
+  scaleValue: 0.007
 --- !u!1 &9107031795758981066
 GameObject:
   m_ObjectHideFlags: 0

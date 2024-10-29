@@ -43,7 +43,7 @@ public class Bullet : RecycleObject
     {
         if (GameManager.Instance.Player != null)
         {
-            DisableTimer(3.0f);
+            DisableTimer(7.0f);
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -62,7 +62,7 @@ public class Bullet : RecycleObject
 
     private void Update()
     {
-        if(direction != Vector3.zero)
+        if(direction != Vector3.zero && !isRock)
             rb.velocity = direction  * shotSpeed;
     }
 

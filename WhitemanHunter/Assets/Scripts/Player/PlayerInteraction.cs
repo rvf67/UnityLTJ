@@ -60,6 +60,10 @@ public class PlayerInteraction : MonoBehaviour
             if (value != health)
             {
                 health = value;
+                if (health <= 0)
+                {
+                    Die();
+                }
             }
         }
     }
@@ -122,6 +126,7 @@ public class PlayerInteraction : MonoBehaviour
         undieLayer = LayerMask.NameToLayer("Undie");
         playerLayer = LayerMask.NameToLayer("Player");
     }
+    
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Item")
@@ -157,11 +162,11 @@ public class PlayerInteraction : MonoBehaviour
                 Bullet enemyBullet = other.GetComponent<Bullet>();
                 Health -= enemyBullet.damage;
                 StartCoroutine(OnDamage());
-                if (enemyBullet.GetComponent<Rigidbody>() != null)
-                {
-                    enemyBullet.gameObject.SetActive(false);
-                }
             }        
+            if (other.GetComponent<Rigidbody>() != null)
+            {
+                other.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -230,6 +235,11 @@ public class PlayerInteraction : MonoBehaviour
     public void SwapOut()
     {
         isSwap = false;
+    }
+
+    public void Die()
+    {
+        Debug.Log("ав╢ы.");
     }
 
     IEnumerator OnDamage()

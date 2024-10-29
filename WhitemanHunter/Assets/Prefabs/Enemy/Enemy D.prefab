@@ -72,8 +72,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6129786658189185073}
   - component: {fileID: 65526543760505454}
+  - component: {fileID: 3484319689528442427}
   m_Layer: 12
-  m_Name: MeleeArea
+  m_Name: DamageArea
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,12 +110,28 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 3.5, y: 0.5, z: 3.5}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &3484319689528442427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6586984601421616798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee9aa656a870dd4f8c63d35091533ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 40
+  shotSpeed: 50
+  isMelee: 1
+  isRock: 0
 --- !u!1 &7988094277207216310
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +218,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 3.7, y: 3.7, z: 3.7}
-  m_Center: {x: 0, y: 2, z: 1}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!195 &8714667261281776086
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -212,7 +229,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 40
+  m_Speed: 70
   m_Acceleration: 60
   avoidancePriority: 50
   m_AngularSpeed: 0
@@ -238,6 +255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 100
+  turnSmooth: 100
 --- !u!1001 &4079406986716864453
 PrefabInstance:
   m_ObjectHideFlags: 0
