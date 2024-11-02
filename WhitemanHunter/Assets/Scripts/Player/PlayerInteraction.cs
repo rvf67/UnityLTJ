@@ -23,6 +23,19 @@ public class PlayerInteraction : MonoBehaviour
     /// </summary>
     public Weapon equipWeapon;
 
+    int score;
+
+    public int Score
+    {
+        get => score;
+        set
+        {
+            if (score != value)
+            {
+                score = value;
+            }
+        }
+    }
     /// <summary>
     /// 가지고 있는 여분탄약
     /// </summary>
@@ -77,6 +90,17 @@ public class PlayerInteraction : MonoBehaviour
     /// </summary>
     public int coinMax;
 
+    public int Coin
+    {
+        get => coin;
+        set
+        {
+            if(value != coin)
+            {
+                coin = value;
+            }
+        }
+    }
     /// <summary>
     /// 스왑 애니메이터용 해시
     /// </summary>
@@ -120,6 +144,8 @@ public class PlayerInteraction : MonoBehaviour
         animator = transform.GetChild(0).GetComponent<Animator>();
         meshs = transform.GetComponentsInChildren<MeshRenderer>();
         Health = healthMax;
+        //Debug.Log(PlayerPrefs.GetInt("MaxScore"));
+        //PlayerPrefs.SetInt("MaxScore", 112500);
     }
     private void Start()
     {

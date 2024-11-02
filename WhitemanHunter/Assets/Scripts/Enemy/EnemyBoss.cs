@@ -27,10 +27,7 @@ public class EnemyBoss : EnemyBase
     /// 추적여부
     /// </summary>
     bool isChase = false;
-    /// <summary>
-    /// 공격여부
-    /// </summary>
-    bool isAttack = false;
+
     /// <summary>
     /// 플레이어를 볼 수 있는지
     /// </summary>

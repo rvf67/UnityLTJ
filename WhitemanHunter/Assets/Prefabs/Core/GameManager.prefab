@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa06f24d674e364783c81035248d1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuCam: {fileID: 2285654787818756133, guid: c3a9f78092507174fb3fcacbcb85bed2, type: 3}
+  gameCam: {fileID: 8532820811792551490, guid: e9990965a9958b94ba0090a5c5bb458a, type: 3}
