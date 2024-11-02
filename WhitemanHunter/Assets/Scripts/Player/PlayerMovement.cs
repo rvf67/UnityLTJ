@@ -149,7 +149,6 @@ public class PlayerMovement : MonoBehaviour
         {
             cc.Move(Time.deltaTime * currentSpeed * direction); // 수동
         }
-        
 
         if (isMove)
         {
@@ -179,7 +178,6 @@ public class PlayerMovement : MonoBehaviour
         direction.x = inputDir.x;
         direction.y = 0.0f;
         direction.z = inputDir.y;
-        
         if (isPress)
         {
             Quaternion camY = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0);    // 카메라의 Y축 회전만 따로 추출

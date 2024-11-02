@@ -37,6 +37,11 @@ public class EnemyBoss : EnemyBase
     bool isLook = false;
 
     /// <summary>
+    /// 죽음여부 변수
+    /// </summary>
+    bool isDead = false;
+
+    /// <summary>
     /// 적 컴포넌트들
     /// </summary>
     NavMeshAgent agent;
@@ -85,6 +90,8 @@ public class EnemyBoss : EnemyBase
     }
     private void Update()
     {
+        if (isDead)
+            return;
         if (isLook)
         {
             rb.isKinematic = true;
@@ -116,6 +123,8 @@ public class EnemyBoss : EnemyBase
     {
         animator.SetTrigger(Die_Hash);
         agent.enabled = false;
+        isDead = true;
+        StopAllCoroutines();
     }
 
     /// <summary>
@@ -231,4 +240,6 @@ public class EnemyBoss : EnemyBase
         agent.isStopped = true;
         StartCoroutine(RandomPattern());
     }
+
+   
 }
