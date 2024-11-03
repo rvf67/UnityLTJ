@@ -342,4 +342,15 @@ public class PlayerMovement : MonoBehaviour
         playerInteraction.Ammo -= reAmmo;
         isReload=false;
     }
+
+    /// <summary>
+    /// 순간이동 함수 (캐릭터 컨트롤러 버그 때문에 만듬)
+    /// </summary>
+    /// <param name="pos">이동할 위치</param>
+    public void Teleport(Vector3 pos)
+    {
+        cc.enabled = false;
+        transform.position = pos;
+        cc.enabled = true;
+    }
 }

@@ -15,13 +15,18 @@ public class EnemyBase : RecycleObject
     public float health;
 
     /// <summary>
+    /// 이 적을 잡았을 때 얻을 점수변수
+    /// </summary>
+    public int score;
+    /// <summary>
+    /// 적이 갖고 있는 코인 배열
+    /// </summary>
+    public GameObject[] coins;
+
+    /// <summary>
     /// 무적레이어
     /// </summary>
     protected int enemyUndieLayer;
-    /// <summary>
-    /// 생존한 적 레이어
-    /// </summary>
-    int enemyLayer;
     /// <summary>
     /// 적의 리지드바디
     /// </summary>
@@ -37,6 +42,10 @@ public class EnemyBase : RecycleObject
     /// </summary>
     protected MeshRenderer[] bodyMeshs;
 
+    /// <summary>
+    /// 생존한 적 레이어
+    /// </summary>
+    int enemyLayer;
     protected virtual void Awake()
     {
         rb = transform.GetComponent<Rigidbody>();
@@ -124,6 +133,7 @@ public class EnemyBase : RecycleObject
     /// </summary>
     protected virtual void Die()
     {
-
+        PlayerInteraction targeInteraction=target.transform.GetComponent<PlayerInteraction>();
+        targeInteraction.Score += score;
     }
 }

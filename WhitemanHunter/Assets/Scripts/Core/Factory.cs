@@ -10,6 +10,10 @@ public class Factory : Singleton<Factory>
     MissilePool missile;
     BossRockPool bossRock;
     BossMissilePool bossMissile;
+
+    EnemyAPool enemyA;
+    EnemyBPool enemyB;
+    EnemyCPool enemyC;
     protected override void OnInitialize()
     {
         handBullet = GetComponentInChildren<HandGunBulletPool>();
@@ -35,6 +39,18 @@ public class Factory : Singleton<Factory>
         bossMissile = GetComponentInChildren<BossMissilePool>();
         if( bossMissile != null ) 
             bossMissile?.Initialize();
+
+        enemyA = GetComponentInChildren<EnemyAPool>();
+        if( enemyA != null )
+            enemyA?.Initialize();
+
+        enemyB = GetComponentInChildren<EnemyBPool>();
+        if (enemyB != null)
+            enemyB?.Initialize();
+
+        enemyC = GetComponentInChildren<EnemyCPool>();
+        if ( enemyC != null )
+            enemyC?.Initialize();
     }
 
     public Bullet GetHandBullet(Vector3? position = null, Vector3? eulerAngle = null)
@@ -75,5 +91,17 @@ public class Factory : Singleton<Factory>
         BossMissile bossMissilePrefab = bossMissile.GetObject(position);
         bossMissilePrefab.SetDirection((Vector3)eulerAngle);
         return bossMissilePrefab;
+    }
+    public GreenEnemy GetGreenEnemy(Vector3? position = null)
+    {
+        return enemyA.GetObject(position);
+    }
+    public PurpleEnemy GetPurpleEnemy(Vector3? position = null)
+    {
+        return enemyB.GetObject(position);
+    }
+    public YellowEnemy GetYellowEnemy(Vector3? position = null)
+    {
+        return enemyC.GetObject(position);
     }
 }

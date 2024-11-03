@@ -183,13 +183,14 @@ public class PlayerInteraction : MonoBehaviour
         }
         else if(other.tag == "EnemyBullet")
         {
+            Bullet enemyBullet = other.GetComponent<Bullet>();
             if (!isDamage)
             {
-                Bullet enemyBullet = other.GetComponent<Bullet>();
                 Health -= enemyBullet.damage;
+                transform.position = Vector3.zero;
                 StartCoroutine(OnDamage());
             }        
-            if (other.GetComponent<Rigidbody>() != null)
+            if (!enemyBullet.isMelee&&other.GetComponent<Rigidbody>() != null)
             {
                 other.gameObject.SetActive(false);
             }

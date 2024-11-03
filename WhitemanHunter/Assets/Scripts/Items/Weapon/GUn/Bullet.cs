@@ -41,7 +41,7 @@ public class Bullet : RecycleObject
 
     protected override void OnReset()
     {
-        if (GameManager.Instance.Player != null)
+        if (!isMelee&&GameManager.Instance.Player != null)
         {
             DisableTimer(7.0f);
         }

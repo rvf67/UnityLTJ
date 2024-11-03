@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,10 @@ public class GamePanel : MonoBehaviour
     /// 현재 스테이지
     /// </summary>
     int stage;
+    public int Stage
+    {
+        get => stage;
+    }
     /// <summary>
     /// 게임 플레이시간
     /// </summary>
@@ -17,13 +22,51 @@ public class GamePanel : MonoBehaviour
     /// <summary>
     /// 배틀 중인지 
     /// </summary>
-    bool isBattle;
+    public bool isBattle;
     /// <summary>
     /// 적별 카운트들
     /// </summary>
     int enemyCntA;
     int enemyCntB;
     int enemyCntC;
+    public int EnemyCntA
+    {
+        get => enemyCntA;
+        set
+        {
+            if (enemyCntA != value)
+            {
+                enemyCntA = value;
+            }
+        }
+            
+    }
+    public int EnemyCntB
+    {
+        get => enemyCntB;
+        set
+        {
+            if (enemyCntB != value)
+            {
+                enemyCntB = value;
+            }
+        }
+
+    }
+
+    public int EnemyCntC
+    {
+        get => enemyCntC;
+        set
+        {
+            if (enemyCntC != value)
+            {
+                enemyCntC = value;
+            }
+        }
+
+    }
+    
     /// <summary>
     /// 플레이어 상호작용
     /// </summary>
@@ -102,6 +145,9 @@ public class GamePanel : MonoBehaviour
         child = transform.GetChild(5);
         bossHealthGroup = child.GetComponent<RectTransform>();
         bossHealthBar = child.GetChild(0).GetChild(0).GetComponent<RectTransform>();
+        
+        bossHealthGroup.gameObject.SetActive(false);
+        stage = 1;
     }
 
     private void Start()
@@ -109,10 +155,7 @@ public class GamePanel : MonoBehaviour
         playerInteraction = GameManager.Instance.Player.transform.GetComponent<PlayerInteraction>();
         enemyBoss = GameManager.Instance.Boss;
     }
-    private void OnEnable()
-    {
-        isBattle =true;
-    }
+
     private void OnDisable()
     {
         isBattle =false;
@@ -150,5 +193,13 @@ public class GamePanel : MonoBehaviour
         enemyCTxt.text = enemyCntC.ToString();
         if(enemyBoss!=null)
             bossHealthBar.localScale = new Vector3((float)enemyBoss.health / enemyBoss.maxHealth,1,1);
+    }
+
+    /// <summary>
+    /// 다음스테이지로 넘어가는 함수
+    /// </summary>
+    public void NextStage()
+    {
+        stage++;
     }
 }
