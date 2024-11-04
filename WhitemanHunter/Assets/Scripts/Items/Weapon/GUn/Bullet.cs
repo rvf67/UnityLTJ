@@ -56,7 +56,7 @@ public class Bullet : RecycleObject
     private void OnTriggerEnter(Collider other)
     {
         if(!isMelee&&other.gameObject.tag == "Wall"){
-            DisableTimer();
+            DisableTimer(0.3f);
         }
     }
 

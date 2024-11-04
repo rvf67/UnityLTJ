@@ -69,8 +69,10 @@ public class GreenEnemy : EnemyBase
     }
     protected override void Die()
     {
+        base.Die();
         animator.SetTrigger(Die_Hash);
         agent.enabled = false;
+        GameManager.Instance.GamePanel.EnemyCntA--;
     }
 
     protected override IEnumerator Attack()

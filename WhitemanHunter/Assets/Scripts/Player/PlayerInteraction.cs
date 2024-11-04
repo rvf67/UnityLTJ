@@ -187,7 +187,6 @@ public class PlayerInteraction : MonoBehaviour
             if (!isDamage)
             {
                 Health -= enemyBullet.damage;
-                transform.position = Vector3.zero;
                 StartCoroutine(OnDamage());
             }        
             if (!enemyBullet.isMelee&&other.GetComponent<Rigidbody>() != null)

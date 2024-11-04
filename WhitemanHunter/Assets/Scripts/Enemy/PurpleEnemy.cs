@@ -72,8 +72,10 @@ public class PurpleEnemy : EnemyBase
 
     protected override void Die()
     {
+        base.Die();
         animator.SetTrigger(Die_Hash);
         agent.enabled = false;
+        GameManager.Instance.GamePanel.EnemyCntB--;
     }
 
     public void Chase()

@@ -129,7 +129,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (gamePanel.Stage % 5 == 0)
         {
-
+            gamePanel.EnemyCntD++;
         }
         else
         {
@@ -172,5 +172,12 @@ public class GameManager : Singleton<GameManager>
 
             }
         }
+        while(gamePanel.EnemyCntA +gamePanel.EnemyCntB+gamePanel.EnemyCntC+gamePanel.EnemyCntD > 0)
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(4f);
+        StageEnd(stageZone);
     }
 }

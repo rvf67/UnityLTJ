@@ -43,6 +43,11 @@ public class EnemyBase : RecycleObject
     protected MeshRenderer[] bodyMeshs;
 
     /// <summary>
+    /// 죽었는지 체크
+    /// </summary>
+    protected bool isDie;
+
+    /// <summary>
     /// 생존한 적 레이어
     /// </summary>
     int enemyLayer;
@@ -102,10 +107,14 @@ public class EnemyBase : RecycleObject
         }
         else
         {
-            MeshsChange(bodyMeshs,Color.gray);
-            gameObject.layer=enemyUndieLayer;
-            Die();
-            DisableTimer(0.4f);
+            if (!isDie)
+            {
+                isDie = true;
+                MeshsChange(bodyMeshs, Color.gray);
+                gameObject.layer = enemyUndieLayer;
+                Die();
+                DisableTimer(0.4f);
+            }
         }
     }
     /// <summary>

@@ -29,6 +29,7 @@ public class GamePanel : MonoBehaviour
     int enemyCntA;
     int enemyCntB;
     int enemyCntC;
+    int enemyCntD;
     public int EnemyCntA
     {
         get => enemyCntA;
@@ -66,7 +67,20 @@ public class GamePanel : MonoBehaviour
         }
 
     }
-    
+
+    public int EnemyCntD
+    {
+        get => enemyCntD;
+        set
+        {
+            if (enemyCntD != value)
+            {
+                enemyCntD = value;
+            }
+        }
+
+    }
+
     /// <summary>
     /// 플레이어 상호작용
     /// </summary>

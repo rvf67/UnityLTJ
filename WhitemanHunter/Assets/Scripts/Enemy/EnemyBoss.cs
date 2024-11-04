@@ -118,9 +118,11 @@ public class EnemyBoss : EnemyBase
     /// </summary>
     protected override void Die()
     {
+        base.Die();
         animator.SetTrigger(Die_Hash);
         agent.enabled = false;
         isDead = true;
+        GameManager.Instance.GamePanel.EnemyCntD--;
         StopAllCoroutines();
     }
 
