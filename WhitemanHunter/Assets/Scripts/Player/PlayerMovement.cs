@@ -125,6 +125,17 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
     Rigidbody rb;
 
+    public CharacterController CC
+    {
+        get => cc;
+        set
+        {
+            if (cc != value)
+            {
+                cc = value;
+            }
+        }
+    }
     private void Awake()
     {
         cc = GetComponent<CharacterController>();
@@ -145,18 +156,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!playerInteraction.isSwap && !playerAttack.isAttack && !isReload)
+        if (!playerInteraction.isDie)
         {
-            cc.Move(Time.deltaTime * currentSpeed * direction); // 수동
-        }
+            if (!playerInteraction.isSwap && !playerAttack.isAttack && !isReload)
+            {
+                cc.Move(Time.deltaTime * currentSpeed * direction); // 수동
+            }
 
-        if (isMove)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * turnSmooth);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, TurnFromMouse(), Time.deltaTime * turnSmooth);
+            if (isMove)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * turnSmooth);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, TurnFromMouse(), Time.deltaTime * turnSmooth);
+            }
         }
     }
     private void FixedUpdate()

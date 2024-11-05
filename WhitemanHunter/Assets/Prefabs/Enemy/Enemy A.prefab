@@ -121,6 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   health: 50
+  score: 50
+  coins: []
 --- !u!1 &5924019893030669029
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,6 +171,7 @@ MonoBehaviour:
   damage: 10
   shotSpeed: 50
   isMelee: 1
+  isRock: 0
 --- !u!65 &4839404647495024250
 BoxCollider:
   m_ObjectHideFlags: 0

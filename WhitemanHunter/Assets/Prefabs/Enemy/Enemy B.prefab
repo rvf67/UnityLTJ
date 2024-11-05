@@ -48,6 +48,7 @@ MonoBehaviour:
   damage: 10
   shotSpeed: 50
   isMelee: 1
+  isRock: 0
 --- !u!65 &2980390990236976761
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -190,6 +191,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   health: 50
+  score: 100
+  coins: []
   dashPower: 30
 --- !u!1001 &4106025580532918517
 PrefabInstance:

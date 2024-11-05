@@ -21,8 +21,17 @@ public class MenuPanel : MonoBehaviour
         //변수 세팅
         maxScoreText = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         startButton = transform.GetChild(3).GetComponent<Button>();
-
-        maxScoreText.text = string.Format("{0:n0}",PlayerPrefs.GetInt("MaxScore"));
+        
         startButton.onClick.AddListener(FindAnyObjectByType<GameManager>().GameStart);
+        maxScoreText.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
+
+    }
+
+    /// <summary>
+    /// 최고점수를 업데이트 해주는 함수
+    /// </summary>
+    public void ScoreUpdate()
+    {
+        maxScoreText.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
     }
 }

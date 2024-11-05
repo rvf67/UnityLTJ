@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
@@ -14,10 +15,18 @@ public class PlayerInteraction : MonoBehaviour
     /// 무적 레이어
     /// </summary>
     int undieLayer;
+    public int UndieLayer
+    {
+        get => undieLayer;
+    }
     /// <summary>
     /// 플레이어 레이어
     /// </summary>
     int playerLayer;
+    public int PlayerLayer
+    {
+        get => playerLayer;
+    }
     /// <summary>
     /// 장착하고 있는 무기
     /// </summary>
@@ -73,7 +82,7 @@ public class PlayerInteraction : MonoBehaviour
             if (value != health)
             {
                 health = value;
-                if (health <= 0)
+                if (health <= 0 && !isDie)
                 {
                     Die();
                 }
@@ -106,6 +115,10 @@ public class PlayerInteraction : MonoBehaviour
     /// </summary>
     readonly int Swap_Hash = Animator.StringToHash("Swap");
     /// <summary>
+    /// 죽음 애니메이터용 해시
+    /// </summary>
+    readonly int Die_Hash = Animator.StringToHash("Die");
+    /// <summary>
     /// 플레이어가 가진 무기들
     /// </summary>
     public GameObject[] weapons;
@@ -117,6 +130,11 @@ public class PlayerInteraction : MonoBehaviour
     /// 스왑중인지 체크하는 변수
     /// </summary>
     public bool isSwap;
+    /// <summary>
+    /// 죽었는지 체크하는 변수
+    /// </summary>
+    public bool isDie;
+
     /// <summary>
     /// 무적시간
     /// </summary>
@@ -137,6 +155,7 @@ public class PlayerInteraction : MonoBehaviour
     /// 플레이어 메시들
     /// </summary>
     MeshRenderer[] meshs;
+
 
     private void Awake()
     {
@@ -184,7 +203,7 @@ public class PlayerInteraction : MonoBehaviour
         else if(other.tag == "EnemyBullet")
         {
             Bullet enemyBullet = other.GetComponent<Bullet>();
-            if (!isDamage)
+            if (!isDamage && !isDie)
             {
                 Health -= enemyBullet.damage;
                 StartCoroutine(OnDamage());
@@ -265,7 +284,10 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("죽다.");
+        animator.SetTrigger(Die_Hash);
+        isDie = true;
+        playerMovement.CC.enabled = false;
+        GameManager.Instance.GameOver();
     }
 
     IEnumerator OnDamage()

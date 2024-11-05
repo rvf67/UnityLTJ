@@ -113,18 +113,6 @@ public class EnemyBoss : EnemyBase
         }
     }
 
-    /// <summary>
-    /// 죽음 함수
-    /// </summary>
-    protected override void Die()
-    {
-        base.Die();
-        animator.SetTrigger(Die_Hash);
-        agent.enabled = false;
-        isDead = true;
-        GameManager.Instance.GamePanel.EnemyCntD--;
-        StopAllCoroutines();
-    }
 
     /// <summary>
     /// 공격 코루틴
@@ -240,5 +228,18 @@ public class EnemyBoss : EnemyBase
         StartCoroutine(RandomPattern());
     }
 
-   
+
+    /// <summary>
+    /// 죽음 함수
+    /// </summary>
+    protected override void Die()
+    {
+        base.Die();
+        animator.SetTrigger(Die_Hash);
+        agent.enabled = false;
+        isDead = true;
+        GameManager.Instance.GamePanel.EnemyCntD--;
+        StopAllCoroutines();
+        DisableTimer(1.5f);
+    }
 }

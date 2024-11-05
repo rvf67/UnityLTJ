@@ -532,13 +532,14 @@ MonoBehaviour:
   equipWeapon: {fileID: 0}
   ammoMax: 100
   healthMax: 100
-  coinMax: 0
+  coinMax: 200
   weapons:
   - {fileID: 7899113043661299313}
   - {fileID: 7740775427209449282}
   - {fileID: 7941739193299009}
   hasWeapons: 000000
   isSwap: 0
+  isDie: 0
   undieTime: 1
   isDamage: 0
 --- !u!1 &6472520065299826936

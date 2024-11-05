@@ -205,8 +205,15 @@ public class GamePanel : MonoBehaviour
         enemyATxt.text = enemyCntA.ToString();
         enemyBTxt.text = enemyCntB.ToString();
         enemyCTxt.text = enemyCntC.ToString();
-        if(enemyBoss!=null)
-            bossHealthBar.localScale = new Vector3((float)enemyBoss.health / enemyBoss.maxHealth,1,1);
+        if (enemyBoss != null && enemyBoss.gameObject.activeSelf == true)
+        {
+            bossHealthGroup.gameObject.SetActive(true);
+            bossHealthBar.localScale = new Vector3(Mathf.Clamp((float)enemyBoss.health / enemyBoss.maxHealth,0,enemyBoss.maxHealth), 1, 1);
+        }
+        else
+        {
+            bossHealthGroup.gameObject.SetActive(false);
+        }
     }
 
     /// <summary>

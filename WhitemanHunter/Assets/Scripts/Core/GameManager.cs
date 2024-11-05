@@ -8,11 +8,11 @@ public class GameManager : Singleton<GameManager>
     /// <summary>
     /// 메뉴 카메라
     /// </summary>
-    public GameObject menuCam;
+    MenuClass menuCam;
     /// <summary>
     /// 게임 카메라
     /// </summary>
-    public GameObject gameCam;
+    CameraFollow gameCam;
 
     /// <summary>
     /// enemyZones
@@ -42,9 +42,12 @@ public class GameManager : Singleton<GameManager>
     /// 게임패널
     /// </summary>
     GamePanel gamePanel;
+
+    GameOverPanel gameOverPanel;
     
     public MenuPanel MenuPanel => menuPanel;
     public GamePanel GamePanel => gamePanel;
+    public GameOverPanel GameOverPanel => gameOverPanel;
    
 
 
@@ -55,24 +58,39 @@ public class GameManager : Singleton<GameManager>
 
     protected override void OnInitialize()
     {
+        StopAllCoroutines();
         player = FindAnyObjectByType<Player>();
         boss = FindAnyObjectByType<EnemyBoss>();
         menuPanel = FindAnyObjectByType<MenuPanel>();
         gamePanel = FindAnyObjectByType<GamePanel>();
-        //시작전 세팅
-        gameCam.gameObject.SetActive(false);
+        gameOverPanel = FindAnyObjectByType<GameOverPanel>();
+        gameCam = FindAnyObjectByType<CameraFollow>();
+        menuCam = FindAnyObjectByType<MenuClass>();
+    }
+
+    private void Awake()
+    {
+        
+        if (!PlayerPrefs.HasKey("MaxScore"))
+            PlayerPrefs.SetInt("MaxScore",0);
+    }
+
+    private void Start()
+    {
+        //게임시작전 세팅
+        menuPanel.ScoreUpdate();
         player.gameObject.SetActive(false);
         gamePanel.gameObject.SetActive(false);
+        gameOverPanel.gameObject.SetActive(false);
         boss.gameObject.SetActive(false);
+        gameCam.gameObject.SetActive(false);
         enemyList = new List<int>();
         enemyZones = GameObject.Find("Spawners").transform.GetComponentsInChildren<Transform>();
-        foreach( Transform zone in enemyZones)
+        foreach (Transform zone in enemyZones)
         {
             zone.gameObject.SetActive(false);
         }
     }
-
-
     /// <summary>
     /// 스테이지 시작 함수
     /// </summary>
@@ -86,7 +104,7 @@ public class GameManager : Singleton<GameManager>
         {
             zone.gameObject.SetActive(true);
         }
-
+        player.gameObject.layer = player.GetComponent<PlayerInteraction>().PlayerLayer;
         StartCoroutine(InBattle(stageZone));
     }
 
@@ -104,6 +122,7 @@ public class GameManager : Singleton<GameManager>
         stageZone.SetActive(true);
         gamePanel.isBattle=false;
         gamePanel.NextStage();
+        player.gameObject.layer = player.GetComponent<PlayerInteraction>().UndieLayer;
     }
     
     /// <summary>
@@ -120,6 +139,13 @@ public class GameManager : Singleton<GameManager>
         player.gameObject.SetActive(true);
     }
 
+    public void GameOver()
+    {
+        gamePanel.gameObject.SetActive(false);
+        gameOverPanel.gameObject.SetActive(true);
+        gameOverPanel.ShowScore();
+    }
+
     /// <summary>
     /// 배틀시작 코루틴
     /// </summary>
@@ -130,6 +156,8 @@ public class GameManager : Singleton<GameManager>
         if (gamePanel.Stage % 5 == 0)
         {
             gamePanel.EnemyCntD++;
+            boss.transform.position = enemyZones[4].position;
+            boss.gameObject.SetActive(true);
         }
         else
         {
@@ -153,7 +181,7 @@ public class GameManager : Singleton<GameManager>
 
             while (enemyList.Count > 0)
             {
-                int ranZone = Random.Range(0, 4);
+                int ranZone = Random.Range(1, 5);
                 switch (enemyList[0])
                 {
                     case 0:
